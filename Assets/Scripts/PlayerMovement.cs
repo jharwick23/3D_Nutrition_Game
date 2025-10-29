@@ -73,8 +73,8 @@ public class PlayerController : MonoBehaviour
         if (isGrounded && jumpPressed)
         {
             jumpPressed = false;
-
             animator.SetTrigger("Jump");
+            ApplyJumpForce();
         }
 
         velocity.y += gravity * Time.deltaTime;
