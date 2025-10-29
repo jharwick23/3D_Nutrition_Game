@@ -74,10 +74,7 @@ public class PlayerController : MonoBehaviour
         {
             jumpPressed = false;
 
-            if (!animator.GetBool("isWalking"))
-            {
-                animator.SetTrigger("Jump");
-            }
+            animator.SetTrigger("Jump");
         }
 
         velocity.y += gravity * Time.deltaTime;
