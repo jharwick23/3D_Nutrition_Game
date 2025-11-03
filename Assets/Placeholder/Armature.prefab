@@ -100,13 +100,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Armature
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5866666021909216657, guid: 97397d71e89cc7e4e934569af8f77396, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 97397d71e89cc7e4e934569af8f77396, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2933802091945604817}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 97397d71e89cc7e4e934569af8f77396, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8876672580133111635}
@@ -122,28 +120,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 97397d71e89cc7e4e934569af8f77396, type: 3}
   m_PrefabInstance: {fileID: 4261484793593784966}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &2933802091945604817
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4026987753159776215}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 97397d71e89cc7e4e934569af8f77396, type: 3}
-  m_Controller: {fileID: 9100000, guid: 645f396f605474448aff3111764f5b96, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &8876672580133111635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,6 +225,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 3e65b8a4-b5b7-47af-a831-bebd077480b7
     m_ActionName: 'Player/Jump[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5317218106162621412}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Sprint
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d9cfc1fc-55e8-4cd3-9cc6-12f769b4512e
+    m_ActionName: Player/Sprint
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -268,8 +260,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharacterController
   moveSpeed: 5
   turnSmoothTime: 0.1
+  sprintMultiplier: 1.5
   gravity: -9.81
-  jumpHeight: 0.5
+  jumpHeight: 2
 --- !u!143 &7090103010235726431
 CharacterController:
   m_ObjectHideFlags: 0
