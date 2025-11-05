@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public float jumpHeight = 0.5f;
 
     private CharacterController controller;
+    private Animator animator;
     private Transform cam;
 
     private Vector2 moveInput;
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
         cam = Camera.main.transform;
     }
 
@@ -30,6 +32,16 @@ public class PlayerController : MonoBehaviour
     {
         // If WASD/Arrow keys are pressed set the moveinput to the Vector2 value
         moveInput = context.ReadValue<Vector2>();
+
+        // Sets isWalking boolean for animator to true if button is being held
+        if(context.performed){
+            animator.SetBool("isWalking", true);
+        }
+
+        // Sets isWalking boolean for animator to false if button "hit" is canceled
+        else if(context.canceled){
+            animator.SetBool("isWalking", false);
+        }
     }
 
     public void Jump(InputAction.CallbackContext context)
