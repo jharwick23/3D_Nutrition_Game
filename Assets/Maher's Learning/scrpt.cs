@@ -1,8 +1,8 @@
-using UnityEngine;
+/*using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
-public class MovementTest : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
     public float walkSpeed = 5f;
@@ -28,14 +28,8 @@ public class MovementTest : MonoBehaviour
     [Tooltip("How smoothly the camera follows the player (higher = more responsive)")]
     public float cameraSmoothness = 12f;
 
-    [Header("Jump & Gravity")]
-    public float jumpHeight = 1.2f;
-    public float gravity = -20f;
-
     private float currentVerticalRotation = 0f; // For camera high low
     private Vector3 cameraVelocity = Vector3.zero;
-    private float verticalVelocity = 0f;
-    private bool jumpRequested = false;
 
     void Awake()
     {
@@ -56,12 +50,6 @@ public class MovementTest : MonoBehaviour
     public void OnLook(InputValue value)
     {
         lookInput = value.Get<Vector2>();
-    }
-
-    public void OnJump(InputValue value)
-    {
-        if (value.isPressed)
-            jumpRequested = true;
     }
 
     void Start()
@@ -88,7 +76,7 @@ public class MovementTest : MonoBehaviour
         // Rotate the player left/right
         transform.Rotate(Vector3.up * mouseDelta.x);
 
-        // Update camera vertical rotation (independent of player rotation)
+        // Update camera vertical rotation
         currentVerticalRotation -= mouseDelta.y;
         currentVerticalRotation = Mathf.Clamp(currentVerticalRotation, -maxLookAngle, maxLookAngle);
 
@@ -118,28 +106,12 @@ public class MovementTest : MonoBehaviour
         // Movement relative to the player's orientation
         Vector3 right = transform.right;
         Vector3 forward = transform.forward;
+
         Vector3 desired = right * moveInput.x + forward * moveInput.y;
         if (desired.sqrMagnitude > 1f) desired.Normalize();
+
         Vector3 move = desired * walkSpeed;
-
-        // Gravity and jumping
-        if (controller.isGrounded)
-        {
-            if (verticalVelocity < 0f)
-                verticalVelocity = -2f; // Small downward force to keep grounded
-            if (jumpRequested)
-            {
-                verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
-                jumpRequested = false;
-            }
-        }
-        else
-        {
-            verticalVelocity += gravity * Time.deltaTime;
-        }
-
-        move.y = verticalVelocity;
         controller.Move(move * Time.deltaTime);
     }
 }
-
+*/
