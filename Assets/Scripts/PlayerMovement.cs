@@ -6,9 +6,9 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float turnSmoothTime = 0.1f;
-    public float sprintMultiplier = 1.5f;
+    public float sprintMultiplier = 2f;
     public float gravity = -9.81f;
-    public float jumpHeight = 0.5f;
+    public float jumpHeight = 1f;
 
     private CharacterController controller;
     private Animator animator;
@@ -32,16 +32,6 @@ public class PlayerController : MonoBehaviour
     {
         // If WASD/Arrow keys are pressed set the moveinput to the Vector2 value
         moveInput = context.ReadValue<Vector2>();
-
-        // Sets isWalking boolean for animator to true if button is being held
-        if(context.performed){
-            animator.SetBool("isWalking", true);
-        }
-
-        // Sets isWalking boolean for animator to false if button "hit" is canceled
-        else if(context.canceled){
-            animator.SetBool("isWalking", false);
-        }
     }
 
     public void Jump(InputAction.CallbackContext context)
@@ -50,17 +40,19 @@ public class PlayerController : MonoBehaviour
         if (context.performed)
         {
             jumpPressed = true;
+            animator.SetBool("JumpRequested", true);
         }
     }
+    
     public void Sprint(InputAction.CallbackContext context)
     {
-        UnityEngine.Debug.Log("Sprint");
         sprintPressed = context.ReadValue<float>() > 0;
     }
 
     private void Update()
     {
         isGrounded = controller.isGrounded;
+        animator.SetBool("IsGrounded", isGrounded);
 
         // Reset the vertical velocity when you hit the ground
         if (isGrounded && velocity.y < 0)
@@ -70,6 +62,12 @@ public class PlayerController : MonoBehaviour
 
         // Calculate movement direction
         Vector3 inputDir = new Vector3(moveInput.x, 0f, moveInput.y).normalized;
+
+        // Compute target speed value for Animator
+        float targetSpeed = inputDir.magnitude * (sprintPressed ? sprintMultiplier : 1f);
+
+        // Set Blend Tree parameter
+        animator.SetFloat("Speed", targetSpeed, 0.1f, Time.deltaTime);
 
         if (inputDir.magnitude >= 0.1f)
         {
@@ -89,6 +87,7 @@ public class PlayerController : MonoBehaviour
         // Apply Jump
         if (isGrounded && jumpPressed)
         {
+            animator.SetBool("JumpRequested", false);
             jumpPressed = false;
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }

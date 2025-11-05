@@ -621,6 +621,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5317218106162621412, guid: 229ece9617d1ad4848f21fde8339bf22, type: 3}
+      propertyPath: jumpHeight
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5317218106162621412, guid: 229ece9617d1ad4848f21fde8339bf22, type: 3}
+      propertyPath: m_EditorClassIdentifier
+      value: Assembly-CSharp::PlayerController
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
