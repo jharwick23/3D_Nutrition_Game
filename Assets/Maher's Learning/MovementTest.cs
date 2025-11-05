@@ -4,48 +4,62 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class MovementTest : MonoBehaviour
 {
+    // -- // -- // Movement Variables -- // -- //
     [Header("Movement")]
-    public float walkSpeed = 5f;
+    [SerializeField] private float walkSpeed = 5f;
 
-    CharacterController controller;
+    private CharacterController controller;
+    private Animator animator;
+    private string currentAnimation = "";
+
+    // -- // -- // Input Variables // -- // -- //
 
     Vector2 moveInput = Vector2.zero;
     Vector2 lookInput = Vector2.zero;
 
+    // -- // -- // Camera Variables -- // -- //
+
     [Header("Camera Settings")]
-    public Camera playerCamera;
-    public float mouseSensitivity = 0.2f;
+    [SerializeField] private Camera playerCamera;
+    [SerializeField] private float mouseSensitivity = 0.2f;
     [Tooltip("Limits how far up/down you can look in degrees")]
-    public float maxLookAngle = 60f;
-    
+    [SerializeField] private float maxLookAngle = 60f;
+
+    // -- // -- // Third Person Camera Variables -- // -- //
+
     [Header("Third Person Camera")]
     [Tooltip("How far behind the player the camera should be")]
-    public float cameraDistance = 5f;
+    [SerializeField] private float cameraDistance = 3f;
     [Tooltip("How high above the player the camera should be")]
-    public float cameraHeight = 2f;
+    [SerializeField] private float cameraHeight = 2f;
     [Tooltip("Default camera angle in degrees, positive = looking down")]
-    public float defaultCameraAngle = 0f;
+    [SerializeField] private float defaultCameraAngle = 0f;
     [Tooltip("How smoothly the camera follows the player (higher = more responsive)")]
-    public float cameraSmoothness = 12f;
+    [SerializeField] private float cameraSmoothness = 100f;
+
+    // -- // -- // Jump & Gravity Variables -- // -- //
 
     [Header("Jump & Gravity")]
-    public float jumpHeight = 1.2f;
-    public float gravity = -20f;
+    [SerializeField] private float jumpHeight = 1.2f;
+    [SerializeField] private float gravity = -20f;
 
     private float currentVerticalRotation = 0f; // For camera high low
     private Vector3 cameraVelocity = Vector3.zero;
     private float verticalVelocity = 0f;
     private bool jumpRequested = false;
+    private float yaw = 0f; // horizontal rotation tracked separately
 
     void Awake()
     {
         controller = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
     {
         ApplyMouseLook();
         ApplyMovement();
+        CheckAnimationState();
     }
 
     public void OnMove(InputValue value)
@@ -69,7 +83,17 @@ public class MovementTest : MonoBehaviour
         if (playerCamera == null)
             playerCamera = GetComponentInChildren<Camera>();
 
+        // Unparent camera so its unaffected by player animations
+        if (playerCamera != null && playerCamera.transform.IsChildOf(transform))
+        {
+            playerCamera.transform.SetParent(null);
+        }
+
+        // Players current transform yaw
+        yaw = transform.eulerAngles.y;
+
         ToggleCursorLock(true);
+        ChangeAnimation("MaherIdle");
     }
 
     void ToggleCursorLock(bool locked)
@@ -85,8 +109,9 @@ public class MovementTest : MonoBehaviour
         // Scale by mouse sensitivity
         Vector2 mouseDelta = lookInput * mouseSensitivity;
 
-        // Rotate the player left/right
-        transform.Rotate(Vector3.up * mouseDelta.x);
+        // Accumulate yaw from mouse X and apply to the player's root rotation.
+        yaw += mouseDelta.x;
+        transform.rotation = Quaternion.Euler(0f, yaw, 0f);
 
         // Update camera vertical rotation (independent of player rotation)
         currentVerticalRotation -= mouseDelta.y;
@@ -94,11 +119,14 @@ public class MovementTest : MonoBehaviour
 
         // Calculate desired camera position
         float totalAngle = defaultCameraAngle + currentVerticalRotation;
-        
-        // Calculate the position behind and above the player
-        Vector3 targetPosition = transform.position
-            - transform.forward * cameraDistance * Mathf.Cos(totalAngle * Mathf.Deg2Rad)  // Back
-            + Vector3.up * (cameraHeight + cameraDistance * Mathf.Sin(totalAngle * Mathf.Deg2Rad)); // Up
+
+        // Pivot point for the camera (player position plus height)
+        Vector3 pivot = transform.position + Vector3.up * cameraHeight;
+
+        // Compute camera offset using yaw and pitch so camera doesn't inherit any transform parenting/animation
+        Quaternion camRot = Quaternion.Euler(totalAngle, yaw, 0f);
+        Vector3 cameraOffset = camRot * new Vector3(0f, 0f, -cameraDistance);
+        Vector3 targetPosition = pivot + cameraOffset;
 
         // Smoothly move camera to target position
         playerCamera.transform.position = Vector3.SmoothDamp(
@@ -109,7 +137,7 @@ public class MovementTest : MonoBehaviour
         );
 
         // Make camera look at player (slightly above player)
-        Vector3 lookTarget = transform.position + Vector3.up * 1f;
+        Vector3 lookTarget = transform.position + Vector3.up * 1.2f;
         playerCamera.transform.LookAt(lookTarget);
     }
 
@@ -130,6 +158,7 @@ public class MovementTest : MonoBehaviour
             if (jumpRequested)
             {
                 verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                ChangeAnimation("Jump Up");
                 jumpRequested = false;
             }
         }
@@ -141,5 +170,66 @@ public class MovementTest : MonoBehaviour
         move.y = verticalVelocity;
         controller.Move(move * Time.deltaTime);
     }
+
+    private void ChangeAnimation(string newAnimation, float crossfade = 0.2f)
+    {
+        if (currentAnimation == newAnimation) return;
+        animator.CrossFade(newAnimation, crossfade);
+        currentAnimation = newAnimation;
+    }
+    
+    private void CheckAnimationState()
+    {
+
+
+        // Handle jump/fall animations
+        if (!controller.isGrounded)
+        {
+            if (verticalVelocity > 0f)
+            {
+                // ChangeAnimation("Jump Up");
+                return;
+            }
+            else if (verticalVelocity < 0f)
+            {
+                // ChangeAnimation("Falling");
+                return;
+            }
+        }
+
+        // Idle if no input
+        if (moveInput.magnitude < 0.1f)
+        {
+            ChangeAnimation("MaherIdle");
+            return;
+        }
+
+        // Determine direction from input: x = right, y = forward
+        float angle = Mathf.Atan2(moveInput.y, moveInput.x) * Mathf.Rad2Deg; // -180-180, 0 = right
+        float angleNorm = (angle + 360f) % 360f; // 0-360 degrees
+
+        string anim = "MaherIdle";
+
+        // Map angle to 8 directions
+        if (angleNorm >= 337.5f || angleNorm < 22.5f)
+            anim = "Walk Right";
+        else if (angleNorm >= 22.5f && angleNorm < 67.5f)
+            anim = "Walk Forward Right";
+        else if (angleNorm >= 67.5f && angleNorm < 112.5f)
+            anim = "Walk Forward";
+        else if (angleNorm >= 112.5f && angleNorm < 157.5f)
+            anim = "Walk Forward Left";
+        else if (angleNorm >= 157.5f && angleNorm < 202.5f)
+            anim = "Walk Left";
+        else if (angleNorm >= 202.5f && angleNorm < 247.5f)
+            anim = "Walk Backward Left";
+        else if (angleNorm >= 247.5f && angleNorm < 292.5f)
+            anim = "Walk Backward";
+        else if (angleNorm >= 292.5f && angleNorm < 337.5f)
+            anim = "Walk Backward Right";
+
+        ChangeAnimation(anim);
+    }
+
 }
 
