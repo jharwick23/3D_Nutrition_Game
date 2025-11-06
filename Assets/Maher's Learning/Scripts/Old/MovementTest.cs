@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 [RequireComponent(typeof(CharacterController))]
 public class MovementTest : MonoBehaviour
@@ -7,9 +8,13 @@ public class MovementTest : MonoBehaviour
     // -- // -- // Movement Variables -- // -- //
     [Header("Movement")]
     [SerializeField] private float walkSpeed = 5f;
+    [SerializeField] private float sprintMultiplier = 2f;
+    [Tooltip("Set to true to enable sprinting with Shift key")]
+    [SerializeField] private bool enableSprint = true;
 
     private CharacterController controller;
     private Animator animator;
+    private bool isSprinting = false;
     private string currentAnimation = "";
 
     // -- // -- // Input Variables // -- // -- //
@@ -143,12 +148,18 @@ public class MovementTest : MonoBehaviour
 
     void ApplyMovement()
     {
+        // Check for sprint (only when moving forward)
+        isSprinting = enableSprint && (Keyboard.current?.shiftKey.isPressed ?? false) && moveInput.y > 0.1f && Mathf.Abs(moveInput.x) < 0.3f;
+        
         // Movement relative to the player's orientation
         Vector3 right = transform.right;
         Vector3 forward = transform.forward;
         Vector3 desired = right * moveInput.x + forward * moveInput.y;
         if (desired.sqrMagnitude > 1f) desired.Normalize();
-        Vector3 move = desired * walkSpeed;
+        
+        // Apply sprint multiplier only when moving forward
+        float currentSpeed = isSprinting ? walkSpeed * sprintMultiplier : walkSpeed;
+        Vector3 move = desired * currentSpeed;
 
         // Gravity and jumping
         if (controller.isGrounded)
@@ -210,8 +221,13 @@ public class MovementTest : MonoBehaviour
 
         string anim = "MaherIdle";
 
-        // Map angle to 8 directions
-        if (angleNorm >= 337.5f || angleNorm < 22.5f)
+        // Check if we're sprinting forward first
+        if (isSprinting)
+        {
+            anim = "Run Forward";
+        }
+        // Otherwise map angle to 8 directions for walking
+        else if (angleNorm >= 337.5f || angleNorm < 22.5f)
             anim = "Walk Right";
         else if (angleNorm >= 22.5f && angleNorm < 67.5f)
             anim = "Walk Forward Right";
