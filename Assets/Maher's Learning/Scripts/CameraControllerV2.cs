@@ -2,6 +2,8 @@ using UnityEngine;
 
 // Reminder for me (maher): Currently using new code on old method. Using (old) shoulder empty part
 // as the Follow Target for the camera. But using new camera positioning code and logic (.rotation not LookAt).
+// Good Point : 1.5, 0.6, 0
+// New Good Point: 0.6, 1.5, 0
 public class CameraControllerV2 : MonoBehaviour
 {
     public Transform FollowTarget;
@@ -11,7 +13,7 @@ public class CameraControllerV2 : MonoBehaviour
     public float CameraPitch = 0f; // Starting Camera Pitch/Angle degrees, Changes with Mouse Y movement
     [Tooltip("Camera offset from the follow target position")]
     public Vector3 ShoulderOffset = new Vector3(0.0f, 0.0f, 0.0f); // 0,0,0 for Old // Old changes part Position
-    public float CameraDistance = 5f;
+    public float CameraDistance = 9f;
 
     private Vector3 _currentVelocity = Vector3.zero;
 

@@ -4,7 +4,8 @@ using UnityEngine.InputSystem;
 public class InputHandlerV2 : MonoBehaviour
 {
     public PlayerControllerV2 PlayerController;
-    private InputAction _moveAction, _lookAction, _jumpAction;
+    public ProjectileGun StandardProjectileGun;
+    private InputAction _moveAction, _lookAction, _jumpAction, _attackAction;
     private PlayerInput playerInput;
 
     void Start()
@@ -15,7 +16,10 @@ public class InputHandlerV2 : MonoBehaviour
             _moveAction = playerInput.actions.FindAction("Move");
             _lookAction = playerInput.actions.FindAction("Look");
             _jumpAction = playerInput.actions.FindAction("Jump");
+            _attackAction = playerInput.actions.FindAction("Attack");
+            _attackAction.performed += OnAttackPerformed;
             _jumpAction.performed += OnJumpPerformed;
+            
         }
         else
         {
@@ -45,5 +49,10 @@ public class InputHandlerV2 : MonoBehaviour
     private void OnJumpPerformed(InputAction.CallbackContext context)
     {
         PlayerController.Jump();
+    }
+
+    private void OnAttackPerformed(InputAction.CallbackContext context)
+    {
+        StandardProjectileGun.Shoot();
     }
 }
