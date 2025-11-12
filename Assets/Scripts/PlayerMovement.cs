@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,8 +6,9 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float turnSmoothTime = 0.1f;
+    public float sprintMultiplier = 2f;
     public float gravity = -9.81f;
-    public float jumpHeight = 0.5f;
+    public float jumpHeight = 1f;
 
     private CharacterController controller;
     private Animator animator;
@@ -18,6 +20,7 @@ public class PlayerController : MonoBehaviour
 
     private bool isGrounded;
     private bool jumpPressed;
+    private bool sprintPressed;
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -27,34 +30,44 @@ public class PlayerController : MonoBehaviour
 
     public void Walk(InputAction.CallbackContext context)
     {
+        // If WASD/Arrow keys are pressed set the moveinput to the Vector2 value
         moveInput = context.ReadValue<Vector2>();
-
-        animator.SetBool("isWalking", true);
-
-        if (context.canceled)
-        {
-            animator.SetBool("isWalking", false);
-        }
     }
 
     public void Jump(InputAction.CallbackContext context)
     {
+        // If spacebar is pressed set jumpPressed to true
         if (context.performed)
         {
             jumpPressed = true;
+            animator.SetBool("JumpRequested", true);
         }
+    }
+    
+    public void Sprint(InputAction.CallbackContext context)
+    {
+        sprintPressed = context.ReadValue<float>() > 0;
     }
 
     private void Update()
     {
         isGrounded = controller.isGrounded;
+        animator.SetBool("IsGrounded", isGrounded);
 
+        // Reset the vertical velocity when you hit the ground
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
         }
 
+        // Calculate movement direction
         Vector3 inputDir = new Vector3(moveInput.x, 0f, moveInput.y).normalized;
+
+        // Compute target speed value for Animator
+        float targetSpeed = inputDir.magnitude * (sprintPressed ? sprintMultiplier : 1f);
+
+        // Set Blend Tree parameter
+        animator.SetFloat("Speed", targetSpeed, 0.1f, Time.deltaTime);
 
         if (inputDir.magnitude >= 0.1f)
         {
@@ -67,25 +80,20 @@ public class PlayerController : MonoBehaviour
 
             // Move in that direction
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(moveSpeed * Time.deltaTime * moveDir.normalized);
+            float speed = sprintPressed ? moveSpeed * sprintMultiplier : moveSpeed;
+            controller.Move(speed * Time.deltaTime * moveDir.normalized);
         }
 
+        // Apply Jump
         if (isGrounded && jumpPressed)
         {
+            animator.SetBool("JumpRequested", false);
             jumpPressed = false;
-
-            if (!animator.GetBool("isWalking"))
-            {
-                animator.SetTrigger("Jump");
-            }
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
+        // Apply gravity
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
-    }
-
-    public void ApplyJumpForce()
-    {
-        velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
     }
 }
