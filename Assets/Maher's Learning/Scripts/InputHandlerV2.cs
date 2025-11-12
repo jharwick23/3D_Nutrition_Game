@@ -20,7 +20,8 @@ public class InputHandlerV2 : MonoBehaviour
             _sprintAction = playerInput.actions.FindAction("Sprint");
             _attackAction.performed += OnAttackPerformed;
             _jumpAction.performed += OnJumpPerformed;
-            
+            _sprintAction.performed += OnSprintPerformed;
+            _sprintAction.canceled += OnSprintCancelled;
         }
         else
         {
@@ -43,10 +44,6 @@ public class InputHandlerV2 : MonoBehaviour
         Vector2 movementVector = _moveAction.ReadValue<Vector2>();
         Vector2 lookVector = _lookAction.ReadValue<Vector2>();
 
-        // Set sprinting bool in Player Controller to true if sprint action is not null
-        bool sprinting = _sprintAction != null && _sprintAction.ReadValue<float>() > 0;
-        PlayerController.SetSprinting(sprinting);
-
         PlayerController.Move(movementVector);
         PlayerController.Rotate(lookVector);
     }
@@ -59,5 +56,17 @@ public class InputHandlerV2 : MonoBehaviour
     private void OnAttackPerformed(InputAction.CallbackContext context)
     {
         StandardProjectileGun.Shoot();
+    }
+
+    private void OnSprintPerformed(InputAction.CallbackContext context)
+    {
+        // Set sprinting bool in Player Controller to true if sprint action is not null
+        //bool sprinting = _sprintAction != null && _sprintAction.ReadValue<float>() > 0;
+        PlayerController.SetSprinting(true);
+    }
+
+    private void OnSprintCancelled(InputAction.CallbackContext context)
+    {
+        PlayerController.SetSprinting(false);
     }
 }
