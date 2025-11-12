@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 8f164acbdfb415f41a338de250c76a75
+=======
+guid: c2fe1cb16179a7d40a39ca611bd3f3cd
+>>>>>>> 19ec457a5f70f1b1a773e360de353ad5a044f505
 TextureImporter:
   fileIDToRecycleName:
     21300000: EmojiOne_0
