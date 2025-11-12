@@ -4,6 +4,7 @@ public class PlayerControllerV2 : MonoBehaviour
 {
     private CharacterController _characterController;
     private CameraControllerV2 CameraController;
+    private Animator _animator;
     [SerializeField] private float MovementSpeed = 10f;
     [SerializeField] private float RotationSpeed = 20f; // Horizontal Look Speed
     [SerializeField] private float LookSensitivityY = 20f; // Veritical Look Speed
@@ -11,11 +12,14 @@ public class PlayerControllerV2 : MonoBehaviour
     [SerializeField] private float MaxCamAngle = -80f;
     [SerializeField] private float JumpForce = 8f;
     [SerializeField] private float Gravity = -25f;
+    [SerializeField] private float SprintMultiplier = 2f;
     private float _rotationY;
     private float _verticalVelocity;
+    private bool _isSprinting = false;
 
     void Start()
     {
+        _animator = GetComponent<Animator>();
         _characterController = GetComponent<CharacterController>();
         if (CameraController == null)
         {
@@ -38,6 +42,12 @@ public class PlayerControllerV2 : MonoBehaviour
 
         Vector3 move = transform.right * movementVector.x + transform.forward * movementVector.y;
         move = move * MovementSpeed * Time.deltaTime;
+
+        // Compute target speed value for Animator
+        // If isSprinting is true then double speed
+        float targetSpeed = movementVector.magnitude * (_isSprinting ? SprintMultiplier : 1f);
+        _animator.SetFloat("Speed", targetSpeed, 0.1f, Time.deltaTime);
+        
         _characterController.Move(move);
 
         // Apply gravity
@@ -80,5 +90,10 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             _verticalVelocity = JumpForce;
         }
+    }
+
+    public void SetSprinting(bool isSprinting)
+    {
+        _isSprinting = isSprinting;
     }
 }
