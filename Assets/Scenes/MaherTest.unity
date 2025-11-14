@@ -1352,8 +1352,8 @@ MonoBehaviour:
   MovementSpeed: 10
   RotationSpeed: 20
   LookSensitivityY: 20
-  MinCamAngle: 80
-  MaxCamAngle: -80
+  MinCamAngle: 45
+  MaxCamAngle: -75
   JumpForce: 8
   Gravity: -25
 --- !u!143 &1495611143
@@ -2242,7 +2242,7 @@ GameObject:
   - component: {fileID: 1879358495}
   - component: {fileID: 1879358494}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Hud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
