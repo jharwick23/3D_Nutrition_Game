@@ -8,8 +8,8 @@ public class PlayerControllerV2 : MonoBehaviour
     [SerializeField] private float MovementSpeed = 10f;
     [SerializeField] private float RotationSpeed = 20f; // Horizontal Look Speed
     [SerializeField] private float LookSensitivityY = 20f; // Veritical Look Speed
-    [SerializeField] private float MinCamAngle = 80f;
-    [SerializeField] private float MaxCamAngle = -80f;
+    [SerializeField] private float MinCamAngle = 45f;
+    [SerializeField] private float MaxCamAngle = -75f;
     [SerializeField] private float JumpForce = 8f;
     [SerializeField] private float Gravity = -25f;
     [SerializeField] private float SprintMultiplier = 2f;

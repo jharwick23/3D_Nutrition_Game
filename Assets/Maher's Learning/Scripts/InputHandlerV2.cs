@@ -5,7 +5,7 @@ public class InputHandlerV2 : MonoBehaviour
 {
     public PlayerControllerV2 PlayerController;
     public ProjectileGun StandardProjectileGun;
-    private InputAction _moveAction, _lookAction, _jumpAction, _attackAction, _sprintAction;
+    private InputAction _moveAction, _lookAction, _jumpAction, _attackAction, _sprintAction, _relaodAction;
     private PlayerInput playerInput;
 
     void Start()
@@ -18,6 +18,8 @@ public class InputHandlerV2 : MonoBehaviour
             _jumpAction = playerInput.actions.FindAction("Jump");
             _attackAction = playerInput.actions.FindAction("Attack");
             _sprintAction = playerInput.actions.FindAction("Sprint");
+            _relaodAction = playerInput.actions.FindAction("Reload");
+            _relaodAction.performed += OnReloadPerformed;
             _attackAction.performed += OnAttackPerformed;
             _jumpAction.performed += OnJumpPerformed;
             _sprintAction.performed += OnSprintPerformed;
@@ -68,5 +70,10 @@ public class InputHandlerV2 : MonoBehaviour
     private void OnSprintCancelled(InputAction.CallbackContext context)
     {
         PlayerController.SetSprinting(false);
+    }
+
+    private void OnReloadPerformed(InputAction.CallbackContext context)
+    {
+        StandardProjectileGun.StartReloading();
     }
 }
