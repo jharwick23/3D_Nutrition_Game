@@ -46,7 +46,7 @@ public class PlayerControllerV2 : MonoBehaviour
         // Compute target speed value for Animator
         // If isSprinting is true then double speed
         float targetSpeed = movementVector.magnitude * (_isSprinting ? SprintMultiplier : 1f);
-        _animator.SetFloat("Speed", targetSpeed, 0.1f, Time.deltaTime);
+        // _animator.SetFloat("Speed", targetSpeed, 0.1f, Time.deltaTime); // Commented out for Maher's capsule character
         
         _characterController.Move(move);
 
