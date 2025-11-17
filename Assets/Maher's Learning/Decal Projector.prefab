@@ -72,5 +72,5 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b5fb4ff8e09cb7045a3e6a9ba9c64114, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
-  lifetime: 30
+  m_EditorClassIdentifier: Assembly-CSharp::DecalDestroyer
+  lifetime: 3

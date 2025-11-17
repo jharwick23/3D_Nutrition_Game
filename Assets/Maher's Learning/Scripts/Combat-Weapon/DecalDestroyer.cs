@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DecalDestroyer : MonoBehaviour
 {
-    public float lifetime = 30f;
+    public float lifetime = 3f;
     void Start()
     {
         Destroy(gameObject, lifetime);

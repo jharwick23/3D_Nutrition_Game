@@ -2,9 +2,19 @@ using UnityEngine;
 
 public class PlayerControllerV2 : MonoBehaviour
 {
+    // --- Player Stats Variables --- \\
+    [SerializeField] private int MaxHealth = 100;
+    [SerializeField] private int CurrentHealth = 100;
+    // [SerializeField] private int Level = 1;
+    [SerializeField] private int Coins = 0;
+    
+    // --- Assigned Controllers Variables --- \\
     private CharacterController _characterController;
     private CameraControllerV2 CameraController;
+    public UIHandler _uiHandler;
     private Animator _animator;
+
+    // --- Player Movement/Camera Variables --- \\
     [SerializeField] private float MovementSpeed = 10f;
     [SerializeField] private float RotationSpeed = 20f; // Horizontal Look Speed
     [SerializeField] private float LookSensitivityY = 20f; // Veritical Look Speed
@@ -25,6 +35,14 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             CameraController = FindFirstObjectByType<CameraControllerV2>();
         }
+        if (_uiHandler == null)
+        {
+            _uiHandler = FindFirstObjectByType<UIHandler>();
+        }
+
+        // Initialize UI
+        _uiHandler.UpdateHealthUI(CurrentHealth, MaxHealth);
+        _uiHandler.UpdateCoinUI(Coins);
     }
 
     public void Move(Vector2 movementVector)
@@ -95,5 +113,31 @@ public class PlayerControllerV2 : MonoBehaviour
     public void SetSprinting(bool isSprinting)
     {
         _isSprinting = isSprinting;
+    }
+
+    public void TakeDamage(int damageAmount)
+    {
+        CurrentHealth -= damageAmount;
+        if (CurrentHealth < 0)
+        {
+            CurrentHealth = 0;
+        }
+        _uiHandler.UpdateHealthUI(CurrentHealth, MaxHealth);
+    }
+
+    public void Heal(int healAmount)
+    {
+        CurrentHealth += healAmount;
+        if (CurrentHealth > MaxHealth)
+        {
+            CurrentHealth = MaxHealth;
+        }
+        _uiHandler.UpdateHealthUI(CurrentHealth, MaxHealth);
+    }
+
+    public void AddCoins(int coinAmount)
+    {
+        Coins += coinAmount;
+        _uiHandler.UpdateCoinUI(Coins);
     }
 }

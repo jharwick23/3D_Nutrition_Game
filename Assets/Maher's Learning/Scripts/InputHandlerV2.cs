@@ -5,11 +5,19 @@ public class InputHandlerV2 : MonoBehaviour
 {
     public PlayerControllerV2 PlayerController;
     public ProjectileGun StandardProjectileGun;
-    private InputAction _moveAction, _lookAction, _jumpAction, _attackAction, _sprintAction, _relaodAction;
+    private InputAction _moveAction, _lookAction, _jumpAction, _attackAction, _sprintAction, _relaodAction, _switchBulletAction;
     private PlayerInput playerInput;
 
     void Start()
     {
+        if (PlayerController == null)
+        {
+            PlayerController = FindFirstObjectByType<PlayerControllerV2>();
+        }
+        if (StandardProjectileGun == null)
+        {
+            StandardProjectileGun = FindFirstObjectByType<ProjectileGun>();
+        }
         playerInput = GetComponent<PlayerInput>();
         if (playerInput != null)
         {
@@ -19,9 +27,11 @@ public class InputHandlerV2 : MonoBehaviour
             _attackAction = playerInput.actions.FindAction("Attack");
             _sprintAction = playerInput.actions.FindAction("Sprint");
             _relaodAction = playerInput.actions.FindAction("Reload");
+            _switchBulletAction = playerInput.actions.FindAction("SwitchBullet");
             _relaodAction.performed += OnReloadPerformed;
             _attackAction.performed += OnAttackPerformed;
             _jumpAction.performed += OnJumpPerformed;
+            _switchBulletAction.performed += OnSwitchBulletPerformed;
             _sprintAction.performed += OnSprintPerformed;
             _sprintAction.canceled += OnSprintCancelled;
         }
@@ -75,5 +85,10 @@ public class InputHandlerV2 : MonoBehaviour
     private void OnReloadPerformed(InputAction.CallbackContext context)
     {
         StandardProjectileGun.StartReloading();
+    }
+
+    private void OnSwitchBulletPerformed(InputAction.CallbackContext context)
+    {
+        StandardProjectileGun.SwitchBulletType();
     }
 }

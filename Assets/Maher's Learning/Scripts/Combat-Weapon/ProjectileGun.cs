@@ -4,29 +4,36 @@ using TMPro;
 
 public class ProjectileGun : MonoBehaviour
 {
-    // SETUP REFERENCES
-    public GameObject BulletPrefab;
+    // --- SETUP REFERENCES --- \\
+    public GameObject StandardBulletPrefab;
+    public GameObject TomatoBulletPrefab;
     public Transform BulletSpawnPoint;
     public Camera PlayerCamera;
-    public TextMeshProUGUI AmmoDisplay;
+    public UIHandler _uiHandler;
     public float MaxDistance = 100f;
 
-    // AMMO AND COOLDOWNS
+    // --- AMMO/Type AND COOLDOWNS --- \\
+    public enum BulletType { Standard, Tomato }
+    public BulletType CurrentBulletType = BulletType.Standard;
     public int maxAmmo;
     public int currentAmmo;
     public float timeBetweenShooting = 0.5f;
     public float reloadTime = 1f;
 
-    // STATE TRACKING
+    // --- STATE TRACKING --- \\
     private bool canShoot = true;
     private bool isReloading = false;
     // public float ShootForce = 150f; // OLD
     
     private void Awake()
     {
-        maxAmmo = BulletPrefab.GetComponent<StandardBullet>().maxAmmo;
+        maxAmmo = StandardBulletPrefab.GetComponent<StandardBullet>().maxAmmo;
         currentAmmo = maxAmmo;
-        UpdateAmmoDisplay();
+        if (_uiHandler == null)
+        {
+            _uiHandler = FindFirstObjectByType<UIHandler>();
+        }
+        _uiHandler.UpdateAmmoUI(currentAmmo.ToString() + " / Inf");
     }
 
     public void Shoot()
@@ -37,7 +44,7 @@ public class ProjectileGun : MonoBehaviour
         // Start cooldown and reduce ammo
         StartCoroutine(ShootCooldown());
         currentAmmo--;
-        UpdateAmmoDisplay();
+        _uiHandler.UpdateAmmoUI(currentAmmo.ToString() + " / Inf");
 
 
         Ray ray = PlayerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
@@ -53,10 +60,22 @@ public class ProjectileGun : MonoBehaviour
         }
 
         Vector3 shootDirection = (targetPoint - BulletSpawnPoint.position).normalized;
-        GameObject bullet = Instantiate(BulletPrefab, BulletSpawnPoint.position, Quaternion.LookRotation(shootDirection));
+
+        // Check bullet type and instantiate accordingly
+        if (CurrentBulletType == BulletType.Standard)
+        {
+            GameObject bullet = Instantiate(StandardBulletPrefab, BulletSpawnPoint.position, Quaternion.LookRotation(shootDirection));
+            bullet.GetComponent<StandardBullet>().Init(shootDirection);
+        }
+        else if (CurrentBulletType == BulletType.Tomato)
+        {
+            GameObject bullet =  Instantiate(TomatoBulletPrefab, BulletSpawnPoint.position, Quaternion.LookRotation(shootDirection));
+            bullet.GetComponent<TomatoBullet>().Init(shootDirection);
+        }
+
+        // OLD
         //bullet.GetComponent<Rigidbody>().AddForce(shootDirection.normalized * ShootForce, ForceMode.Impulse);
         // Destroy(bullet, bullet.GetComponent<StandardBullet>().LifeTime);
-        bullet.GetComponent<StandardBullet>().Init(shootDirection);
     }
 
 
@@ -79,24 +98,23 @@ public class ProjectileGun : MonoBehaviour
     {  
         canShoot = false;
         isReloading = true;
-        UpdateAmmoDisplay("Reloading...");
+        _uiHandler.UpdateAmmoUI("Reloading...");
         yield return new WaitForSeconds(reloadTime);
         isReloading = false;
         currentAmmo = maxAmmo;
         canShoot = true;
-        UpdateAmmoDisplay();
+        _uiHandler.UpdateAmmoUI(currentAmmo.ToString() + " / Inf");
     }
 
-    public void UpdateAmmoDisplay(string ammoText = "")
+    public void SwitchBulletType()
     {
-        if (AmmoDisplay != null)
-        if (ammoText != "")
+        if (CurrentBulletType == BulletType.Standard)
         {
-            AmmoDisplay.text = ammoText;
+            CurrentBulletType = BulletType.Tomato;
         }
         else
         {
-            AmmoDisplay.text = $"{currentAmmo} / Inf";
+            CurrentBulletType = BulletType.Standard;
         }
-    }
+    }   
 }

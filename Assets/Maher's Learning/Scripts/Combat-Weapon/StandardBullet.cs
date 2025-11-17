@@ -56,11 +56,14 @@ public class StandardBullet : MonoBehaviour
         Quaternion hitRotation = Quaternion.LookRotation(hitNormal);
         Vector3 spawnPosition = hitPoint + hitNormal * 0.01f; // Slight offset to avoid z-fighting
 
-        Instantiate(
-            ImpactDecalPrefab,
-            spawnPosition,
-            hitRotation     
-        );
+        if (ImpactDecalPrefab != null)
+        {
+            Instantiate(
+                ImpactDecalPrefab,
+                spawnPosition,
+                hitRotation     
+            );
+        }
 
         Destroy(gameObject);
     }
