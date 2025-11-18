@@ -74,6 +74,17 @@ public class PlayerControllerV2 : MonoBehaviour
         // Compute target speed value for Animator
         // If isSprinting is true then double speed
         float targetSpeed = movementVector.magnitude * (_isSprinting ? SprintMultiplier : 1f);
+        
+        // Calculate the direction of movement relative to the player's forward direction
+        Vector3 forward = transform.forward; 
+        float dot = Vector3.Dot(forward, move.normalized); // Dot product to check whether forward or backward
+
+        // Possibly use Clamp outside of conditional to clamp speed normally
+        if(dot < 0)
+        {
+            targetSpeed = -Mathf.Clamp(Mathf.Abs(targetSpeed), 0f, 1f);
+        }
+
         _animator.SetFloat("Speed", targetSpeed, 0.1f, Time.deltaTime); // Comment out for Maher's capsule character if needed
         
         _characterController.Move(move);
