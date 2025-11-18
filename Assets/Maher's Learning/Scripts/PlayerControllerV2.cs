@@ -58,13 +58,23 @@ public class PlayerControllerV2 : MonoBehaviour
             return;
         }
 
+        // Tells the animator whether or not the character is grounded
+        bool grounded = _characterController.isGrounded;
+        _animator.SetBool("IsGrounded", grounded);
+
+        // Tells animator JumpRequested is false when player gets in the air after jump
+        if (!_characterController.isGrounded)
+        {
+            _animator.SetBool("JumpRequested", false);
+        }
+
         Vector3 move = transform.right * movementVector.x + transform.forward * movementVector.y;
         move = move * MovementSpeed * Time.deltaTime;
 
         // Compute target speed value for Animator
         // If isSprinting is true then double speed
         float targetSpeed = movementVector.magnitude * (_isSprinting ? SprintMultiplier : 1f);
-        // _animator.SetFloat("Speed", targetSpeed, 0.1f, Time.deltaTime); // Commented out for Maher's capsule character
+        _animator.SetFloat("Speed", targetSpeed, 0.1f, Time.deltaTime); // Comment out for Maher's capsule character if needed
         
         _characterController.Move(move);
 
@@ -106,6 +116,7 @@ public class PlayerControllerV2 : MonoBehaviour
     {
         if (_characterController.isGrounded)
         {
+            _animator.SetBool("JumpRequested", true);
             _verticalVelocity = JumpForce;
         }
     }
@@ -139,5 +150,10 @@ public class PlayerControllerV2 : MonoBehaviour
     {
         Coins += coinAmount;
         _uiHandler.UpdateCoinUI(Coins);
+    }
+
+    private bool IsNearGround(float distance)
+    {
+        return Physics.Raycast(transform.position, Vector3.down, distance);
     }
 }
