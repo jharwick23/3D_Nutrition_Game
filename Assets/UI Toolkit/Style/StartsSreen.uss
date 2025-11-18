@@ -1,0 +1,15 @@
+#start-button {
+    width: 500px;
+    height: 60px;
+    margin: 10px;
+    align-self: center;
+    font-size: 20px;
+}
+
+#quit-button {
+    width: 500px;
+    height: 60px;
+    margin: 10px;
+    align-self: center;
+    font-size: 20px;
+}

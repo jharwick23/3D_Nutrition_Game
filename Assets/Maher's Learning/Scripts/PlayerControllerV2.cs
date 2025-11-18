@@ -2,25 +2,47 @@ using UnityEngine;
 
 public class PlayerControllerV2 : MonoBehaviour
 {
+    // --- Player Stats Variables --- \\
+    [SerializeField] private int MaxHealth = 100;
+    [SerializeField] private int CurrentHealth = 100;
+    // [SerializeField] private int Level = 1;
+    [SerializeField] private int Coins = 0;
+    
+    // --- Assigned Controllers Variables --- \\
     private CharacterController _characterController;
     private CameraControllerV2 CameraController;
+    public UIHandler _uiHandler;
+    private Animator _animator;
+
+    // --- Player Movement/Camera Variables --- \\
     [SerializeField] private float MovementSpeed = 10f;
     [SerializeField] private float RotationSpeed = 20f; // Horizontal Look Speed
     [SerializeField] private float LookSensitivityY = 20f; // Veritical Look Speed
-    [SerializeField] private float MinCamAngle = 80f;
-    [SerializeField] private float MaxCamAngle = -80f;
+    [SerializeField] private float MinCamAngle = 45f;
+    [SerializeField] private float MaxCamAngle = -75f;
     [SerializeField] private float JumpForce = 8f;
     [SerializeField] private float Gravity = -25f;
+    [SerializeField] private float SprintMultiplier = 2f;
     private float _rotationY;
     private float _verticalVelocity;
+    private bool _isSprinting = false;
 
     void Start()
     {
+        _animator = GetComponent<Animator>();
         _characterController = GetComponent<CharacterController>();
         if (CameraController == null)
         {
             CameraController = FindFirstObjectByType<CameraControllerV2>();
         }
+        if (_uiHandler == null)
+        {
+            _uiHandler = FindFirstObjectByType<UIHandler>();
+        }
+
+        // Initialize UI
+        _uiHandler.UpdateHealthUI(CurrentHealth, MaxHealth);
+        _uiHandler.UpdateCoinUI(Coins);
     }
 
     public void Move(Vector2 movementVector)
@@ -38,6 +60,12 @@ public class PlayerControllerV2 : MonoBehaviour
 
         Vector3 move = transform.right * movementVector.x + transform.forward * movementVector.y;
         move = move * MovementSpeed * Time.deltaTime;
+
+        // Compute target speed value for Animator
+        // If isSprinting is true then double speed
+        float targetSpeed = movementVector.magnitude * (_isSprinting ? SprintMultiplier : 1f);
+        // _animator.SetFloat("Speed", targetSpeed, 0.1f, Time.deltaTime); // Commented out for Maher's capsule character
+        
         _characterController.Move(move);
 
         // Apply gravity
@@ -80,5 +108,36 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             _verticalVelocity = JumpForce;
         }
+    }
+
+    public void SetSprinting(bool isSprinting)
+    {
+        _isSprinting = isSprinting;
+    }
+
+    public void TakeDamage(int damageAmount)
+    {
+        CurrentHealth -= damageAmount;
+        if (CurrentHealth < 0)
+        {
+            CurrentHealth = 0;
+        }
+        _uiHandler.UpdateHealthUI(CurrentHealth, MaxHealth);
+    }
+
+    public void Heal(int healAmount)
+    {
+        CurrentHealth += healAmount;
+        if (CurrentHealth > MaxHealth)
+        {
+            CurrentHealth = MaxHealth;
+        }
+        _uiHandler.UpdateHealthUI(CurrentHealth, MaxHealth);
+    }
+
+    public void AddCoins(int coinAmount)
+    {
+        Coins += coinAmount;
+        _uiHandler.UpdateCoinUI(Coins);
     }
 }

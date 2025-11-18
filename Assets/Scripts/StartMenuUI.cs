@@ -7,7 +7,7 @@ public class StartMenuUI : MonoBehaviour
     private Button startButton;
     private Button quitButton;
 
-    void onEnable()
+    void OnEnable()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
 

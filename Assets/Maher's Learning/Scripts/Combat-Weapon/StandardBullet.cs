@@ -7,6 +7,8 @@ public class StandardBullet : MonoBehaviour
     public float Speed = 100f;
     public float BulletDrop = 5f; // Gravity 
     public float LifeTime = 5f;
+    public int maxAmmo = 24;
+    public GameObject ImpactDecalPrefab;
 
     private Vector3 _velocity;
 
@@ -41,5 +43,28 @@ public class StandardBullet : MonoBehaviour
     void FixedUpdate()
     {
         rb.linearVelocity += Vector3.down * BulletDrop * Time.fixedDeltaTime;
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        // Add impact effects or damage logic here if needed
+        ContactPoint contact = collision.contacts[0];
+
+        Vector3 hitPoint = contact.point;
+        Vector3 hitNormal = contact.normal;
+
+        Quaternion hitRotation = Quaternion.LookRotation(hitNormal);
+        Vector3 spawnPosition = hitPoint + hitNormal * 0.01f; // Slight offset to avoid z-fighting
+
+        if (ImpactDecalPrefab != null)
+        {
+            Instantiate(
+                ImpactDecalPrefab,
+                spawnPosition,
+                hitRotation     
+            );
+        }
+
+        Destroy(gameObject);
     }
 }
