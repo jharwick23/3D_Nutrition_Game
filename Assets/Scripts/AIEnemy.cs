@@ -1,18 +1,21 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class AIEnemy : MonoBehaviour
 {
     public Transform target;
+    public int enemyHealth;
     public float attackDistance;
-
     private NavMeshAgent agent;
     private float distance;
+    public Slider healthSlider;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+
     }
 
     // Update is called once per frame
@@ -28,5 +31,17 @@ public class AIEnemy : MonoBehaviour
             agent.isStopped = false;
             agent.destination = target.position;
         }
+    }
+    
+    public void DoDeath()
+    {
+        if (enemyHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+    public void UpdateUI()
+    {
+        healthSlider.value = enemyHealth;
     }
 }
