@@ -29,6 +29,10 @@ public class ProjectileGun : MonoBehaviour
     {
         maxAmmo = StandardBulletPrefab.GetComponent<StandardBullet>().maxAmmo;
         currentAmmo = maxAmmo;
+        if (PlayerCamera == null)
+        {
+            PlayerCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        }
         if (_uiHandler == null)
         {
             _uiHandler = FindFirstObjectByType<UIHandler>();

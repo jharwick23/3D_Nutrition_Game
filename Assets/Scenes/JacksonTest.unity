@@ -2021,7 +2021,7 @@ GameObject:
   - component: {fileID: 4477965547282974605}
   m_Layer: 0
   m_Name: playerCamera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3424,7 +3424,7 @@ MonoBehaviour:
   TomatoBulletPrefab: {fileID: 3452694226032689571, guid: aa3fb751019881542b3e50d48d5e1220, type: 3}
   BulletSpawnPoint: {fileID: 8608662582100324438}
   PlayerCamera: {fileID: 2911033132809655260}
-  _uiHandler: {fileID: 657930146}
+  _uiHandler: {fileID: 0}
   MaxDistance: 100
   CurrentBulletType: 0
   maxAmmo: 0
@@ -3652,7 +3652,7 @@ MonoBehaviour:
   MaxHealth: 100
   CurrentHealth: 100
   Coins: 0
-  _uiHandler: {fileID: 657930146}
+  _uiHandler: {fileID: 0}
   MovementSpeed: 10
   RotationSpeed: 20
   LookSensitivityY: 20
