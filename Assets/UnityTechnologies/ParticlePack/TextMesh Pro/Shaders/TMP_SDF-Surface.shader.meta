@@ -1,5 +1,13 @@
 fileFormatVersion: 2
-guid: f7ada0af4f174f0694ca6a487b8f543d
+<<<<<<< HEAD
+guid: 810a639409bb9095c8bca9c7035e5ec8
+=======
+<<<<<<< HEAD
+guid: 15ad3f4d81134bae491100ab386508d3
+=======
+guid: 98f23185f4292d548bdce6eabf789e22
+>>>>>>> 19ec457a5f70f1b1a773e360de353ad5a044f505
+>>>>>>> 86e316d11a946f8a08ff02050eb8fd9f98d8dc63
 ShaderImporter:
   externalObjects: {}
   defaultTextures: []

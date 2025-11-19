@@ -1,5 +1,13 @@
 fileFormatVersion: 2
-guid: e3265ab4bf004d28a9537516768c1c75
+<<<<<<< HEAD
+guid: a27090856c7d161ec9a6309de098752d
+=======
+<<<<<<< HEAD
+guid: 79d63980c5baa02bc92028c6b5f118bd
+=======
+guid: 191f7bd0d16fd1e48a999046bfbeadb1
+>>>>>>> 19ec457a5f70f1b1a773e360de353ad5a044f505
+>>>>>>> 86e316d11a946f8a08ff02050eb8fd9f98d8dc63
 timeCreated: 1484171297
 licenseType: Pro
 TrueTypeFontImporter:
