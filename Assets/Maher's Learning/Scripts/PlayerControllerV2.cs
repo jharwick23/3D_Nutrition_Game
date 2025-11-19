@@ -75,15 +75,59 @@ public class PlayerControllerV2 : MonoBehaviour
         // If isSprinting is true then double speed
         float targetSpeed = movementVector.magnitude * (_isSprinting ? SprintMultiplier : 1f);
         
-        // Calculate the direction of movement relative to the player's forward direction
-        Vector3 forward = transform.forward; 
-        float dot = Vector3.Dot(forward, move.normalized); // Dot product to check whether forward or backward
+        // Get the horizontal and vertical inputs to determine movement direction
+        float movementDirectionX = 0f;
+        float movementDirectionY = 0f;
 
-        // Possibly use Clamp outside of conditional to clamp speed normally
-        if(dot < 0)
+        if (Mathf.Abs(movementVector.x) > Mathf.Epsilon || Mathf.Abs(movementVector.y) > Mathf.Epsilon)
         {
-            targetSpeed = -Mathf.Clamp(Mathf.Abs(targetSpeed), 0f, 1f);
+            if (movementVector.x > 0) // Right
+            {
+                movementDirectionX = 1f;
+            }
+            else if (movementVector.x < 0) // Left
+            {
+                movementDirectionX = -1f;
+            }
+
+            if (movementVector.y > 0) // Forward
+            {
+                movementDirectionY = 1f;
+            }
+            else if (movementVector.y < 0) // Backward
+            {
+                movementDirectionY = -1f;
+            }
+
+            // Handle diagonal movement (combine forward/backward and left/right)
+            if (Mathf.Abs(movementVector.x) > Mathf.Epsilon && Mathf.Abs(movementVector.y) > Mathf.Epsilon)
+            {
+                if (movementVector.x > 0 && movementVector.y > 0) // Forward-Right
+                {
+                    movementDirectionX = 0.5f;
+                    movementDirectionY = 0.5f;
+                }
+                else if (movementVector.x < 0 && movementVector.y > 0) // Forward-Left
+                {
+                    movementDirectionX = -0.5f;
+                    movementDirectionY = 0.5f;
+                }
+                else if (movementVector.x > 0 && movementVector.y < 0) // Backward-Right
+                {
+                    movementDirectionX = 0.5f;
+                    movementDirectionY = -0.5f;
+                }
+                else if (movementVector.x < 0 && movementVector.y < 0) // Backward-Left
+                {
+                    movementDirectionX = -0.5f;
+                    movementDirectionY = -0.5f;
+                }
+            }
         }
+
+        // Set animator parameters for blending movement
+        _animator.SetFloat("MovementX", movementDirectionX, 0.1f, Time.deltaTime); // X controls Left-Right
+        _animator.SetFloat("MovementY", movementDirectionY, 0.1f, Time.deltaTime); // Y controls Forward-Backward
 
         _animator.SetFloat("Speed", targetSpeed, 0.1f, Time.deltaTime); // Comment out for Maher's capsule character if needed
         
