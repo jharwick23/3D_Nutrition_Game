@@ -30,6 +30,8 @@ public class PlayerControllerV2 : MonoBehaviour
     private bool _isBlocking = false;
     private bool _isMeleeing = false;
     private bool _dodgePressed = false;
+    private float _lastAttackTime = 0f;
+    private float _attackHoldDuration = 1f;
     void Start()
     {
         _animator = GetComponent<Animator>();
@@ -56,28 +58,36 @@ public class PlayerControllerV2 : MonoBehaviour
             MeleeAnim();
             BlockingAnim();
         }
+
+        // Checks to see the amount of time passed between the last attack
+        // If it is greater than one second we will set the _isShooting variable
+        // to false
+        if (Time.time - _lastAttackTime > _attackHoldDuration)
+        {
+            IsShooting(false);
+        }
     }
 
     private void ShootingAnim()
     {
         // This updates the holding weapon layer or "HoldingHat Layer"
         // Possibly put this in separate file?
-        UpdateLayerWeight(_isShooting, 1);
+        UpdateLayerWeight(_isShooting, 1, 5);
     }
 
     private void MeleeAnim()
     {
         // Updates the melee animation layer
-        UpdateLayerWeight(_isMeleeing, 2);
+        UpdateLayerWeight(_isMeleeing, 2, 5);
     }
 
     private void BlockingAnim()
     {
         // Updates the blocking animation layer
-        UpdateLayerWeight(_isBlocking, 3);
+        UpdateLayerWeight(_isBlocking, 3, 5);
     }
 
-    private void UpdateLayerWeight(bool isActive, int layerIndex)
+    private void UpdateLayerWeight(bool isActive, int layerIndex, float speed)
     {
         float currentLayerWeight = _animator.GetLayerWeight(layerIndex);
         float targetLayerWeight;
@@ -94,7 +104,7 @@ public class PlayerControllerV2 : MonoBehaviour
         float newLayerWeight = Mathf.MoveTowards(
             currentLayerWeight,
             targetLayerWeight,
-            Time.deltaTime * 5
+            Time.deltaTime * speed
         );
 
         _animator.SetLayerWeight(layerIndex, newLayerWeight);
@@ -296,5 +306,10 @@ public class PlayerControllerV2 : MonoBehaviour
     public void IsDodging()
     {
         _dodgePressed = true;
+    }
+
+    public void SetLastAttackTime()
+    {
+        _lastAttackTime = Time.time;
     }
 }
