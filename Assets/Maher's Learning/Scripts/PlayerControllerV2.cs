@@ -134,7 +134,7 @@ public class PlayerControllerV2 : MonoBehaviour
         }
 
         Vector3 move = transform.right * movementVector.x + transform.forward * movementVector.y;
-        move = move * MovementSpeed * Time.deltaTime;
+        move = move * MovementSpeed * Time.deltaTime * (_isSprinting ? SprintMultiplier : 1f);
 
         // Compute target speed value for Animator
         // If isSprinting is true then double speed
