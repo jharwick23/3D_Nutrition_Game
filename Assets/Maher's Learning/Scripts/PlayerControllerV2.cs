@@ -26,7 +26,10 @@ public class PlayerControllerV2 : MonoBehaviour
     private float _rotationY;
     private float _verticalVelocity;
     private bool _isSprinting = false;
-
+    private bool _isShooting = false;
+    private bool _isBlocking = false;
+    private bool _isMeleeing = false;
+    private bool _dodgePressed = false;
     void Start()
     {
         _animator = GetComponent<Animator>();
@@ -45,6 +48,58 @@ public class PlayerControllerV2 : MonoBehaviour
         _uiHandler.UpdateCoinUI(Coins);
     }
 
+    void Update()
+    {
+        if (!_dodgePressed)
+        {
+            ShootingAnim();
+            MeleeAnim();
+            BlockingAnim();
+        }
+    }
+
+    private void ShootingAnim()
+    {
+        // This updates the holding weapon layer or "HoldingHat Layer"
+        // Possibly put this in separate file?
+        UpdateLayerWeight(_isShooting, 1);
+    }
+
+    private void MeleeAnim()
+    {
+        // Updates the melee animation layer
+        UpdateLayerWeight(_isMeleeing, 2);
+    }
+
+    private void BlockingAnim()
+    {
+        // Updates the blocking animation layer
+        UpdateLayerWeight(_isBlocking, 3);
+    }
+
+    private void UpdateLayerWeight(bool isActive, int layerIndex)
+    {
+        float currentLayerWeight = _animator.GetLayerWeight(layerIndex);
+        float targetLayerWeight;
+
+        if (isActive)
+        {
+            targetLayerWeight = 1;
+        }
+        else
+        {
+            targetLayerWeight = 0;
+        }
+
+        float newLayerWeight = Mathf.MoveTowards(
+            currentLayerWeight,
+            targetLayerWeight,
+            Time.deltaTime * 5
+        );
+
+        _animator.SetLayerWeight(layerIndex, newLayerWeight);
+    }
+    
     public void Move(Vector2 movementVector)
     {
         if (_characterController == null)
@@ -130,6 +185,17 @@ public class PlayerControllerV2 : MonoBehaviour
         _animator.SetFloat("MovementY", movementDirectionY, 0.1f, Time.deltaTime); // Y controls Forward-Backward
 
         _animator.SetFloat("Speed", targetSpeed, 0.1f, Time.deltaTime); // Comment out for Maher's capsule character if needed
+
+        // If the dodge pressed bool is true and the speed is greater than 0.1 we can set the dodge trigger
+        if (_dodgePressed && (targetSpeed > 0.1f))
+        {
+            _animator.SetTrigger("Dodge");
+            _dodgePressed = false;
+        }
+        else
+        {
+            _dodgePressed = false;
+        }
         
         _characterController.Move(move);
 
@@ -210,5 +276,25 @@ public class PlayerControllerV2 : MonoBehaviour
     private bool IsNearGround(float distance)
     {
         return Physics.Raycast(transform.position, Vector3.down, distance);
+    }
+
+    public void IsShooting(bool isShooting)
+    {
+        _isShooting = isShooting;
+    }
+
+    public void IsMeleeAttacking(bool isMeleeing)
+    {
+        _isMeleeing = isMeleeing;
+    }
+
+    public void IsBlocking(bool isBlocking)
+    {
+        _isBlocking = isBlocking;
+    }
+
+    public void IsDodging()
+    {
+        _dodgePressed = true;
     }
 }
