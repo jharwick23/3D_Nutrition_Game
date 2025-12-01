@@ -5,6 +5,7 @@ public class TomatoBullet : MonoBehaviour
 {
     private Rigidbody rb;
     public float Speed = 100f;
+    public int bulletDamage = 50;
     public float BulletDrop = 5f; // Gravity 
     public float LifeTime = 5f;
     public int maxAmmo = 24;
@@ -63,6 +64,14 @@ public class TomatoBullet : MonoBehaviour
                 spawnPosition,
                 hitRotation     
             );
+        }
+        bool isEnemy = collision.gameObject.CompareTag("Enemy");
+
+        if (isEnemy)
+        {
+            collision.gameObject.GetComponent<AIEnemy>().enemyHealth -= bulletDamage;
+            collision.gameObject.GetComponent<AIEnemy>().UpdateUI();
+            collision.gameObject.GetComponent<AIEnemy>().DoDeath();
         }
 
         Destroy(gameObject);

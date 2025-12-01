@@ -4,35 +4,13 @@ using UnityEngine.UI;
 
 public class AIEnemy : MonoBehaviour
 {
-    public Transform target;
+
     public int enemyHealth;
-    public float attackDistance;
-    private NavMeshAgent agent;
-    private float distance;
     public Slider healthSlider;
+    public bool isCube;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        agent = GetComponent<NavMeshAgent>();
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        distance = Vector3.Distance(agent.transform.position, target.position);
-        if (distance < attackDistance)
-        {
-            agent.isStopped = true;
-        }
-        else
-        {
-            agent.isStopped = false;
-            agent.destination = target.position;
-        }
-    }
     
+    //Checks if game object has no health so it can destroy itself
     public void DoDeath()
     {
         if (enemyHealth <= 0)
@@ -40,8 +18,13 @@ public class AIEnemy : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    
+    //Updates UI when for health tracking
     public void UpdateUI()
     {
-        healthSlider.value = enemyHealth;
+        if (isCube)
+        {
+            healthSlider.value = enemyHealth;
+        }
     }
 }
