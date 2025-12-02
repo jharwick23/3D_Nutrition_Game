@@ -121,9 +121,9 @@ Material:
     - _RefractionModel: 0
     - _RenderQueueType: 4
     - _RequireSplitLighting: 0
-    - _ScaleRatioA: 1
-    - _ScaleRatioB: 1
-    - _ScaleRatioC: 1
+    - _ScaleRatioA: 0.9
+    - _ScaleRatioB: 0.7875
+    - _ScaleRatioC: 0.7875
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
