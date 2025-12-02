@@ -80,6 +80,7 @@ public class InputHandlerV2 : MonoBehaviour
     {
         StandardProjectileGun.Shoot();
         PlayerController.IsShooting(true);
+        PlayerController.HatHandler.SetOnGun();
         PlayerController.SetLastAttackTime();
     }
 

@@ -676,6 +676,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 838983281}
   m_CullTransparentMesh: 1
+--- !u!1 &949954160
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 949954161}
+  m_Layer: 0
+  m_Name: HoldingHatHoldPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &949954161
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949954160}
+  serializedVersion: 2
+  m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
+  m_LocalPosition: {x: 0.12, y: 1.1, z: 0.3405}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8683652780655262687}
+  m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
+--- !u!1 &1102689058
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1102689059}
+  m_Layer: 0
+  m_Name: HatHoldPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1102689059
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102689058}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: -0.7071068}
+  m_LocalPosition: {x: -0.01900005, y: 0.21, z: 0.024}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8907928019874402680}
+  m_LocalEulerAnglesHint: {x: 270, y: 0, z: 0}
 --- !u!1 &1256658381
 GameObject:
   m_ObjectHideFlags: 0
@@ -2346,6 +2408,7 @@ GameObject:
   - component: {fileID: 2103644432134009981}
   - component: {fileID: 2895734492169306811}
   - component: {fileID: 6917528229547684058}
+  - component: {fileID: 6917528229547684059}
   m_Layer: 0
   m_Name: Hat
   m_TagString: Untagged
@@ -2810,14 +2873,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3529234402940420684}
   serializedVersion: 2
-  m_LocalRotation: {x: 1, y: -0, z: -0, w: 0}
-  m_LocalPosition: {x: 0.128, y: 1.114, z: 0.326}
+  m_LocalRotation: {x: 0.70710677, y: -0, z: -0, w: -0.7071068}
+  m_LocalPosition: {x: -0.01900005, y: 1.8247181, z: -0.025567293}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8608662582100324438}
   m_Father: {fileID: 8683652780655262687}
-  m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 270, y: 0, z: 0}
 --- !u!4 &4997651216732606951
 Transform:
   m_ObjectHideFlags: 0
@@ -3431,6 +3494,20 @@ MonoBehaviour:
   currentAmmo: 0
   timeBetweenShooting: 0.5
   reloadTime: 1
+--- !u!114 &6917528229547684059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3529234402940420684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1283507c94fee4728826edab67fae3ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HatHandler
+  headAttachPoint: {fileID: 1102689059}
+  gunHoldPoint: {fileID: 949954161}
 --- !u!1 &6955046174852734384
 GameObject:
   m_ObjectHideFlags: 0
@@ -3653,6 +3730,7 @@ MonoBehaviour:
   CurrentHealth: 100
   Coins: 0
   _uiHandler: {fileID: 0}
+  HatHandler: {fileID: 6917528229547684059}
   MovementSpeed: 10
   RotationSpeed: 20
   LookSensitivityY: 20
@@ -3850,6 +3928,7 @@ Transform:
   - {fileID: 5850883594380380324}
   - {fileID: 8515776317378292945}
   - {fileID: 4969064163735949230}
+  - {fileID: 949954161}
   m_Father: {fileID: 9217575796790890278}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &8791711737601773738
@@ -3952,6 +4031,7 @@ Transform:
   - {fileID: 2437344357037180182}
   - {fileID: 1489672524230268912}
   - {fileID: 1929165597612569054}
+  - {fileID: 1102689059}
   m_Father: {fileID: 712538178740820653}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8942975091057163610

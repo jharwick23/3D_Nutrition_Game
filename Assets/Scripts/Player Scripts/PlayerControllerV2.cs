@@ -14,6 +14,9 @@ public class PlayerControllerV2 : MonoBehaviour
     public UIHandler _uiHandler;
     private Animator _animator;
 
+    // Handling Hat Variable so we don't create a new projectile gun instance
+    public HatHandler HatHandler;
+    
     // --- Player Movement/Camera Variables --- \\
     [SerializeField] private float MovementSpeed = 10f;
     [SerializeField] private float RotationSpeed = 20f; // Horizontal Look Speed
@@ -62,9 +65,11 @@ public class PlayerControllerV2 : MonoBehaviour
         // Checks to see the amount of time passed between the last attack
         // If it is greater than one second we will set the _isShooting variable
         // to false
+        // Also changes hat position to have the player wear the hat
         if (Time.time - _lastAttackTime > _attackHoldDuration)
         {
             IsShooting(false);
+            HatHandler.SetOnHead();
         }
     }
 
