@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4609230312776269700}
   m_Layer: 0
   m_Name: StandardBullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StandardBullet
   Speed: 100
+  bulletDamage: 50
   BulletDrop: 5
   LifeTime: 5
   maxAmmo: 24

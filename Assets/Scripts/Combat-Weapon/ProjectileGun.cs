@@ -25,7 +25,7 @@ public class ProjectileGun : MonoBehaviour
     private bool isReloading = false;
     // public float ShootForce = 150f; // OLD
     
-    private void Awake()
+    private void Start()
     {
         maxAmmo = StandardBulletPrefab.GetComponent<StandardBullet>().maxAmmo;
         currentAmmo = maxAmmo;

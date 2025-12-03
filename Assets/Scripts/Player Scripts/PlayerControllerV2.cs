@@ -51,6 +51,7 @@ public class PlayerControllerV2 : MonoBehaviour
         // Initialize UI
         _uiHandler.UpdateHealthUI(CurrentHealth, MaxHealth);
         _uiHandler.UpdateCoinUI(Coins);
+        Respawn();
     }
 
     void Update()
@@ -265,11 +266,12 @@ public class PlayerControllerV2 : MonoBehaviour
     public void TakeDamage(int damageAmount)
     {
         CurrentHealth -= damageAmount;
-        if (CurrentHealth < 0)
+        if (CurrentHealth <= 0)
         {
             CurrentHealth = 0;
         }
         _uiHandler.UpdateHealthUI(CurrentHealth, MaxHealth);
+        DoDeath();
     }
 
     public void Heal(int healAmount)
@@ -291,6 +293,55 @@ public class PlayerControllerV2 : MonoBehaviour
     private bool IsNearGround(float distance)
     {
         return Physics.Raycast(transform.position, Vector3.down, distance);
+    }
+
+    private void DoDeath()
+    {
+        if (CurrentHealth <= 0)
+        {
+            // Respawn & Set Health to Max
+            Respawn();
+            CurrentHealth = MaxHealth;
+            _uiHandler.UpdateHealthUI(CurrentHealth, MaxHealth);
+
+            // Reset Ammo
+            ProjectileGun HatWeapon = FindFirstObjectByType<ProjectileGun>();
+            if (HatWeapon)
+            {
+                HatWeapon.StartReloading();
+            }
+            else
+            {
+                Debug.Log("HatWeapon not found in transform children.");
+            }
+
+            // Reset Puzzle
+            GameObject puzzle1 = GameObject.FindGameObjectWithTag("Puzzle1");
+            Puzzle1 Puzzle1Script = puzzle1.GetComponent<Puzzle1>();
+            Puzzle1Script.resetPuzzle();
+
+            // Delete all enemies in the scene
+
+
+            
+        }
+    }
+
+    private void Respawn()
+    {
+        // Find position of the object tagged "RespawnPoint"
+        GameObject respawnPoint = GameObject.FindGameObjectWithTag("Spawnpoint");
+        if (respawnPoint != null)
+        {
+            _characterController.enabled = false;
+            transform.position = respawnPoint.transform.position;
+            _characterController.enabled = true;
+            _verticalVelocity = -2f;
+        }
+        else
+        {
+            Debug.LogError("RespawnPoint not found in the scene.");
+        }
     }
 
     public void IsShooting(bool isShooting)
