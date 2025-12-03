@@ -79,7 +79,7 @@ public class InputHandlerV2 : MonoBehaviour
     private void OnAttackPerformed(InputAction.CallbackContext context)
     {
         StandardProjectileGun.Shoot();
-        PlayerController.IsShooting(true);
+        PlayerController.SetEquipped(true);
         PlayerController.HatHandler.SetOnGun();
         PlayerController.SetLastAttackTime();
     }

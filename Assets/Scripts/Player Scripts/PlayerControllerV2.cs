@@ -29,12 +29,12 @@ public class PlayerControllerV2 : MonoBehaviour
     private float _rotationY;
     private float _verticalVelocity;
     private bool _isSprinting = false;
-    private bool _isShooting = false;
+    private bool _isEquipped = false;
     private bool _isBlocking = false;
     private bool _isMeleeing = false;
     private bool _dodgePressed = false;
     private float _lastAttackTime = 0f;
-    private float _attackHoldDuration = 1f;
+    private float _attackHoldDuration = 5f;
     void Start()
     {
         _animator = GetComponent<Animator>();
@@ -58,27 +58,27 @@ public class PlayerControllerV2 : MonoBehaviour
     {
         if (!_dodgePressed)
         {
-            ShootingAnim();
+            EquippedAnim();
             MeleeAnim();
             BlockingAnim();
         }
 
         // Checks to see the amount of time passed between the last attack
-        // If it is greater than one second we will set the _isShooting variable
+        // If it is greater than one second we will set the _isEquipped variable
         // to false
         // Also changes hat position to have the player wear the hat
         if (Time.time - _lastAttackTime > _attackHoldDuration)
         {
-            IsShooting(false);
+            SetEquipped(false);
             HatHandler.SetOnHead();
         }
     }
 
-    private void ShootingAnim()
+    private void EquippedAnim()
     {
         // This updates the holding weapon layer or "HoldingHat Layer"
         // Possibly put this in separate file?
-        UpdateLayerWeight(_isShooting, 1, 5);
+        UpdateLayerWeight(_isEquipped, 1, 5);
     }
 
     private void MeleeAnim()
@@ -344,9 +344,14 @@ public class PlayerControllerV2 : MonoBehaviour
         }
     }
 
-    public void IsShooting(bool isShooting)
+    public void SetEquipped(bool isEquipped)
     {
-        _isShooting = isShooting;
+        _isEquipped = isEquipped;
+    }
+
+    public bool GetEquipped()
+    {
+        return _isEquipped;
     }
 
     public void IsMeleeAttacking(bool isMeleeing)
@@ -354,9 +359,19 @@ public class PlayerControllerV2 : MonoBehaviour
         _isMeleeing = isMeleeing;
     }
 
+    public bool GetMeleeAttacking()
+    {
+        return _isMeleeing;
+    }
+
     public void IsBlocking(bool isBlocking)
     {
         _isBlocking = isBlocking;
+    }
+    
+    public bool GetBlocking()
+    {
+        return _isBlocking;
     }
 
     public void IsDodging()

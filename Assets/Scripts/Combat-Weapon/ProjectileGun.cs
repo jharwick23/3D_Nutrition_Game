@@ -10,6 +10,7 @@ public class ProjectileGun : MonoBehaviour
     public Transform BulletSpawnPoint;
     public Camera PlayerCamera;
     public UIHandler _uiHandler;
+    public PlayerControllerV2 PlayerController;
     public float MaxDistance = 100f;
 
     // --- AMMO/Type AND COOLDOWNS --- \\
@@ -38,11 +39,18 @@ public class ProjectileGun : MonoBehaviour
             _uiHandler = FindFirstObjectByType<UIHandler>();
         }
         _uiHandler.UpdateAmmoUI(currentAmmo.ToString() + " / Inf");
+        
+        if (PlayerController == null)
+        {
+            PlayerController = FindFirstObjectByType<PlayerControllerV2>();
+        }
     }
 
     public void Shoot()
     {
-        if (!canShoot || currentAmmo <= 0 || isReloading)
+        if (!canShoot || currentAmmo <= 0 || isReloading || 
+            !PlayerController.GetEquipped() || PlayerController.GetBlocking()
+            || PlayerController.GetMeleeAttacking())
             return;
 
         // Start cooldown and reduce ammo
