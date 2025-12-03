@@ -13,9 +13,17 @@ public class CameraControllerV2 : MonoBehaviour
     public float CameraPitch = 0f; // Starting Camera Pitch/Angle degrees, Changes with Mouse Y movement
     [Tooltip("Camera offset from the follow target position")]
     public Vector3 ShoulderOffset = new Vector3(0.0f, 0.0f, 0.0f); // 0,0,0 for Old // Old changes part Position
-    public float CameraDistance = 9f;
+    public float CameraDistance = 5f;
 
     private Vector3 _currentVelocity = Vector3.zero;
+
+    void Start()
+    {
+        if (FollowTarget == null)
+        {
+            FollowTarget = GameObject.Find("CameraFollowTarget").transform;
+        }
+    }
 
     void LateUpdate()
     {
