@@ -923,17 +923,21 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3913122986997153791, guid: ade8540804200fcd397f6a00c821bb8f, type: 3}
+      propertyPath: HatHandler
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7614779640677468769, guid: ade8540804200fcd397f6a00c821bb8f, type: 3}
       propertyPath: PlayerCamera
       value: 
       objectReference: {fileID: 2911033132809655260}
     - target: {fileID: 8248514138707313343, guid: ade8540804200fcd397f6a00c821bb8f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.8493958
+      value: -1.31
       objectReference: {fileID: 0}
     - target: {fileID: 8248514138707313343, guid: ade8540804200fcd397f6a00c821bb8f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.000030517578
+      value: 1.11
       objectReference: {fileID: 0}
     - target: {fileID: 8248514138707313343, guid: ade8540804200fcd397f6a00c821bb8f, type: 3}
       propertyPath: m_LocalPosition.z

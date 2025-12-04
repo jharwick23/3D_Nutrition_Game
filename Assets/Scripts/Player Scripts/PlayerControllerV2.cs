@@ -14,7 +14,7 @@ public class PlayerControllerV2 : MonoBehaviour
     public UIHandler _uiHandler;
     private Animator _animator;
 
-    // Handling Hat Variable so we don't create a new projectile gun instance
+    // Handling Hat Object
     public HatHandler _hatHandler;
     
     // --- Player Movement/Camera Variables --- \\
@@ -26,6 +26,9 @@ public class PlayerControllerV2 : MonoBehaviour
     [SerializeField] private float JumpForce = 8f;
     [SerializeField] private float Gravity = -25f;
     [SerializeField] private float SprintMultiplier = 2f;
+    private float distanceFromGroundThreshold = 0.4f;
+
+    // Movement and Animation variables
     private float _rotationY;
     private float _verticalVelocity;
     private bool _isSprinting = false;
@@ -71,30 +74,27 @@ public class PlayerControllerV2 : MonoBehaviour
         // If it is greater than one second we will set the _isEquipped variable
         // to false
         // Also changes hat position to have the player wear the hat
-        if (Time.time - _lastAttackTime > _attackHoldDuration)
+        if (Time.time - _lastAttackTime > _attackHoldDuration || _isMeleeing || _isBlocking)
         {
             SetEquipped(false);
             _hatHandler.SetOnHead();
         }
     }
 
+    // These three functions set the animator booleans
     private void EquippedAnim()
     {
-        // This updates the holding weapon layer or "HoldingHat Layer"
-        // Possibly put this in separate file?
-        UpdateLayerWeight(_isEquipped, 1, 5);
+        _animator.SetBool("IsEquipped", _isEquipped);
     }
 
     private void MeleeAnim()
     {
-        // Updates the melee animation layer
-        UpdateLayerWeight(_isMeleeing, 2, 5);
+        _animator.SetBool("IsMelee", _isMeleeing);
     }
 
     private void BlockingAnim()
     {
-        // Updates the blocking animation layer
-        UpdateLayerWeight(_isBlocking, 3, 5);
+        _animator.SetBool("IsBlocking", _isBlocking);
     }
 
     private void UpdateLayerWeight(bool isActive, int layerIndex, float speed)
@@ -134,11 +134,10 @@ public class PlayerControllerV2 : MonoBehaviour
         }
 
         // Tells the animator whether or not the character is grounded
-        bool grounded = _characterController.isGrounded;
-        _animator.SetBool("IsGrounded", grounded);
+        _animator.SetBool("IsGrounded", IsGrounded());
 
         // Tells animator JumpRequested is false when player gets in the air after jump
-        if (!_characterController.isGrounded)
+        if (!IsGrounded())
         {
             _animator.SetBool("JumpRequested", false);
         }
@@ -255,7 +254,7 @@ public class PlayerControllerV2 : MonoBehaviour
 
     public void Jump()
     {
-        if (_characterController.isGrounded)
+        if (IsGrounded())
         {
             _animator.SetBool("JumpRequested", true);
             _verticalVelocity = JumpForce;
@@ -294,9 +293,11 @@ public class PlayerControllerV2 : MonoBehaviour
         _uiHandler.UpdateCoinUI(Coins);
     }
 
-    private bool IsNearGround(float distance)
+    private bool IsGrounded()
     {
-        return Physics.Raycast(transform.position, Vector3.down, distance);
+        Vector3 bottom = transform.position + _characterController.center + Vector3.down * (_characterController.height / 2f);
+
+        return Physics.Raycast(bottom, Vector3.down, distanceFromGroundThreshold);
     }
 
     private void DoDeath()
