@@ -31,13 +31,15 @@ public class PlayerControllerV2 : MonoBehaviour
     // Movement and Animation variables
     private float _rotationY;
     private float _verticalVelocity;
+    private float _lastAttackTime = 0f;
+    private float _attackHoldDuration = 1f;
     private bool _isSprinting = false;
     private bool _isEquipped = false;
     private bool _isBlocking = false;
     private bool _isMeleeing = false;
     private bool _dodgePressed = false;
-    private float _lastAttackTime = 0f;
-    private float _attackHoldDuration = 5f;
+    private bool _hasLanded = false;
+
     void Start()
     {
         _animator = GetComponent<Animator>();
@@ -74,7 +76,8 @@ public class PlayerControllerV2 : MonoBehaviour
         // If it is greater than one second we will set the _isEquipped variable
         // to false
         // Also changes hat position to have the player wear the hat
-        if (Time.time - _lastAttackTime > _attackHoldDuration || _isMeleeing || _isBlocking)
+        if (Time.time - _lastAttackTime > _attackHoldDuration 
+            || _isMeleeing || _isBlocking)
         {
             SetEquipped(false);
             _hatHandler.SetOnHead();
@@ -131,6 +134,12 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             Debug.LogWarning("CharacterController component is Currently Inactive.");
             return;
+        }
+        
+        // If the player has landed stop horizontal movement momentarily
+        if (_hasLanded)
+        {
+            movementVector = Vector2.zero;
         }
 
         // Tells the animator whether or not the character is grounded
@@ -293,7 +302,7 @@ public class PlayerControllerV2 : MonoBehaviour
         _uiHandler.UpdateCoinUI(Coins);
     }
 
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         Vector3 bottom = transform.position + _characterController.center + Vector3.down * (_characterController.height / 2f);
 
@@ -387,5 +396,10 @@ public class PlayerControllerV2 : MonoBehaviour
     public void SetLastAttackTime()
     {
         _lastAttackTime = Time.time;
+    }
+
+    public void SetHasLanded(bool hasLanded)
+    {
+        _hasLanded = hasLanded;
     }
 }

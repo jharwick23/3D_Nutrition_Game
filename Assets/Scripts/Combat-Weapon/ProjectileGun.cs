@@ -55,6 +55,7 @@ public class ProjectileGun : MonoBehaviour
 
         // Start cooldown and reduce ammo
         StartCoroutine(ShootCooldown());
+        PlayerController.SetLastAttackTime();
         currentAmmo--;
         _uiHandler.UpdateAmmoUI(currentAmmo.ToString() + " / Inf");
 

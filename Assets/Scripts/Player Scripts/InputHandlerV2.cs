@@ -35,7 +35,6 @@ public class InputHandlerV2 : MonoBehaviour
             _dodgeAction = playerInput.actions.FindAction("Dodge");
             _reloadAction.performed += OnReloadPerformed;
             _attackAction.performed += OnAttackPerformed;
-            _attackAction.canceled += OnAttackCancelled;
             _meleeAction.performed += OnMeleePerformed;
             _meleeAction.canceled += OnMeleeCancelled;
             _blockAction.performed += OnBlockingPerformed;
@@ -78,15 +77,9 @@ public class InputHandlerV2 : MonoBehaviour
 
     private void OnAttackPerformed(InputAction.CallbackContext context)
     {
-        StandardProjectileGun.Shoot();
         PlayerController.SetEquipped(true);
         PlayerController._hatHandler.SetOnGun();
-        PlayerController.SetLastAttackTime();
-    }
-
-    private void OnAttackCancelled(InputAction.CallbackContext context)
-    {
-        PlayerController.SetLastAttackTime();
+        StandardProjectileGun.Shoot();
     }
 
     private void OnMeleePerformed(InputAction.CallbackContext context)
