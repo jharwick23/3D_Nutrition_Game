@@ -15,7 +15,7 @@ public class PlayerControllerV2 : MonoBehaviour
     private Animator _animator;
 
     // Handling Hat Variable so we don't create a new projectile gun instance
-    public HatHandler HatHandler;
+    public HatHandler _hatHandler;
     
     // --- Player Movement/Camera Variables --- \\
     [SerializeField] private float MovementSpeed = 10f;
@@ -47,6 +47,10 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             _uiHandler = FindFirstObjectByType<UIHandler>();
         }
+        if (_hatHandler == null)
+        {
+            _hatHandler = FindFirstObjectByType<HatHandler>();
+        }
 
         // Initialize UI
         _uiHandler.UpdateHealthUI(CurrentHealth, MaxHealth);
@@ -70,7 +74,7 @@ public class PlayerControllerV2 : MonoBehaviour
         if (Time.time - _lastAttackTime > _attackHoldDuration)
         {
             SetEquipped(false);
-            HatHandler.SetOnHead();
+            _hatHandler.SetOnHead();
         }
     }
 
