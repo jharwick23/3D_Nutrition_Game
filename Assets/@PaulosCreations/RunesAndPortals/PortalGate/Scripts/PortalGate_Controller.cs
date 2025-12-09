@@ -48,6 +48,7 @@ public class PortalGate_Controller : MonoBehaviour
             ParticleSystem.MainModule mod = part.main;
             mod.startColor = portalEffectColor;
         }
+        F_TogglePortalGate(true);
     }
 
     public void F_TogglePortalGate(bool _activate)
