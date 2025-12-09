@@ -8,6 +8,7 @@ TagManager:
   - Spawnpoint
   - Bullet
   - Puzzle1
+  - DropService
   layers:
   - Default
   - TransparentFX

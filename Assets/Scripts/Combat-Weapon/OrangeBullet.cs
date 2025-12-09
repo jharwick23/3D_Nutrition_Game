@@ -1,14 +1,15 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class StandardBullet : MonoBehaviour
+public class OrangeBullet : MonoBehaviour
 {
     private Rigidbody rb;
     public float Speed = 100f;
-    public int bulletDamage = 50;
+    public int bulletDamage = 5;
     public float BulletDrop = 5f; // Gravity 
     public float LifeTime = 5f;
     public int maxAmmo = 24;
+    public float timeBetweenShooting = 0.5f;
     public GameObject ImpactDecalPrefab;
 
     private Vector3 _velocity;
@@ -48,6 +49,10 @@ public class StandardBullet : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.CompareTag("Player") || (collision.transform.parent != null && collision.transform.parent.CompareTag("Player")))
+        {
+            return;
+        }
         // Add impact effects or damage logic here if needed
         ContactPoint contact = collision.contacts[0];
 

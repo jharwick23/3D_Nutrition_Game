@@ -6,12 +6,14 @@ public class UIHandler : MonoBehaviour
     private HealthUIHandler _healthUIHandler;
     private CoinUIHandler _coinUIHandler;
     private AmmoUIHandler _ammoUIHandler;
+    private BulletTypeUIHandler _bulletTypeUIHandler;
 
     void Awake()
     {
         _healthUIHandler = GetComponentInChildren<HealthUIHandler>();
         _coinUIHandler = GetComponentInChildren<CoinUIHandler>();
         _ammoUIHandler = GetComponentInChildren<AmmoUIHandler>();
+        _bulletTypeUIHandler = GetComponentInChildren<BulletTypeUIHandler>();
     }
 
     public void UpdateHealthUI(int currentHealth, int maxHealth)
@@ -47,6 +49,18 @@ public class UIHandler : MonoBehaviour
         else
         {
             Debug.LogWarning("AmmoUIHandler component not found.");
+        }
+    }
+
+    public void UpdateBulletTypeUI(string bulletType)
+    {
+        if (_bulletTypeUIHandler != null)
+        {
+            _bulletTypeUIHandler.UpdateBulletType(bulletType);
+        }
+        else
+        {
+            Debug.LogWarning("BulletTypeUIHandler component not found.");
         }
     }
 }

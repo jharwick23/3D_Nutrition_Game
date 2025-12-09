@@ -344,6 +344,17 @@ public class PlayerControllerV2 : MonoBehaviour
         }
     }
 
+    public bool IsMaxHealth()
+    {
+        if (CurrentHealth == MaxHealth)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    // -- Animation Bool Set Function -- \\
+
     public void IsShooting(bool isShooting)
     {
         _isShooting = isShooting;

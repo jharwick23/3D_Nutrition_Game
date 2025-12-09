@@ -5,7 +5,7 @@ using TMPro;
 public class ProjectileGun : MonoBehaviour
 {
     // --- SETUP REFERENCES --- \\
-    public GameObject StandardBulletPrefab;
+    public GameObject OrangeBulletPrefab;
     public GameObject TomatoBulletPrefab;
     public Transform BulletSpawnPoint;
     public Camera PlayerCamera;
@@ -13,11 +13,11 @@ public class ProjectileGun : MonoBehaviour
     public float MaxDistance = 100f;
 
     // --- AMMO/Type AND COOLDOWNS --- \\
-    public enum BulletType { Standard, Tomato }
-    public BulletType CurrentBulletType = BulletType.Standard;
+    public enum BulletType { Tomato, Orange }
+    public BulletType CurrentBulletType = BulletType.Orange;
     public int maxAmmo;
     public int currentAmmo;
-    public float timeBetweenShooting = 0.5f;
+    public float timeBetweenShooting;
     public float reloadTime = 1f;
 
     // --- STATE TRACKING --- \\
@@ -27,8 +27,9 @@ public class ProjectileGun : MonoBehaviour
     
     private void Start()
     {
-        maxAmmo = StandardBulletPrefab.GetComponent<StandardBullet>().maxAmmo;
+        maxAmmo = OrangeBulletPrefab.GetComponent<OrangeBullet>().maxAmmo;
         currentAmmo = maxAmmo;
+        timeBetweenShooting = OrangeBulletPrefab.GetComponent<OrangeBullet>().timeBetweenShooting;
         if (PlayerCamera == null)
         {
             PlayerCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
@@ -66,10 +67,10 @@ public class ProjectileGun : MonoBehaviour
         Vector3 shootDirection = (targetPoint - BulletSpawnPoint.position).normalized;
 
         // Check bullet type and instantiate accordingly
-        if (CurrentBulletType == BulletType.Standard)
+        if (CurrentBulletType == BulletType.Orange)
         {
-            GameObject bullet = Instantiate(StandardBulletPrefab, BulletSpawnPoint.position, Quaternion.LookRotation(shootDirection));
-            bullet.GetComponent<StandardBullet>().Init(shootDirection);
+            GameObject bullet = Instantiate(OrangeBulletPrefab, BulletSpawnPoint.position, Quaternion.LookRotation(shootDirection));
+            bullet.GetComponent<OrangeBullet>().Init(shootDirection);
         }
         else if (CurrentBulletType == BulletType.Tomato)
         {
@@ -112,13 +113,17 @@ public class ProjectileGun : MonoBehaviour
 
     public void SwitchBulletType()
     {
-        if (CurrentBulletType == BulletType.Standard)
+        if (CurrentBulletType == BulletType.Tomato)
         {
-            CurrentBulletType = BulletType.Tomato;
+            CurrentBulletType = BulletType.Orange;
+            _uiHandler.UpdateBulletTypeUI("Orange");
+            timeBetweenShooting = OrangeBulletPrefab.GetComponent<OrangeBullet>().timeBetweenShooting;
         }
         else
         {
-            CurrentBulletType = BulletType.Standard;
+            CurrentBulletType = BulletType.Tomato;
+            _uiHandler.UpdateBulletTypeUI("Tomato");
+            timeBetweenShooting = TomatoBulletPrefab.GetComponent<TomatoBullet>().timeBetweenShooting;
         }
     }   
 }
