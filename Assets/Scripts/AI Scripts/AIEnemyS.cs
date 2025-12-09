@@ -8,7 +8,7 @@ public class AIEnemyS : MonoBehaviour
     public float attackDistance, fireRate, rotationSpeed;
     private NavMeshAgent agent;
     private float distance;
-    public float height = 2f, bobSpeed = 2f, bobAmount = 0.3f;
+    public float height = 2f, bobSpeed = 2f, bobAmount = 0.3f, frontScale = 1.5f, randomX = 2f, randomY = 4f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,7 +31,7 @@ public class AIEnemyS : MonoBehaviour
             if (fireRate <= Time.time)
             {
                 Shoot();
-                fireRate = Time.time + Random.Range(2f, 4f);
+                fireRate = Time.time + Random.Range(randomX, randomY);
             }
         }
         //Used to make enemy float and bob a bit
@@ -45,7 +45,7 @@ public class AIEnemyS : MonoBehaviour
     void Shoot()
     {
         // Spawn slightly in front of enemy
-        Vector3 spawnPos = transform.position + transform.forward * 1.5f;
+        Vector3 spawnPos = transform.position + transform.forward * frontScale;
         GameObject bullet = Instantiate(sugarBullet, spawnPos, Quaternion.identity);
         Vector3 direction = (target.position - spawnPos).normalized;
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
