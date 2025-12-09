@@ -16,6 +16,12 @@ public class PlayerControllerV2 : MonoBehaviour
 
     // Handling Hat Object
     public HatHandler _hatHandler;
+
+    // Knife Object
+    public KnifeController Knife;
+
+    // Pan Object
+    public PanController Pan;
     
     // --- Player Movement/Camera Variables --- \\
     [SerializeField] private float MovementSpeed = 10f;
@@ -31,10 +37,10 @@ public class PlayerControllerV2 : MonoBehaviour
     // Movement and Animation variables
     private float _rotationY;
     private float _verticalVelocity;
-    private float _lastAttackTime = 0f;
-    private float _attackHoldDuration = 1f;
+    private float _lastShootingAttackTime = 0f;
+    private float _shootingHoldDuration = 5f;
     private bool _isSprinting = false;
-    private bool _isEquipped = false;
+    private bool _isHatEquipped = false;
     private bool _isBlocking = false;
     private bool _isMeleeing = false;
     private bool _dodgePressed = false;
@@ -56,6 +62,14 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             _hatHandler = FindFirstObjectByType<HatHandler>();
         }
+        if (Knife == null)
+        {
+            Knife = FindFirstObjectByType<KnifeController>();
+        }
+        if (Pan == null)
+        {
+            Pan = FindFirstObjectByType<PanController>();
+        }
 
         // Initialize UI
         _uiHandler.UpdateHealthUI(CurrentHealth, MaxHealth);
@@ -67,27 +81,28 @@ public class PlayerControllerV2 : MonoBehaviour
     {
         if (!_dodgePressed)
         {
-            EquippedAnim();
+            HatEquippedAnim();
             MeleeAnim();
-            BlockingAnim();
+            if(!_isMeleeing && !_isHatEquipped)
+            {
+                BlockingAnim();
+            }
         }
 
-        // Checks to see the amount of time passed between the last attack
-        // If it is greater than one second we will set the _isEquipped variable
-        // to false
+        // Checks to see the amount of time passed between the last ranged attack
         // Also changes hat position to have the player wear the hat
-        if (Time.time - _lastAttackTime > _attackHoldDuration 
+        if (Time.time - _lastShootingAttackTime > _shootingHoldDuration 
             || _isMeleeing || _isBlocking)
         {
-            SetEquipped(false);
+            SetHatEquipped(false);
             _hatHandler.SetOnHead();
         }
     }
 
     // These three functions set the animator booleans
-    private void EquippedAnim()
+    private void HatEquippedAnim()
     {
-        _animator.SetBool("IsEquipped", _isEquipped);
+        _animator.SetBool("IsHatEquipped", _isHatEquipped);
     }
 
     private void MeleeAnim()
@@ -100,29 +115,6 @@ public class PlayerControllerV2 : MonoBehaviour
         _animator.SetBool("IsBlocking", _isBlocking);
     }
 
-    private void UpdateLayerWeight(bool isActive, int layerIndex, float speed)
-    {
-        float currentLayerWeight = _animator.GetLayerWeight(layerIndex);
-        float targetLayerWeight;
-
-        if (isActive)
-        {
-            targetLayerWeight = 1;
-        }
-        else
-        {
-            targetLayerWeight = 0;
-        }
-
-        float newLayerWeight = Mathf.MoveTowards(
-            currentLayerWeight,
-            targetLayerWeight,
-            Time.deltaTime * speed
-        );
-
-        _animator.SetLayerWeight(layerIndex, newLayerWeight);
-    }
-    
     public void Move(Vector2 movementVector)
     {
         if (_characterController == null)
@@ -331,8 +323,11 @@ public class PlayerControllerV2 : MonoBehaviour
 
             // Reset Puzzle
             GameObject puzzle1 = GameObject.FindGameObjectWithTag("Puzzle1");
-            Puzzle1 Puzzle1Script = puzzle1.GetComponent<Puzzle1>();
-            Puzzle1Script.resetPuzzle();
+            if (puzzle1)
+            {
+               Puzzle1 Puzzle1Script = puzzle1.GetComponent<Puzzle1>();
+                Puzzle1Script.resetPuzzle(); 
+            }
 
             // Delete all enemies in the scene
 
@@ -358,14 +353,14 @@ public class PlayerControllerV2 : MonoBehaviour
         }
     }
 
-    public void SetEquipped(bool isEquipped)
+    public void SetHatEquipped(bool isHatEquipped)
     {
-        _isEquipped = isEquipped;
+        _isHatEquipped = isHatEquipped;
     }
 
-    public bool GetEquipped()
+    public bool GetHatEquipped()
     {
-        return _isEquipped;
+        return _isHatEquipped;
     }
 
     public void IsMeleeAttacking(bool isMeleeing)
@@ -393,9 +388,9 @@ public class PlayerControllerV2 : MonoBehaviour
         _dodgePressed = true;
     }
 
-    public void SetLastAttackTime()
+    public void SetLastShootingAttackTime()
     {
-        _lastAttackTime = Time.time;
+        _lastShootingAttackTime = Time.time;
     }
 
     public void SetHasLanded(bool hasLanded)

@@ -20,7 +20,9 @@ public class InputHandlerV2 : MonoBehaviour
         {
             StandardProjectileGun = FindFirstObjectByType<ProjectileGun>();
         }
+
         playerInput = GetComponent<PlayerInput>();
+
         if (playerInput != null)
         {
             _moveAction = playerInput.actions.FindAction("Move");
@@ -77,7 +79,7 @@ public class InputHandlerV2 : MonoBehaviour
 
     private void OnAttackPerformed(InputAction.CallbackContext context)
     {
-        PlayerController.SetEquipped(true);
+        PlayerController.SetHatEquipped(true);
         PlayerController._hatHandler.SetOnGun();
         StandardProjectileGun.Shoot();
     }
@@ -85,6 +87,7 @@ public class InputHandlerV2 : MonoBehaviour
     private void OnMeleePerformed(InputAction.CallbackContext context)
     {
         PlayerController.IsMeleeAttacking(true);
+        PlayerController.Knife.HoldKnifeInHand();
     }
 
     private void OnMeleeCancelled(InputAction.CallbackContext context)
@@ -95,6 +98,7 @@ public class InputHandlerV2 : MonoBehaviour
     private void OnBlockingPerformed(InputAction.CallbackContext context)
     {
         PlayerController.IsBlocking(true);
+        PlayerController.Pan.HoldPanInHand();
     }
 
     private void OnBlockingCancelled(InputAction.CallbackContext context)

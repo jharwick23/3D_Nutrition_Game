@@ -49,13 +49,13 @@ public class ProjectileGun : MonoBehaviour
     public void Shoot()
     {
         if (!canShoot || currentAmmo <= 0 || isReloading || 
-            !PlayerController.GetEquipped() || PlayerController.GetBlocking()
+            !PlayerController.GetHatEquipped() || PlayerController.GetBlocking()
             || PlayerController.GetMeleeAttacking())
             return;
 
         // Start cooldown and reduce ammo
         StartCoroutine(ShootCooldown());
-        PlayerController.SetLastAttackTime();
+        PlayerController.SetLastShootingAttackTime();
         currentAmmo--;
         _uiHandler.UpdateAmmoUI(currentAmmo.ToString() + " / Inf");
 

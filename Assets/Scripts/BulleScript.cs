@@ -11,7 +11,10 @@ public class BulleScript : MonoBehaviour
             PlayerControllerV2 playerController = other.GetComponent<PlayerControllerV2>();
             if (playerController != null)
             {
-                playerController.TakeDamage(10);
+                if (!playerController.GetBlocking())
+                {
+                    playerController.TakeDamage(10);
+                }
             }
         }
         Destroy(gameObject);
