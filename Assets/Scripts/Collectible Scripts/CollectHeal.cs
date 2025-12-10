@@ -1,9 +1,10 @@
 using UnityEngine;
 
-public class HealTest : MonoBehaviour
+public class CollectHeal : MonoBehaviour
 {
     public float bobbleHeight = 0.25f;
     public float bobbleSpeed = 2f;
+    public int healAmount = 10;
     private Vector3 startPos;
 
     private void Start()
@@ -31,7 +32,7 @@ public class HealTest : MonoBehaviour
             {
                 if (!playerController.IsMaxHealth())
                 {
-                    playerController.Heal(50);
+                    playerController.Heal(healAmount);
                     Destroy(gameObject);
                 }
             }

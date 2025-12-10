@@ -20,7 +20,7 @@ public class AIEnemy : MonoBehaviour
     {
         if (enemyHealth <= 0)
         {
-            _dropService.DropCoin(new Vector3(transform.position.x, 1, transform.position.z)); // Drop Coin
+            _dropService.DropCoin(new Vector3(transform.position.x, 1, transform.position.z), 10); // Drop Coin
             Destroy(gameObject);
         }
     }
