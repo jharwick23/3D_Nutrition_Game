@@ -157,5 +157,5 @@ MonoBehaviour:
   BulletDrop: 5
   LifeTime: 5
   maxAmmo: 24
-  timeBetweenShooting: 2
+  timeBetweenShooting: 1
   ImpactDecalPrefab: {fileID: 5631425737720120280, guid: 5d175a2cbbc7c7f43b33138b69c7bc95, type: 3}

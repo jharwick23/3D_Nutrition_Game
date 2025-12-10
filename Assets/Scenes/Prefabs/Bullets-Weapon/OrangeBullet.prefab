@@ -154,9 +154,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OrangeBullet
   Speed: 100
-  bulletDamage: 5
+  bulletDamage: 10
   BulletDrop: 5
   LifeTime: 5
   maxAmmo: 24
-  timeBetweenShooting: 0.5
+  timeBetweenShooting: 0.2
   ImpactDecalPrefab: {fileID: 5631425737720120280, guid: 5d175a2cbbc7c7f43b33138b69c7bc95, type: 3}

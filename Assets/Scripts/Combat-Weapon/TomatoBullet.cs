@@ -9,7 +9,7 @@ public class TomatoBullet : MonoBehaviour
     public float BulletDrop = 5f; // Gravity 
     public float LifeTime = 5f;
     public int maxAmmo = 24;
-    public float timeBetweenShooting = 2f;
+    public float timeBetweenShooting = 1f;
     public GameObject ImpactDecalPrefab;
 
     private Vector3 _velocity;

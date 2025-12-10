@@ -273,9 +273,22 @@ public class PlayerControllerV2 : MonoBehaviour
         if (CurrentHealth <= 0)
         {
             CurrentHealth = 0;
+            _uiHandler.UpdateHealthUI(CurrentHealth, MaxHealth);
+            DeathScreenMenu deathScreenMenu = FindFirstObjectByType<DeathScreenMenu>();
+            if (deathScreenMenu)
+            {
+                deathScreenMenu.EnableDeathScreen();
+            }
+            else
+            {
+                Debug.Log("DeathScreenMenu Unavailable!");
+            }
         }
-        _uiHandler.UpdateHealthUI(CurrentHealth, MaxHealth);
-        DoDeath();
+        else
+        {
+            _uiHandler.UpdateHealthUI(CurrentHealth, MaxHealth);
+        }
+        // DoDeath();
     }
 
     public void Heal(int healAmount)
@@ -301,7 +314,7 @@ public class PlayerControllerV2 : MonoBehaviour
         return Physics.Raycast(bottom, Vector3.down, distanceFromGroundThreshold);
     }
 
-    private void DoDeath()
+    public void DoDeath()
     {
         if (CurrentHealth <= 0)
         {
