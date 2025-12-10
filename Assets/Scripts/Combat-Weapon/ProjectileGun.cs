@@ -12,6 +12,7 @@ public class ProjectileGun : MonoBehaviour
     public UIHandler _uiHandler;
     public PlayerControllerV2 PlayerController;
     public float MaxDistance = 100f;
+    public LayerMask raycastMask;
 
     // --- AMMO/Type AND COOLDOWNS --- \\
     public enum BulletType { Tomato, Orange }
@@ -63,11 +64,10 @@ public class ProjectileGun : MonoBehaviour
         currentAmmo--;
         _uiHandler.UpdateAmmoUI(currentAmmo.ToString() + " / Inf");
 
-
         Ray ray = PlayerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         Vector3 targetPoint;
 
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, MaxDistance))
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, MaxDistance, raycastMask))
         {
             targetPoint = hitInfo.point;
         }

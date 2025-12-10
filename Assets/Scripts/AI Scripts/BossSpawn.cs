@@ -3,15 +3,29 @@ using UnityEngine;
 public class BossSpawn : MonoBehaviour
 {
     [SerializeField] private GameObject enemyTypeA;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] private Transform transform;
+    private GameObject newBoss;
+    private bool spawned = false;
+
+    // Spawn boss when player enters
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (!spawned)
         {
-            if(enemyTypeA != null)
+            if (other.CompareTag("Player"))
             {
-                enemyTypeA.SetActive(true);
-            } 
+                newBoss = Instantiate(enemyTypeA, transform.position, transform.rotation);
+                newBoss.SetActive(true);
+                spawned = true;
+            }
         }
+        
+    }
+
+    // Reset Boss
+    public void ResetArea()
+    {
+        Destroy(newBoss);
+        spawned = false;
     }
 }

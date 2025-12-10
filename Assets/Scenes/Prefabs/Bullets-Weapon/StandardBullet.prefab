@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4540716950725184405}
   - component: {fileID: 3566548799531083908}
   - component: {fileID: 4609230312776269700}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: StandardBullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -157,4 +157,5 @@ MonoBehaviour:
   BulletDrop: 5
   LifeTime: 5
   maxAmmo: 24
+  timeBetweenShooting: 0
   ImpactDecalPrefab: {fileID: 5631425737720120280, guid: 5d175a2cbbc7c7f43b33138b69c7bc95, type: 3}
