@@ -94,7 +94,7 @@ Material:
     - _UnderlaySoftness: 0
     - _VertexOffsetX: 0
     - _VertexOffsetY: 0
-    - _WeightBold: 0.5
+    - _WeightBold: 0.75
     - _WeightNormal: 0
     m_Colors:
     - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
@@ -128,7 +128,7 @@ MonoBehaviour:
     m_StyleName: Regular
     m_PointSize: 144
     m_Scale: 1
-    m_UnitsPerEM: 2048
+    m_UnitsPerEM: 1024
     m_LineHeight: 153.14062
     m_AscentLine: 127.125
     m_CapLine: 107
@@ -153,7 +153,7 @@ MonoBehaviour:
     pointSizeSamplingMode: 1
     pointSize: 144
     padding: 10
-    paddingMode: 0
+    paddingMode: 2
     packingMode: 4
     atlasWidth: 1024
     atlasHeight: 1024
