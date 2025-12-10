@@ -31,7 +31,7 @@ public class HealTest : MonoBehaviour
             {
                 if (!playerController.IsMaxHealth())
                 {
-                    playerController.Heal(10);
+                    playerController.Heal(50);
                     Destroy(gameObject);
                 }
             }

@@ -335,6 +335,10 @@ public class PlayerControllerV2 : MonoBehaviour
 
             foreach (GameObject enemy in enemies) {
                 enemy.GetComponent<EnemySpawner>().ResetArea();
+                if (enemy.GetComponent<BossSpawn>() != null)
+                {
+                    enemy.GetComponent<BossSpawn>().ResetArea();
+                }
             }
             
         }
