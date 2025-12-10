@@ -8,7 +8,11 @@ TagManager:
   - Spawnpoint
   - Bullet
   - Puzzle1
+<<<<<<< HEAD
   - DropService
+=======
+  - EnemyZones
+>>>>>>> 48639363d064c489065de6b7af640b7116406bca
   layers:
   - Default
   - TransparentFX

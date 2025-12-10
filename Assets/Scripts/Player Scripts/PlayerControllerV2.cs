@@ -331,7 +331,11 @@ public class PlayerControllerV2 : MonoBehaviour
 
             // Delete all enemies in the scene
 
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("EnemyZones");
 
+            foreach (GameObject enemy in enemies) {
+                enemy.GetComponent<EnemySpawner>().ResetArea();
+            }
             
         }
     }

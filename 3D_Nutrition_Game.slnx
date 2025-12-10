@@ -1,5 +1,6 @@
 ﻿<Solution>
   <Project Path="Unity.AI.Navigation.Samples.csproj" />
+<<<<<<< HEAD
   <Project Path="Unity.AI.Navigation.Editor.ConversionSystem.csproj" />
   <Project Path="Unity.VisualScripting.State.Editor.csproj" />
   <Project Path="Unity.Burst.CodeGen.csproj" />
@@ -13,6 +14,8 @@
   <Project Path="Unity.VisualScripting.State.csproj" />
   <Project Path="Unity.AI.Navigation.Updater.csproj" />
   <Project Path="Unity.Postprocessing.Runtime.csproj" />
+=======
+>>>>>>> 48639363d064c489065de6b7af640b7116406bca
   <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
   <Project Path="Unity.AI.Navigation.Samples.Initialization.Editor.csproj" />
