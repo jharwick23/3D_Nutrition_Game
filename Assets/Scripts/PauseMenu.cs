@@ -5,12 +5,10 @@ public class PauseMenu : MonoBehaviour
 {
     [Header("UI")]
     [SerializeField] private GameObject pausePanel;
-
     private bool isPaused = false;
 
     private void Awake()
-    {
-        
+    {   
         PauseMenu[] menus = FindObjectsOfType<PauseMenu>();
         if (menus.Length > 1)
         {
@@ -24,22 +22,20 @@ public class PauseMenu : MonoBehaviour
 
     private void Start()
     {
-        if (pausePanel != null)
-            pausePanel.SetActive(false);
-
         Resume(); 
     }
 
     private void Update()
     {
-        
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (isPaused)
-                Resume();
-            else
-                Pause();
-        }
+    
+    }
+
+    public void PerformPause()
+    {
+        if (isPaused)
+            Resume();
+        else
+            Pause();
     }
 
     public void Pause()
@@ -47,6 +43,8 @@ public class PauseMenu : MonoBehaviour
         if (pausePanel != null)
             pausePanel.SetActive(true);
 
+        InputHandlerV2 inputHandler = FindFirstObjectByType<InputHandlerV2>();
+        inputHandler.DisableInputs();
         Time.timeScale = 0f;     
         isPaused = true;
 
@@ -59,6 +57,8 @@ public class PauseMenu : MonoBehaviour
         if (pausePanel != null)
             pausePanel.SetActive(false);
 
+        InputHandlerV2 inputHandler = FindFirstObjectByType<InputHandlerV2>();
+        inputHandler.EnableInputs();
         Time.timeScale = 1f;     
         isPaused = false;
 

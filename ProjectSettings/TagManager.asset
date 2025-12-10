@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 3
   tags:
   - Enemy
+  - Spawnpoint
+  - Bullet
+  - Puzzle1
+  - DropService
+  - EnemyZones
+  - HUD
   layers:
   - Default
   - TransparentFX
