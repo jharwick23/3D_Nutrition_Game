@@ -126,17 +126,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f574c9c471cdc7478370abf185fac2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileGun
-  StandardBulletPrefab: {fileID: 0}
-  TomatoBulletPrefab: {fileID: 0}
-  BulletSpawnPoint: {fileID: 0}
+  OrangeBulletPrefab: {fileID: 370912169763564214, guid: e03102626fd8d4f4cab8ac4a55c7a19c, type: 3}
+  TomatoBulletPrefab: {fileID: 3452694226032689571, guid: aa3fb751019881542b3e50d48d5e1220, type: 3}
+  BulletSpawnPoint: {fileID: 7980558542937126928}
   PlayerCamera: {fileID: 0}
   _uiHandler: {fileID: 0}
   PlayerController: {fileID: 0}
   MaxDistance: 100
-  CurrentBulletType: 0
+  CurrentBulletType: 1
   maxAmmo: 0
   currentAmmo: 0
-  timeBetweenShooting: 0.5
+  timeBetweenShooting: 0
   reloadTime: 1
 --- !u!114 &1177165208192014905
 MonoBehaviour:

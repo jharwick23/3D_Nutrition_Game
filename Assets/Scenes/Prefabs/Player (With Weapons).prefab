@@ -96,18 +96,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4876181031112817170, guid: 15daafdcb6af8b933b893dda50785d75, type: 3}
-      propertyPath: BulletSpawnPoint
-      value: 
-      objectReference: {fileID: 6736991056220665972}
-    - target: {fileID: 4876181031112817170, guid: 15daafdcb6af8b933b893dda50785d75, type: 3}
-      propertyPath: OrangeBulletPrefab
-      value: 
-      objectReference: {fileID: 370912169763564214, guid: e03102626fd8d4f4cab8ac4a55c7a19c, type: 3}
-    - target: {fileID: 4876181031112817170, guid: 15daafdcb6af8b933b893dda50785d75, type: 3}
-      propertyPath: TomatoBulletPrefab
-      value: 
-      objectReference: {fileID: 3452694226032689571, guid: aa3fb751019881542b3e50d48d5e1220, type: 3}
-    - target: {fileID: 4876181031112817170, guid: 15daafdcb6af8b933b893dda50785d75, type: 3}
       propertyPath: StandardBulletPrefab
       value: 
       objectReference: {fileID: 7063116710776768397, guid: 57190e8784691914dbe990f77e814bb7, type: 3}
@@ -119,11 +107,6 @@ PrefabInstance:
 --- !u!4 &3447752033440709520 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2046562949092408308, guid: 15daafdcb6af8b933b893dda50785d75, type: 3}
-  m_PrefabInstance: {fileID: 3728481440656900196}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &6736991056220665972 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7980558542937126928, guid: 15daafdcb6af8b933b893dda50785d75, type: 3}
   m_PrefabInstance: {fileID: 3728481440656900196}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4175500470559149558
