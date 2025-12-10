@@ -28,9 +28,6 @@ public class ProjectileGun : MonoBehaviour
 
     void Awake()
     {
-        maxAmmo = OrangeBulletPrefab.GetComponent<OrangeBullet>().maxAmmo;
-        currentAmmo = maxAmmo;
-        timeBetweenShooting = OrangeBulletPrefab.GetComponent<OrangeBullet>().timeBetweenShooting;
         if (PlayerCamera == null)
         {
             PlayerCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
@@ -48,8 +45,9 @@ public class ProjectileGun : MonoBehaviour
     
     private void Start()
     {
-        maxAmmo = StandardBulletPrefab.GetComponent<StandardBullet>().maxAmmo;
+        maxAmmo = OrangeBulletPrefab.GetComponent<OrangeBullet>().maxAmmo;
         currentAmmo = maxAmmo;
+        timeBetweenShooting = OrangeBulletPrefab.GetComponent<OrangeBullet>().timeBetweenShooting;
         _uiHandler.UpdateAmmoUI(currentAmmo.ToString() + " / Inf");
     }
 

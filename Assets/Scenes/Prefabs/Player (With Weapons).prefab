@@ -100,6 +100,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6736991056220665972}
     - target: {fileID: 4876181031112817170, guid: 15daafdcb6af8b933b893dda50785d75, type: 3}
+      propertyPath: OrangeBulletPrefab
+      value: 
+      objectReference: {fileID: 370912169763564214, guid: e03102626fd8d4f4cab8ac4a55c7a19c, type: 3}
+    - target: {fileID: 4876181031112817170, guid: 15daafdcb6af8b933b893dda50785d75, type: 3}
       propertyPath: TomatoBulletPrefab
       value: 
       objectReference: {fileID: 3452694226032689571, guid: aa3fb751019881542b3e50d48d5e1220, type: 3}
@@ -330,6 +334,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.033941146
       objectReference: {fileID: 0}
+    - target: {fileID: 1001024469466306935, guid: d6a5d8c076dd3b3b8a3b6cd0b222935a, type: 3}
+      propertyPath: m_Actions
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1023314151024931270, guid: d6a5d8c076dd3b3b8a3b6cd0b222935a, type: 3}
       propertyPath: StandardProjectileGun
       value: 
@@ -337,6 +345,18 @@ PrefabInstance:
     - target: {fileID: 4011209477917418058, guid: d6a5d8c076dd3b3b8a3b6cd0b222935a, type: 3}
       propertyPath: m_Name
       value: Player (With Weapons)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4026241512021092423, guid: d6a5d8c076dd3b3b8a3b6cd0b222935a, type: 3}
+      propertyPath: MaxCamAngle
+      value: -75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4026241512021092423, guid: d6a5d8c076dd3b3b8a3b6cd0b222935a, type: 3}
+      propertyPath: MinCamAngle
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 4026241512021092423, guid: d6a5d8c076dd3b3b8a3b6cd0b222935a, type: 3}
+      propertyPath: MovementSpeed
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4301532273739225922, guid: d6a5d8c076dd3b3b8a3b6cd0b222935a, type: 3}
       propertyPath: m_Name
