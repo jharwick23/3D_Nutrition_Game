@@ -75,6 +75,21 @@ public class InputHandlerV2 : MonoBehaviour
         PlayerController.Rotate(lookVector);
     }
 
+    void OnDisable()
+    {
+        _reloadAction.performed -= OnReloadPerformed;
+        _attackAction.performed -= OnAttackPerformed;
+        _meleeAction.performed -= OnMeleePerformed;
+        _meleeAction.canceled -= OnMeleeCancelled;
+        _blockAction.performed -= OnBlockingPerformed;
+        _blockAction.canceled -= OnBlockingCancelled;
+        _dodgeAction.performed -= OnDodgePerformed;
+        _jumpAction.performed -= OnJumpPerformed;
+        _switchBulletAction.performed -= OnSwitchBulletPerformed;
+        _sprintAction.performed -= OnSprintPerformed;
+        _sprintAction.canceled -= OnSprintCancelled;
+    }
+
     private void OnJumpPerformed(InputAction.CallbackContext context)
     {
         PlayerController.Jump();

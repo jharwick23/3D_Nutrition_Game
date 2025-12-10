@@ -24,22 +24,20 @@ public class PauseMenu : MonoBehaviour
 
     private void Start()
     {
-        if (pausePanel != null)
-            pausePanel.SetActive(false);
-
         Resume(); 
     }
 
     private void Update()
     {
-        
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (isPaused)
-                Resume();
-            else
-                Pause();
-        }
+    
+    }
+
+    public void PerformPause()
+    {
+        if (isPaused)
+            Resume();
+        else
+            Pause();
     }
 
     public void Pause()
@@ -56,6 +54,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
+        Debug.Log("test");
         if (pausePanel != null)
             pausePanel.SetActive(false);
 
