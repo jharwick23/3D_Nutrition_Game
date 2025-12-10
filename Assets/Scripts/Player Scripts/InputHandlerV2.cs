@@ -44,18 +44,8 @@ public class InputHandlerV2 : MonoBehaviour
             _blockAction = playerInput.actions.FindAction("Block");
             _dodgeAction = playerInput.actions.FindAction("Dodge");
             _pauseAction = playerInput.actions.FindAction("Pause");
-            _reloadAction.performed += OnReloadPerformed;
-            _attackAction.performed += OnAttackPerformed;
-            _meleeAction.performed += OnMeleePerformed;
-            _meleeAction.canceled += OnMeleeCancelled;
-            _blockAction.performed += OnBlockingPerformed;
-            _blockAction.canceled += OnBlockingCancelled;
-            _dodgeAction.performed += OnDodgePerformed;
-            _jumpAction.performed += OnJumpPerformed;
-            _switchBulletAction.performed += OnSwitchBulletPerformed;
-            _sprintAction.performed += OnSprintPerformed;
-            _sprintAction.canceled += OnSprintCancelled;
             _pauseAction.performed += OnPausePerformed;
+            EnableInputs();
         }
         else
         {
@@ -84,6 +74,12 @@ public class InputHandlerV2 : MonoBehaviour
 
     void OnDisable()
     {
+        _pauseAction.performed -= OnPausePerformed;
+        DisableInputs();
+    }
+
+    public void DisableInputs()
+    {
         _reloadAction.performed -= OnReloadPerformed;
         _attackAction.performed -= OnAttackPerformed;
         _meleeAction.performed -= OnMeleePerformed;
@@ -95,7 +91,21 @@ public class InputHandlerV2 : MonoBehaviour
         _switchBulletAction.performed -= OnSwitchBulletPerformed;
         _sprintAction.performed -= OnSprintPerformed;
         _sprintAction.canceled -= OnSprintCancelled;
-        _pauseAction.performed -= OnPausePerformed;
+    }
+
+    public void EnableInputs()
+    {
+        _reloadAction.performed += OnReloadPerformed;
+        _attackAction.performed += OnAttackPerformed;
+        _meleeAction.performed += OnMeleePerformed;
+        _meleeAction.canceled += OnMeleeCancelled;
+        _blockAction.performed += OnBlockingPerformed;
+        _blockAction.canceled += OnBlockingCancelled;
+        _dodgeAction.performed += OnDodgePerformed;
+        _jumpAction.performed += OnJumpPerformed;
+        _switchBulletAction.performed += OnSwitchBulletPerformed;
+        _sprintAction.performed += OnSprintPerformed;
+        _sprintAction.canceled += OnSprintCancelled;
     }
 
     private void OnJumpPerformed(InputAction.CallbackContext context)

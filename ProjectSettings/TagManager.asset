@@ -10,6 +10,7 @@ TagManager:
   - Puzzle1
   - DropService
   - EnemyZones
+  - HUD
   layers:
   - Default
   - TransparentFX

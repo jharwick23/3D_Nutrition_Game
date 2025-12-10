@@ -3865,6 +3865,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hud
       objectReference: {fileID: 0}
+    - target: {fileID: 4053315324458975735, guid: bc1027c423416ea4ca05801b72324dac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053315324458975735, guid: bc1027c423416ea4ca05801b72324dac, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 8633182693402357106, guid: bc1027c423416ea4ca05801b72324dac, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4608,6 +4616,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: PauseMenu, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 5588687094314544718, guid: 6046f6e7a6feeb75d9498ab371da8e26, type: 3}
+      propertyPath: HUD
+      value: 
+      objectReference: {fileID: 653589305}
     - target: {fileID: 7074051839406003717, guid: 6046f6e7a6feeb75d9498ab371da8e26, type: 3}
       propertyPath: m_fontSize
       value: 26.85
@@ -4720,6 +4732,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.32, y: 15, z: 0.58}
   m_Center: {x: 0.0037540793, y: 2.83, z: 0.017290965}
+--- !u!1 &653589305 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4053315324458975735, guid: bc1027c423416ea4ca05801b72324dac, type: 3}
+  m_PrefabInstance: {fileID: 574259618}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &654968281
 PrefabInstance:
   m_ObjectHideFlags: 0
