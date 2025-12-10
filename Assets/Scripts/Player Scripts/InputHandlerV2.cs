@@ -10,7 +10,7 @@ public class InputHandlerV2 : MonoBehaviour
                         _meleeAction, _blockAction, _dodgeAction;
     private PlayerInput playerInput;
 
-    void Start()
+    void Awake()
     {
         if (PlayerController == null)
         {
@@ -21,6 +21,9 @@ public class InputHandlerV2 : MonoBehaviour
             StandardProjectileGun = FindFirstObjectByType<ProjectileGun>();
         }
 
+    }
+    void Start()
+    {
         playerInput = GetComponent<PlayerInput>();
 
         if (playerInput != null)
@@ -79,9 +82,10 @@ public class InputHandlerV2 : MonoBehaviour
 
     private void OnAttackPerformed(InputAction.CallbackContext context)
     {
+        StandardProjectileGun.Shoot();
         PlayerController.SetHatEquipped(true);
         PlayerController._hatHandler.SetOnGun();
-        StandardProjectileGun.Shoot();
+        PlayerController.SetLastShootingAttackTime();
     }
 
     private void OnMeleePerformed(InputAction.CallbackContext context)

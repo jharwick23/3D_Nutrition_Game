@@ -24,7 +24,7 @@ public class PlayerControllerV2 : MonoBehaviour
     public PanController Pan;
     
     // --- Player Movement/Camera Variables --- \\
-    [SerializeField] private float MovementSpeed = 10f;
+    [SerializeField] private float MovementSpeed = 5f;
     [SerializeField] private float RotationSpeed = 20f; // Horizontal Look Speed
     [SerializeField] private float LookSensitivityY = 20f; // Veritical Look Speed
     [SerializeField] private float MinCamAngle = 45f;
@@ -46,7 +46,7 @@ public class PlayerControllerV2 : MonoBehaviour
     private bool _dodgePressed = false;
     private bool _hasLanded = false;
 
-    void Start()
+    void Awake()
     {
         _animator = GetComponent<Animator>();
         _characterController = GetComponent<CharacterController>();
@@ -70,7 +70,10 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             Pan = FindFirstObjectByType<PanController>();
         }
+    }
 
+    void Start()
+    {
         // Initialize UI
         _uiHandler.UpdateHealthUI(CurrentHealth, MaxHealth);
         _uiHandler.UpdateCoinUI(Coins);
@@ -83,10 +86,7 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             HatEquippedAnim();
             MeleeAnim();
-            if(!_isMeleeing && !_isHatEquipped)
-            {
-                BlockingAnim();
-            }
+            BlockingAnim();
         }
 
         // Checks to see the amount of time passed between the last ranged attack

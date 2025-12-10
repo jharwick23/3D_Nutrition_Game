@@ -25,11 +25,9 @@ public class ProjectileGun : MonoBehaviour
     private bool canShoot = true;
     private bool isReloading = false;
     // public float ShootForce = 150f; // OLD
-    
-    private void Start()
+
+    void Awake()
     {
-        maxAmmo = StandardBulletPrefab.GetComponent<StandardBullet>().maxAmmo;
-        currentAmmo = maxAmmo;
         if (PlayerCamera == null)
         {
             PlayerCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
@@ -38,12 +36,18 @@ public class ProjectileGun : MonoBehaviour
         {
             _uiHandler = FindFirstObjectByType<UIHandler>();
         }
-        _uiHandler.UpdateAmmoUI(currentAmmo.ToString() + " / Inf");
         
         if (PlayerController == null)
         {
             PlayerController = FindFirstObjectByType<PlayerControllerV2>();
         }
+    }
+    
+    private void Start()
+    {
+        maxAmmo = StandardBulletPrefab.GetComponent<StandardBullet>().maxAmmo;
+        currentAmmo = maxAmmo;
+        _uiHandler.UpdateAmmoUI(currentAmmo.ToString() + " / Inf");
     }
 
     public void Shoot()
@@ -55,7 +59,6 @@ public class ProjectileGun : MonoBehaviour
 
         // Start cooldown and reduce ammo
         StartCoroutine(ShootCooldown());
-        PlayerController.SetLastShootingAttackTime();
         currentAmmo--;
         _uiHandler.UpdateAmmoUI(currentAmmo.ToString() + " / Inf");
 
@@ -96,6 +99,9 @@ public class ProjectileGun : MonoBehaviour
     {
         if (!isReloading && currentAmmo < maxAmmo)
         {
+            PlayerController.SetHatEquipped(true);
+            PlayerController._hatHandler.SetOnGun();
+            PlayerController.SetLastShootingAttackTime();
             StartCoroutine(Reload());
         }
     }

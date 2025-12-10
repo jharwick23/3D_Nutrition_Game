@@ -374,6 +374,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player (With Weapons)
       objectReference: {fileID: 0}
+    - target: {fileID: 6088456372811375096, guid: e26693fc80aa6e79eadb4ab7c4f7ec68, type: 3}
+      propertyPath: MaxCamAngle
+      value: -75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6088456372811375096, guid: e26693fc80aa6e79eadb4ab7c4f7ec68, type: 3}
+      propertyPath: MinCamAngle
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 6088456372811375096, guid: e26693fc80aa6e79eadb4ab7c4f7ec68, type: 3}
+      propertyPath: MovementSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7484561536251484029, guid: e26693fc80aa6e79eadb4ab7c4f7ec68, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.8569589

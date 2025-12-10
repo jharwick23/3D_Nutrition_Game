@@ -4,8 +4,7 @@ public class AnimationEvents : MonoBehaviour
 {
     public KnifeController Knife;
     public PlayerControllerV2 PlayerController;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         if (Knife == null)
         {

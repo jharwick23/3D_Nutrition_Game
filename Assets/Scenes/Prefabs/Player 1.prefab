@@ -202,7 +202,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7050313151532964784}
   m_Layer: 0
-  m_Name: HoldingHatHoldPoint
+  m_Name: HoldHatPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -216,12 +216,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 669705771714520311}
   serializedVersion: 2
-  m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
-  m_LocalPosition: {x: 0.12, y: 1.1, z: 0.3405}
+  m_LocalRotation: {x: -0.39041686, y: -0.21955058, z: -0.8139333, w: 0.3699794}
+  m_LocalPosition: {x: 0.008225411, y: 0.018641349, z: -0.38905588}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6651815427306263085}
+  m_Father: {fileID: 646370055316679751}
   m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
 --- !u!1 &1328130703066051027
 GameObject:
@@ -1122,6 +1122,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4135975542519356735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3991707744027203133
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1970348314460891943}
+  m_Layer: 0
+  m_Name: PanRestPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1970348314460891943
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3991707744027203133}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0.007, y: 0.073, z: -0.179}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1514273379914785781}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &4011209477917418058
 GameObject:
   m_ObjectHideFlags: 0
@@ -1274,7 +1305,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4892261439921270801}
   m_Layer: 0
-  m_Name: HatHoldPoint
+  m_Name: RestHatPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1358,6 +1389,7 @@ Transform:
   - {fileID: 2521202230599072435}
   - {fileID: 5819004543268430623}
   - {fileID: 6305855797584273354}
+  - {fileID: 1970348314460891943}
   m_Father: {fileID: 5695378159491555496}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4590101377925659035
@@ -2034,7 +2066,6 @@ Transform:
   - {fileID: 8071807746280587213}
   - {fileID: 2017325812941558110}
   - {fileID: 8398871498676059163}
-  - {fileID: 7050313151532964784}
   m_Father: {fileID: 306278367475408578}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &3775045622996279688
@@ -2102,6 +2133,7 @@ MonoBehaviour:
   _uiHandler: {fileID: 0}
   _hatHandler: {fileID: 0}
   Knife: {fileID: 0}
+  Pan: {fileID: 0}
   MovementSpeed: 10
   RotationSpeed: 20
   LookSensitivityY: 20
@@ -2443,6 +2475,7 @@ Transform:
   - {fileID: 1312423667759853009}
   - {fileID: 1499193689084136834}
   - {fileID: 5194683059402114071}
+  - {fileID: 7050313151532964784}
   m_Father: {fileID: 4388969937257799282}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8252811367894250626
