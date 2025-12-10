@@ -7,8 +7,9 @@ public class InputHandlerV2 : MonoBehaviour
     public PlayerControllerV2 PlayerController;
     public ProjectileGun StandardProjectileGun;
     private InputAction _moveAction, _lookAction, _jumpAction, _attackAction, _sprintAction, _reloadAction, _switchBulletAction,
-                        _meleeAction, _blockAction, _dodgeAction;
+                        _meleeAction, _blockAction, _dodgeAction, _pauseAction;
     private PlayerInput playerInput;
+    public PauseMenu pauseMenu;
 
     void Awake()
     {
@@ -19,6 +20,10 @@ public class InputHandlerV2 : MonoBehaviour
         if (StandardProjectileGun == null)
         {
             StandardProjectileGun = FindFirstObjectByType<ProjectileGun>();
+        }
+        if(pauseMenu == null)
+        {
+            pauseMenu = FindFirstObjectByType<PauseMenu>();
         }
 
     }
@@ -38,6 +43,7 @@ public class InputHandlerV2 : MonoBehaviour
             _meleeAction = playerInput.actions.FindAction("Melee");
             _blockAction = playerInput.actions.FindAction("Block");
             _dodgeAction = playerInput.actions.FindAction("Dodge");
+            _pauseAction = playerInput.actions.FindAction("Pause");
             _reloadAction.performed += OnReloadPerformed;
             _attackAction.performed += OnAttackPerformed;
             _meleeAction.performed += OnMeleePerformed;
@@ -49,6 +55,7 @@ public class InputHandlerV2 : MonoBehaviour
             _switchBulletAction.performed += OnSwitchBulletPerformed;
             _sprintAction.performed += OnSprintPerformed;
             _sprintAction.canceled += OnSprintCancelled;
+            _pauseAction.performed += OnPausePerformed;
         }
         else
         {
@@ -88,6 +95,7 @@ public class InputHandlerV2 : MonoBehaviour
         _switchBulletAction.performed -= OnSwitchBulletPerformed;
         _sprintAction.performed -= OnSprintPerformed;
         _sprintAction.canceled -= OnSprintCancelled;
+        _pauseAction.performed -= OnPausePerformed;
     }
 
     private void OnJumpPerformed(InputAction.CallbackContext context)
@@ -150,5 +158,10 @@ public class InputHandlerV2 : MonoBehaviour
     private void OnSwitchBulletPerformed(InputAction.CallbackContext context)
     {
         StandardProjectileGun.SwitchBulletType();
+    }
+
+    private void OnPausePerformed(InputAction.CallbackContext context)
+    {
+        pauseMenu.PerformPause();
     }
 }
