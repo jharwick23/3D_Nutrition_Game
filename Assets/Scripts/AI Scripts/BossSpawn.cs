@@ -8,7 +8,10 @@ public class BossSpawn : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            enemyTypeA.SetActive(true);
+            if(enemyTypeA != null)
+            {
+                enemyTypeA.SetActive(true);
+            } 
         }
     }
 }
