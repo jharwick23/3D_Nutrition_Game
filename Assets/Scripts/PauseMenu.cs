@@ -22,7 +22,7 @@ public class PauseMenu : MonoBehaviour
 
     private void Start()
     {
-        Resume(); 
+        // Resume(); // Dont call resume, just disable PausePanel
     }
 
     private void Update()
@@ -40,11 +40,30 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
+        // Disable Crosshair
+        UIHandler _uiHandler;
+        _uiHandler = FindFirstObjectByType<UIHandler>();
+        if (_uiHandler)
+        {
+            _uiHandler.ToggleCrosshair(false);
+        }
+        else
+        {
+            Debug.Log("UI Handler was not set!");
+        }
+
         if (pausePanel != null)
             pausePanel.SetActive(true);
 
         InputHandlerV2 inputHandler = FindFirstObjectByType<InputHandlerV2>();
-        inputHandler.DisableInputs();
+        if (inputHandler)
+        {
+            inputHandler.DisableInputs();
+        }
+        else
+        {
+            Debug.Log("Inputhandler not found!");
+        }
         Time.timeScale = 0f;     
         isPaused = true;
 
@@ -54,11 +73,31 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
+        // Enable Crosshair
+        UIHandler _uiHandler;
+        _uiHandler = FindFirstObjectByType<UIHandler>();
+        if (_uiHandler)
+        {
+            _uiHandler.ToggleCrosshair(true);
+        }
+        else
+        {
+            Debug.Log("UI Handler was not set!");
+        }
+
         if (pausePanel != null)
             pausePanel.SetActive(false);
 
         InputHandlerV2 inputHandler = FindFirstObjectByType<InputHandlerV2>();
-        inputHandler.EnableInputs();
+        if (inputHandler)
+        {
+            inputHandler.EnableInputs();
+        }
+        else
+        {
+            Debug.Log("Inputhandler not found!");
+        }
+        
         Time.timeScale = 1f;     
         isPaused = false;
 

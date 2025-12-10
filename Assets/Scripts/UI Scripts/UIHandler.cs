@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIHandler : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class UIHandler : MonoBehaviour
     private CoinUIHandler _coinUIHandler;
     private AmmoUIHandler _ammoUIHandler;
     private BulletTypeUIHandler _bulletTypeUIHandler;
+    private Image _crosshairImage;
 
     void Awake()
     {
@@ -14,6 +16,12 @@ public class UIHandler : MonoBehaviour
         _coinUIHandler = GetComponentInChildren<CoinUIHandler>();
         _ammoUIHandler = GetComponentInChildren<AmmoUIHandler>();
         _bulletTypeUIHandler = GetComponentInChildren<BulletTypeUIHandler>();
+        _crosshairImage = transform.Find("Crosshair").GetComponent<Image>();
+    }
+
+    public void ToggleCrosshair(bool value)
+    {
+        _crosshairImage.enabled = value;
     }
 
     public void UpdateHealthUI(int currentHealth, int maxHealth)

@@ -49,11 +49,13 @@ public class OrangeBullet : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        // Ignore player collisions
         if (collision.gameObject.CompareTag("Player") || (collision.transform.parent != null && collision.transform.parent.CompareTag("Player")))
         {
             return;
         }
-        // Add impact effects or damage logic here if needed
+        
+        // Impact decal logic
         ContactPoint contact = collision.contacts[0];
 
         Vector3 hitPoint = contact.point;
@@ -71,6 +73,7 @@ public class OrangeBullet : MonoBehaviour
             );
         }
         
+        // Enemey damage logic
         bool isEnemy = collision.gameObject.CompareTag("Enemy");
 
         if (isEnemy)
