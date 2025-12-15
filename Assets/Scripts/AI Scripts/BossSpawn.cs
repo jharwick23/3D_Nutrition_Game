@@ -1,11 +1,12 @@
+using System.Diagnostics;
 using UnityEngine;
 
 public class BossSpawn : MonoBehaviour
 {
-    [SerializeField] private GameObject enemyTypeA;
+    [SerializeField] private GameObject enemyTypeA, portal;
     [SerializeField] private Transform transform;
     private GameObject newBoss;
-    private bool spawned = false;
+    private bool spawned = false, dead = true;
 
     // Spawn boss when player enters
     public void OnTriggerEnter(Collider other)
@@ -17,9 +18,21 @@ public class BossSpawn : MonoBehaviour
                 newBoss = Instantiate(enemyTypeA, transform.position, transform.rotation);
                 newBoss.SetActive(true);
                 spawned = true;
+                dead = false;
             }
         }
         
+    }
+
+    void Update()
+    {
+        if (spawned && !dead)
+        {
+            if(newBoss == null)
+            {
+                portal.SetActive(true);
+            }
+        }
     }
 
     // Reset Boss
@@ -27,5 +40,7 @@ public class BossSpawn : MonoBehaviour
     {
         Destroy(newBoss);
         spawned = false;
+        dead = true;
+        portal.SetActive(false);
     }
 }
