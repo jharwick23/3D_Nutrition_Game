@@ -159,7 +159,7 @@ MonoBehaviour:
     pointSizeSamplingMode: 1
     pointSize: 90
     padding: 9
-    paddingMode: 0
+    paddingMode: 2
     packingMode: 4
     atlasWidth: 1024
     atlasHeight: 1024
