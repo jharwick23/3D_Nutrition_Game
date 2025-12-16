@@ -1,9 +1,10 @@
 using UnityEngine;
 
-public class CoinTest : MonoBehaviour
+public class CollectCoin : MonoBehaviour
 {
     public float bobbleHeight = 0.25f;
     public float bobbleSpeed = 2f;
+    public int coinAmount = 1;
     private Vector3 startPos;
 
     private void Start()
@@ -24,15 +25,13 @@ public class CoinTest : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        Debug.LogWarning("Player entered coin trigger but is missing PlayerControllerV2 component!");
-        print("Coin Triggered");
         if (other.CompareTag("Player"))
         {
             PlayerControllerV2 playerController = other.GetComponent<PlayerControllerV2>();
             if (playerController != null)
             {
-                playerController.AddCoins(1);
                 CollectSound();
+                playerController.AddCoins(coinAmount);
             }
             Destroy(gameObject);
         }

@@ -13,11 +13,12 @@ public class DropService : MonoBehaviour
         }
     }
 
-    public void DropHeal(Vector3 position)
+    public void DropHeal(Vector3 position, int healAmount = 10)
     {
         if (AppleHealPrefab != null)
         {
-            Instantiate(AppleHealPrefab, position, Quaternion.identity);
+            GameObject appleHeal = Instantiate(AppleHealPrefab, position, Quaternion.identity);
+            appleHeal.GetComponent<CollectHeal>().healAmount = healAmount;
         }
         else
         {
@@ -25,11 +26,12 @@ public class DropService : MonoBehaviour
         }
     }
 
-    public void DropCoin(Vector3 position)
+    public void DropCoin(Vector3 position, int amount = 1)
     {
         if (MelonCoinPrefab != null)
         {
-            Instantiate(MelonCoinPrefab, position, MelonCoinPrefab.transform.rotation);
+            GameObject melonCoin = Instantiate(MelonCoinPrefab, position, MelonCoinPrefab.transform.rotation);
+            melonCoin.GetComponent<CollectCoin>().coinAmount = amount;
         }
         else
         {
