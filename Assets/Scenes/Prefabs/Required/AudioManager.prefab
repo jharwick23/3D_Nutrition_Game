@@ -90,7 +90,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -147,3 +147,5 @@ MonoBehaviour:
   damageTaken: {fileID: 8300000, guid: bb34b5fd04020dad98fbfd612cbf1459, type: 3}
   death: {fileID: 8300000, guid: 42664ec0763cf98b99cf10a326ca3421, type: 3}
   heal: {fileID: 8300000, guid: 9fb85c8e6e24901cc890f8f46f42cdae, type: 3}
+  shoot: {fileID: 8300000, guid: fde9abe5a4c15ad86a0b1e12e53c7d90, type: 3}
+  collectCoin: {fileID: 8300000, guid: 69d1c60dcde75e6448e889f14685a247, type: 3}

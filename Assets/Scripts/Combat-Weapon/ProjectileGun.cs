@@ -61,6 +61,7 @@ public class ProjectileGun : MonoBehaviour
 
         // Start cooldown and reduce ammo
         StartCoroutine(ShootCooldown());
+        ShootSound();
         currentAmmo--;
         _uiHandler.UpdateAmmoUI(currentAmmo.ToString() + " / Inf");
 
@@ -141,4 +142,15 @@ public class ProjectileGun : MonoBehaviour
             timeBetweenShooting = TomatoBulletPrefab.GetComponent<TomatoBullet>().timeBetweenShooting;
         }
     }   
+
+    private void ShootSound()
+    {
+        if (!SFXManager.Instance)
+        {
+            Debug.LogError("SFXManager not found in scene");
+            return;
+        }
+
+        SFXManager.Instance.Play(SFXManager.SFXType.Shoot);
+    }
 }

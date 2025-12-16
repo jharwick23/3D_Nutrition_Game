@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3580357777798037583}
   - component: {fileID: 6559336944334218064}
   - component: {fileID: -464648561840943556}
+  - component: {fileID: -8626870834019170407}
   m_Layer: 7
   m_Name: TomatoBullet
   m_TagString: Bullet
@@ -159,3 +160,17 @@ MonoBehaviour:
   maxAmmo: 24
   timeBetweenShooting: 1
   ImpactDecalPrefab: {fileID: 5631425737720120280, guid: 5d175a2cbbc7c7f43b33138b69c7bc95, type: 3}
+  projectileSFX: {fileID: 0}
+--- !u!114 &-8626870834019170407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3452694226032689571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a370cd808c1267f28944f0ad2399e1ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileSFX
+  splatSound: {fileID: 8300000, guid: efaa02213e30e90cb9012f6edbe987bb, type: 3}

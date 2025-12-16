@@ -11,6 +11,7 @@ public class TomatoBullet : MonoBehaviour
     public int maxAmmo = 24;
     public float timeBetweenShooting = 1f;
     public GameObject ImpactDecalPrefab;
+    public ProjectileSFX projectileSFX;
 
     private Vector3 _velocity;
 
@@ -34,6 +35,11 @@ public class TomatoBullet : MonoBehaviour
         rb.useGravity = false; // manual gravity
         rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
         rb.interpolation = RigidbodyInterpolation.Interpolate;
+    }
+
+    void Start()
+    {
+        projectileSFX = GetComponent<ProjectileSFX>();
     }
 
     public void Init(Vector3 shootDirection)
@@ -83,6 +89,7 @@ public class TomatoBullet : MonoBehaviour
             collision.gameObject.GetComponent<AIEnemy>().DoDeath();
         }
 
+        projectileSFX.Play();
         Destroy(gameObject);
     }
 }

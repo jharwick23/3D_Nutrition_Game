@@ -9,7 +9,9 @@ public class SFXManager: MonoBehaviour
         KnifeSwing,
         DamageTaken,
         Death,
-        Heal
+        Heal,
+        Shoot,
+        CollectCoin
     }
 
     [Header("Player")]
@@ -17,6 +19,8 @@ public class SFXManager: MonoBehaviour
     public AudioClip damageTaken;
     public AudioClip death;
     public AudioClip heal;
+    public AudioClip shoot;
+    public AudioClip collectCoin;
 
     void Awake()
     {
@@ -57,11 +61,19 @@ public class SFXManager: MonoBehaviour
                 break;
 
             case SFXType.Death:
-                audioSource.PlayOneShot(death, 10f);
+                audioSource.PlayOneShot(death, 5f);
                 break;
 
             case SFXType.Heal:
-                audioSource.PlayOneShot(heal, 15f);
+                audioSource.PlayOneShot(heal, 10f);
+                break;
+
+            case SFXType.Shoot:
+                audioSource.PlayOneShot(shoot);
+                break;
+            
+            case SFXType.CollectCoin:
+                audioSource.PlayOneShot(collectCoin);
                 break;
         }
     }

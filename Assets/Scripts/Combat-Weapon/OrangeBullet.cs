@@ -11,6 +11,7 @@ public class OrangeBullet : MonoBehaviour
     public int maxAmmo = 24;
     public float timeBetweenShooting = 0.2f;
     public GameObject ImpactDecalPrefab;
+    public ProjectileSFX projectileSFX;
 
     private Vector3 _velocity;
 
@@ -34,6 +35,11 @@ public class OrangeBullet : MonoBehaviour
         rb.useGravity = false; // manual gravity
         rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
         rb.interpolation = RigidbodyInterpolation.Interpolate;
+    }
+
+    void Start()
+    {
+        projectileSFX = GetComponent<ProjectileSFX>();
     }
 
     public void Init(Vector3 shootDirection)
@@ -83,6 +89,7 @@ public class OrangeBullet : MonoBehaviour
             collision.gameObject.GetComponent<AIEnemy>().DoDeath();
         }
 
+        projectileSFX.Play();
         Destroy(gameObject);
     }
 }
