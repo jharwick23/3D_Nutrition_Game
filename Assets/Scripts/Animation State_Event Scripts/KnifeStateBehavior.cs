@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class KnifePlacementBehavior : StateMachineBehaviour
+public class KnifeStateBehavior : StateMachineBehaviour
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

@@ -6,6 +6,8 @@ public class KnifeController : MonoBehaviour
     public Transform holdKnifePoint;
     public int knifeDamage = 25;
     private bool hasHit = false;
+    private bool soundPlayed = false;
+    private bool isOnHip = false;
 
     void Awake()
     {
@@ -20,9 +22,15 @@ public class KnifeController : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        isOnHip = true;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (hasHit) return;
+        if (isOnHip) return;
         
         AIEnemy enemy = other.GetComponent<AIEnemy>();
         if (enemy != null)
@@ -38,10 +46,22 @@ public class KnifeController : MonoBehaviour
     public void ResetHit()
     {
         hasHit = false;
+        soundPlayed = false;
+    }
+
+    public bool GetPlayedSound()
+    {
+        return soundPlayed;
+    }
+
+    public void SetSoundPlayed()
+    {
+        soundPlayed = true;
     }
 
     public void SetKnifeOnHip()
     {
+        isOnHip = true;
         transform.SetParent(restKnifePoint);
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
@@ -49,6 +69,7 @@ public class KnifeController : MonoBehaviour
 
     public void HoldKnifeInHand()
     {
+        isOnHip = false;
         transform.SetParent(holdKnifePoint);
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;

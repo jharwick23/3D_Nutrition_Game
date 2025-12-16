@@ -32,8 +32,20 @@ public class CoinTest : MonoBehaviour
             if (playerController != null)
             {
                 playerController.AddCoins(1);
+                CollectSound();
             }
             Destroy(gameObject);
         }
+    }
+
+    private void CollectSound()
+    {
+        if (!SFXManager.Instance)
+        {
+            Debug.LogError("SFXManager not found in scene");
+            return;
+        }
+
+        SFXManager.Instance.Play(SFXManager.SFXType.CollectCoin);
     }
 }

@@ -322,6 +322,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1023314151024931270, guid: d6a5d8c076dd3b3b8a3b6cd0b222935a, type: 3}
+      propertyPath: knifeSwing
+      value: 
+      objectReference: {fileID: 8300000, guid: c4d4f43ef4053e25e861471770eaa85f, type: 3}
+    - target: {fileID: 1023314151024931270, guid: d6a5d8c076dd3b3b8a3b6cd0b222935a, type: 3}
       propertyPath: StandardProjectileGun
       value: 
       objectReference: {fileID: 0}
@@ -329,6 +333,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player (With Weapons)
       objectReference: {fileID: 0}
+    - target: {fileID: 4026241512021092423, guid: d6a5d8c076dd3b3b8a3b6cd0b222935a, type: 3}
+      propertyPath: knifeSwing
+      value: 
+      objectReference: {fileID: 8300000, guid: c4d4f43ef4053e25e861471770eaa85f, type: 3}
     - target: {fileID: 4026241512021092423, guid: d6a5d8c076dd3b3b8a3b6cd0b222935a, type: 3}
       propertyPath: MaxCamAngle
       value: -75

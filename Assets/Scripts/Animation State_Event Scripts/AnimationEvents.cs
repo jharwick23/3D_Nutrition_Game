@@ -23,4 +23,18 @@ public class AnimationEvents : MonoBehaviour
             Knife.ResetHit();
         }
     }
+
+    public void PlayKnifeSlashSound()
+    {
+        if (!SFXManager.Instance)
+        {
+            Debug.LogError("SFXManager not found in scene");
+            return;
+        }
+
+        if (!Knife) return;
+        if (Knife.GetPlayedSound()) return;
+
+        SFXManager.Instance.Play(SFXManager.SFXType.KnifeSwing);
+    }
 }

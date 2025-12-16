@@ -272,6 +272,7 @@ public class PlayerControllerV2 : MonoBehaviour
         CurrentHealth -= damageAmount;
         if (CurrentHealth <= 0)
         {
+            DeathSound();
             CurrentHealth = 0;
             _uiHandler.UpdateHealthUI(CurrentHealth, MaxHealth);
             DeathScreenMenu deathScreenMenu = FindFirstObjectByType<DeathScreenMenu>();
@@ -287,8 +288,31 @@ public class PlayerControllerV2 : MonoBehaviour
         else
         {
             _uiHandler.UpdateHealthUI(CurrentHealth, MaxHealth);
+            TakeDamageSound();
         }
         // DoDeath();
+    }
+
+    private void TakeDamageSound()
+    {
+        if (!SFXManager.Instance)
+        {
+            Debug.LogError("SFXManager not found in scene");
+            return;
+        }
+
+        SFXManager.Instance.Play(SFXManager.SFXType.DamageTaken);
+    }
+
+    private void DeathSound()
+    {
+        if (!SFXManager.Instance)
+        {
+            Debug.LogError("SFXManager not found in scene");
+            return;
+        }
+
+        SFXManager.Instance.Play(SFXManager.SFXType.Death);
     }
 
     public void Heal(int healAmount)
@@ -299,6 +323,18 @@ public class PlayerControllerV2 : MonoBehaviour
             CurrentHealth = MaxHealth;
         }
         _uiHandler.UpdateHealthUI(CurrentHealth, MaxHealth);
+        HealSound();
+    }
+
+    private void HealSound()
+    {
+        if (!SFXManager.Instance)
+        {
+            Debug.LogError("SFXManager not found in scene");
+            return;
+        }
+
+        SFXManager.Instance.Play(SFXManager.SFXType.Heal);
     }
 
     public void AddCoins(int coinAmount)
