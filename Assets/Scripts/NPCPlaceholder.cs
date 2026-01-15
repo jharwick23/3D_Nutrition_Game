@@ -1,61 +1,82 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class NPCPlaceholder : MonoBehaviour
 {
     [Header("NPC Settings")]
     public string npcName = "NPC";
+
     [TextArea]
     public string[] dialogueLines;
 
-    [Header("Interaction Settings")]
-    public KeyCode interactKey = KeyCode.E;
-
-    private bool playerInRange = false;
+    private bool playerInRange;
+    private bool subscribed;
+    private InputAction interactAction;
 
     private void OnTriggerEnter(Collider other)
     {
-        // Only react if the thing entering the trigger is the player
-        if (other.CompareTag("Player"))
+        if (!other.transform.root.CompareTag("Player"))
+            return;
+
+        playerInRange = true;
+
+        var playerInput = other.transform.root.GetComponentInChildren<PlayerInput>();
+        if (playerInput == null)
         {
-            playerInRange = true;
-            Debug.Log($"Press {interactKey} to talk to {npcName}.");
+            Debug.LogWarning("No PlayerInput found on Player.");
+            return;
         }
+
+        interactAction = playerInput.actions.FindAction("Interact", false);
+        if (interactAction == null)
+        {
+            Debug.LogWarning("Interact action not found.");
+            return;
+        }
+
+        if (!subscribed)
+        {
+            interactAction.performed += OnInteractPerformed;
+            subscribed = true;
+        }
+
+        interactAction.Enable();
+
+        Debug.Log($"In range of {npcName}. Press Interact to talk.");
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            playerInRange = false;
-            Debug.Log($"You walked away from {npcName}.");
-        }
+        if (!other.transform.root.CompareTag("Player"))
+            return;
+
+        playerInRange = false;
     }
 
-    private void Update()
+    private void OnDisable()
     {
-        // Only listen for input if the player is in range
-        if (playerInRange && Input.GetKeyDown(interactKey))
-        {
-            StartDialogue();
-        }
+        if (interactAction != null && subscribed)
+            interactAction.performed -= OnInteractPerformed;
+    }
+
+    private void OnInteractPerformed(InputAction.CallbackContext context)
+    {
+        if (!playerInRange)
+            return;
+
+        StartDialogue();
     }
 
     private void StartDialogue()
     {
-        Debug.Log($"Starting dialogue with {npcName}.");
+        if (DialogueManager.Instance == null)
+        {
+            Debug.LogError("DialogueManager.Instance is NULL. Make sure DialogueCanvas/DialogueManager exists in the scene.");
+            return;
+        }
 
-        // For now, just print lines to the Console as a placeholder
-        if (dialogueLines != null && dialogueLines.Length > 0)
-        {
-            foreach (string line in dialogueLines)
-            {
-                Debug.Log($"{npcName}: {line}");
-            }
-        }
-        else
-        {
-            Debug.Log($"{npcName} has nothing to say yet. (Add lines in the Inspector.)");
-        }
+        DialogueManager.Instance.StartDialogue(npcName, dialogueLines);
     }
+
 }
 
