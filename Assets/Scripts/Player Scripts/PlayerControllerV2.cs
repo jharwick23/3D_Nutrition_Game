@@ -389,6 +389,12 @@ public class PlayerControllerV2 : MonoBehaviour
                     enemy.GetComponent<BossSpawn>().ResetArea();
                 }
             }
+
+            GameObject zone = GameObject.FindGameObjectWithTag("SideZone");
+            if (zone != null)
+            {
+                zone.GetComponent<WaveSpawner>().ResetSpawner();
+            }
             
         }
     }

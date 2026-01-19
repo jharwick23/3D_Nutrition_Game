@@ -11,6 +11,7 @@ TagManager:
   - DropService
   - EnemyZones
   - HUD
+  - SideZone
   layers:
   - Default
   - TransparentFX
