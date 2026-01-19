@@ -263,15 +263,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 306278367475408578, guid: d6a5d8c076dd3b3b8a3b6cd0b222935a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.31
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 306278367475408578, guid: d6a5d8c076dd3b3b8a3b6cd0b222935a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.11
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 306278367475408578, guid: d6a5d8c076dd3b3b8a3b6cd0b222935a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.6548767
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 306278367475408578, guid: d6a5d8c076dd3b3b8a3b6cd0b222935a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -320,7 +320,7 @@ PrefabInstance:
     - target: {fileID: 1001024469466306935, guid: d6a5d8c076dd3b3b8a3b6cd0b222935a, type: 3}
       propertyPath: m_Actions
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     - target: {fileID: 1023314151024931270, guid: d6a5d8c076dd3b3b8a3b6cd0b222935a, type: 3}
       propertyPath: knifeSwing
       value: 
@@ -420,6 +420,14 @@ PrefabInstance:
     - target: {fileID: 5194683059402114071, guid: d6a5d8c076dd3b3b8a3b6cd0b222935a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 120.508
+      objectReference: {fileID: 0}
+    - target: {fileID: 6651815427306263085, guid: d6a5d8c076dd3b3b8a3b6cd0b222935a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6651815427306263085, guid: d6a5d8c076dd3b3b8a3b6cd0b222935a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7050313151532964784, guid: d6a5d8c076dd3b3b8a3b6cd0b222935a, type: 3}
       propertyPath: m_LocalPosition.x
