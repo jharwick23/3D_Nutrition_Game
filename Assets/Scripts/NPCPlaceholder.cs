@@ -3,80 +3,46 @@ using UnityEngine.InputSystem;
 
 public class NPCPlaceholder : MonoBehaviour
 {
-    [Header("NPC Settings")]
     public string npcName = "NPC";
-
-    [TextArea]
-    public string[] dialogueLines;
+    [TextArea] public string[] dialogueLines;
 
     private bool playerInRange;
-    private bool subscribed;
     private InputAction interactAction;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.transform.root.CompareTag("Player"))
-            return;
+        if (!other.transform.root.CompareTag("Player")) return;
 
         playerInRange = true;
 
         var playerInput = other.transform.root.GetComponentInChildren<PlayerInput>();
-        if (playerInput == null)
-        {
-            Debug.LogWarning("No PlayerInput found on Player.");
-            return;
-        }
-
-        interactAction = playerInput.actions.FindAction("Interact", false);
-        if (interactAction == null)
-        {
-            Debug.LogWarning("Interact action not found.");
-            return;
-        }
-
-        if (!subscribed)
-        {
-            interactAction.performed += OnInteractPerformed;
-            subscribed = true;
-        }
-
-        interactAction.Enable();
+        interactAction = playerInput != null ? playerInput.actions.FindAction("Interact", false) : null;
 
         Debug.Log($"In range of {npcName}. Press Interact to talk.");
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!other.transform.root.CompareTag("Player"))
-            return;
-
+        if (!other.transform.root.CompareTag("Player")) return;
         playerInRange = false;
     }
 
-    private void OnDisable()
+    private void Update()
     {
-        if (interactAction != null && subscribed)
-            interactAction.performed -= OnInteractPerformed;
-    }
+        if (!playerInRange) return;
+        if (DialogueManager.Instance == null) return;
+        if (interactAction == null) return;
 
-    private void OnInteractPerformed(InputAction.CallbackContext context)
-    {
-        if (!playerInRange)
-            return;
-
-        StartDialogue();
-    }
-
-    private void StartDialogue()
-    {
-        if (DialogueManager.Instance == null)
+        // If dialogue is open, let E advance/close.
+        // If dialogue is closed, let E start.
+        if (interactAction.WasPressedThisFrame())
         {
-            Debug.LogError("DialogueManager.Instance is NULL. Make sure DialogueCanvas/DialogueManager exists in the scene.");
-            return;
+            if (DialogueManager.Instance.IsDialogueActive)
+                DialogueManager.Instance.AdvanceOrEnd();
+            else
+                DialogueManager.Instance.TryStartDialogue(npcName, dialogueLines);
         }
-
-        DialogueManager.Instance.StartDialogue(npcName, dialogueLines);
     }
-
 }
+
 
