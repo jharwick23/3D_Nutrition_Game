@@ -74,9 +74,9 @@ public class PlayerControllerV2 : MonoBehaviour
 
     void Start()
     {
-        // Initialize UI
-        _uiHandler.UpdateHealthUI(CurrentHealth, MaxHealth);
-        _uiHandler.UpdateCoinUI(Coins);
+        // Initialize Player Data
+        InitializePlayerData();
+
         Respawn();
     }
 
@@ -97,6 +97,21 @@ public class PlayerControllerV2 : MonoBehaviour
             SetHatEquipped(false);
             _hatHandler.SetOnHead();
         }
+    }
+
+    // Initializes player data from PlayerPrefs stats
+    public void InitializePlayerData()
+    {
+        // Initialize Stats
+        MaxHealth = PlayerPrefs.GetInt("MaxHealthStat", 0) * 20 + 100;
+        CurrentHealth = MaxHealth;
+        _uiHandler.UpdateHealthUI(CurrentHealth, MaxHealth);
+
+        Coins = PlayerPrefs.GetInt("Coins", 0);
+        _uiHandler.UpdateCoinUI(Coins);
+
+        MovementSpeed = 5f + PlayerPrefs.GetInt("MovementSpeedStat", 0) * 0.5f;
+        
     }
 
     // These three functions set the animator booleans
@@ -340,6 +355,7 @@ public class PlayerControllerV2 : MonoBehaviour
     public void AddCoins(int coinAmount)
     {
         Coins += coinAmount;
+        PlayerPrefs.SetInt("Coins", Coins);
         _uiHandler.UpdateCoinUI(Coins);
     }
 
