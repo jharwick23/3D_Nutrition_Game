@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 2467490742846535557}
   - component: {fileID: 1925598985958938286}
   - component: {fileID: 3994879083126744176}
+  - component: {fileID: 6530856590253563200}
   m_Layer: 0
   m_Name: ChefTork
   m_TagString: Player
@@ -141,6 +142,19 @@ MonoBehaviour:
   m_DefaultActionMap: 
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &6530856590253563200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5233176387296269704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed662dbd296afd849af5db8bf678527f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
+  PlayerController: {fileID: 0}
 --- !u!1 &5253653260092662394
 GameObject:
   m_ObjectHideFlags: 0
