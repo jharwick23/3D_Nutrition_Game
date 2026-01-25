@@ -471,4 +471,17 @@ public class PlayerControllerV2 : MonoBehaviour
     {
         _hasLanded = hasLanded;
     }
+
+    // We want to check whether IsMovJump true or not so when we are falling it either uses the moving jump animation,
+    // or the falling animation
+    // If IsMovJump is true when falling while doing the moving jump animation, the normal falling animation WILL NOT play.
+    public void SetMovJumpTrue()
+    {
+        _animator.SetBool("IsMovJump", true);
+    }
+
+    public void SetMovJumpFalse()
+    {
+        _animator.SetBool("IsMovJump", false);
+    }
 }
