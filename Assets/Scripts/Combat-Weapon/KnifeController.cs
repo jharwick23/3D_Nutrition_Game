@@ -27,6 +27,7 @@ public class KnifeController : MonoBehaviour
         isOnHip = true;
     }
 
+    // Melee Attack function (Only procs when hitting another collider)
     private void OnTriggerEnter(Collider other)
     {
         if (hasHit) return;
@@ -43,6 +44,7 @@ public class KnifeController : MonoBehaviour
         }
     }
 
+    // Resets the "has hit" variable which is used so enemies do not take  damage twice
     public void ResetHit()
     {
         hasHit = false;

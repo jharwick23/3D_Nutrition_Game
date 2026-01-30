@@ -45,6 +45,7 @@ public class PlayerControllerV2 : MonoBehaviour
     private bool _isMeleeing = false;
     private bool _dodgePressed = false;
     private bool _hasLanded = false;
+    private bool _shieldBash = false;
 
     void Awake()
     {
@@ -499,5 +500,23 @@ public class PlayerControllerV2 : MonoBehaviour
     public void SetMovJumpFalse()
     {
         _animator.SetBool("IsMovJump", false);
+    }
+
+    // Sets bashing trigger to do bash animation
+    public void IsBashing()
+    {
+        _animator.SetTrigger("BashShield");
+    }
+
+    // Sets _shieldBash variable (used to keep the shield in hand after bashing)
+    public void SetShieldBash(bool shieldBash)
+    {
+        _shieldBash = shieldBash;
+    }
+
+    public bool GetShieldBash()
+    {
+        // Grabs shieldbash variable
+        return _shieldBash;
     }
 }
