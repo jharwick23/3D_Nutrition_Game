@@ -506,6 +506,7 @@ public class PlayerControllerV2 : MonoBehaviour
     public void IsBashing()
     {
         _animator.SetTrigger("BashShield");
+        Pan.BeginBashDamage(0.15f);
     }
 
     // Sets _shieldBash variable (used to keep the shield in hand after bashing)
