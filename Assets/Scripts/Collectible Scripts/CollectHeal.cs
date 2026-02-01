@@ -4,7 +4,7 @@ public class CollectHeal : MonoBehaviour
 {
     public float bobbleHeight = 0.25f;
     public float bobbleSpeed = 2f;
-    public int healAmount = 10;
+    public int baseHealAmount = 10;
     private Vector3 startPos;
 
     private void Start()
@@ -32,7 +32,8 @@ public class CollectHeal : MonoBehaviour
             {
                 if (!playerController.IsMaxHealth())
                 {
-                    playerController.Heal(healAmount);
+                    int finalHealAmount = baseHealAmount + (5 * PlayerPrefs.GetInt("HealingAmountStat", 0));
+                    playerController.Heal(finalHealAmount);
                     Destroy(gameObject);
                 }
             }

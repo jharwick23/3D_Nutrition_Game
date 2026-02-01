@@ -18,7 +18,7 @@ public class DropService : MonoBehaviour
         if (AppleHealPrefab != null)
         {
             GameObject appleHeal = Instantiate(AppleHealPrefab, position, Quaternion.identity);
-            appleHeal.GetComponent<CollectHeal>().healAmount = healAmount;
+            appleHeal.GetComponent<CollectHeal>().baseHealAmount = healAmount;
         }
         else
         {

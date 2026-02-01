@@ -11,6 +11,7 @@ public class UpgradeStatsMenu : MonoBehaviour
     public TextMeshProUGUI movementSpeedText;
     public TextMeshProUGUI reloadSpeedText;
     public TextMeshProUGUI healingAmountText;
+    public TextMeshProUGUI blockStrengthText;
 
     private void Start()
     {
@@ -90,6 +91,7 @@ public class UpgradeStatsMenu : MonoBehaviour
         movementSpeedText.text = "Lvl. " + PlayerPrefs.GetInt("MovementSpeedStat", 0);
         reloadSpeedText.text = "Lvl. " + PlayerPrefs.GetInt("ReloadSpeedStat", 0);
         healingAmountText.text = "Lvl. " + PlayerPrefs.GetInt("HealingAmountStat", 0);
+        blockStrengthText.text = "Lvl. " + PlayerPrefs.GetInt("BlockStrengthStat", 0);
     }
 
     public void OnUpgradeMaxHealthButton()
@@ -116,7 +118,12 @@ public class UpgradeStatsMenu : MonoBehaviour
         UpdateUI();
     }
 
-    public void OnWipeStatsButon()
+    public void OnUpgradeBlockStrengthButton()
+    {
+        playerStats.UpgradeBlockStrength();
+        UpdateUI();
+    }
+    public void OnWipeStatsButton()
     {
         playerStats.WipeStats();
         UpdateUI();

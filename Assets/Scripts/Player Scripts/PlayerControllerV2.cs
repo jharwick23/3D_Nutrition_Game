@@ -282,9 +282,18 @@ public class PlayerControllerV2 : MonoBehaviour
         _isSprinting = isSprinting;
     }
 
-    public void TakeDamage(int damageAmount)
+    public void TakeDamage(float damageAmount)
     {
-        CurrentHealth -= damageAmount;
+        if (GetBlocking())
+        {
+            float baseReduction = 0.30f;
+            float perPoint = 0.05f;
+            int blockStat = PlayerPrefs.GetInt("BlockStrengthStat", 0);
+            float totalReduction = baseReduction + (blockStat * perPoint);
+            damageAmount *= 1 - totalReduction;
+        }
+
+        CurrentHealth -= Mathf.FloorToInt(damageAmount);
         if (CurrentHealth <= 0)
         {
             DeathSound();

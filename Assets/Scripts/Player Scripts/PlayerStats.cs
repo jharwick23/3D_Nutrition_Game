@@ -5,8 +5,9 @@ public class PlayerStats : MonoBehaviour
     public PlayerControllerV2 PlayerController;
     private int _maxHeathStat;
     private int _movementSpeedStat;
-    private int reloadSpeedStat;
-    private int healingAmountStat;
+    private int _reloadSpeedStat;
+    private int _healingAmountStat;
+    private int _blockStrengthStat;
 
     private void Awake()
     {
@@ -21,16 +22,18 @@ public class PlayerStats : MonoBehaviour
     {
         PlayerPrefs.SetInt("MaxHealthStat", _maxHeathStat);
         PlayerPrefs.SetInt("MovementSpeedStat", _movementSpeedStat);
-        PlayerPrefs.SetInt("ReloadSpeedStat", reloadSpeedStat);
-        PlayerPrefs.SetInt("HealingAmountStat", healingAmountStat);
+        PlayerPrefs.SetInt("ReloadSpeedStat", _reloadSpeedStat);
+        PlayerPrefs.SetInt("HealingAmountStat", _healingAmountStat);
+        PlayerPrefs.SetInt("BlockStrengthStat", _blockStrengthStat);
     }
 
     private void LoadStats()
     {
         _maxHeathStat = PlayerPrefs.GetInt("MaxHealthStat", 0);
         _movementSpeedStat = PlayerPrefs.GetInt("MovementSpeedStat", 0);
-        reloadSpeedStat = PlayerPrefs.GetInt("ReloadSpeedStat", 0);
-        healingAmountStat = PlayerPrefs.GetInt("HealingAmountStat", 0);
+        _reloadSpeedStat = PlayerPrefs.GetInt("ReloadSpeedStat", 0);
+        _healingAmountStat = PlayerPrefs.GetInt("HealingAmountStat", 0);
+        _blockStrengthStat = PlayerPrefs.GetInt("BlockStrengthStat", 0);
     }
 
     public void UpgradeMaxHealth()
@@ -69,7 +72,7 @@ public class PlayerStats : MonoBehaviour
             return;
         }
         
-        reloadSpeedStat++;
+        _reloadSpeedStat++;
         SaveStats();
         PlayerController.AddCoins(-50);
         PlayerController.InitializePlayerData();
@@ -83,7 +86,21 @@ public class PlayerStats : MonoBehaviour
             return;
         }
         
-        healingAmountStat++;
+        _healingAmountStat++;
+        SaveStats();
+        PlayerController.AddCoins(-50);
+        PlayerController.InitializePlayerData();
+    }
+
+    public void UpgradeBlockStrength()
+    {
+        if (PlayerPrefs.GetInt("Coins", 0) < 50)
+        {
+            Debug.Log("Not enough coins to upgrade Block Strength!");
+            return;
+        }
+        
+        _blockStrengthStat++;
         SaveStats();
         PlayerController.AddCoins(-50);
         PlayerController.InitializePlayerData();
@@ -95,6 +112,7 @@ public class PlayerStats : MonoBehaviour
         PlayerPrefs.DeleteKey("MovementSpeedStat");
         PlayerPrefs.DeleteKey("ReloadSpeedStat");
         PlayerPrefs.DeleteKey("HealingAmountStat");
+        PlayerPrefs.DeleteKey("BlockStrengthStat");
         LoadStats();
         PlayerController.InitializePlayerData();
     }

@@ -7,6 +7,9 @@ public class ProjectileGun : MonoBehaviour
     // --- SETUP REFERENCES --- \\
     public GameObject OrangeBulletPrefab;
     public GameObject TomatoBulletPrefab;
+    public GameObject BananaBulletPrefab;
+    public GameObject LemonBulletPrefab;
+    public GameObject CarrotBulletPrefab;
     public Transform BulletSpawnPoint;
     public Camera PlayerCamera;
     public UIHandler _uiHandler;
@@ -15,12 +18,12 @@ public class ProjectileGun : MonoBehaviour
     public LayerMask raycastMask;
 
     // --- AMMO/Type AND COOLDOWNS --- \\
-    public enum BulletType { Tomato, Orange }
+    public enum BulletType { Tomato, Orange, Banana, Lemon, Carrot }
     public BulletType CurrentBulletType = BulletType.Orange;
     public int maxAmmo;
     public int currentAmmo;
     public float timeBetweenShooting;
-    public float reloadTime = 1f;
+    private float _reloadTime = 2f;
 
     // --- STATE TRACKING --- \\
     private bool canShoot = true;
@@ -90,6 +93,11 @@ public class ProjectileGun : MonoBehaviour
             GameObject bullet =  Instantiate(TomatoBulletPrefab, BulletSpawnPoint.position, Quaternion.LookRotation(shootDirection));
             bullet.GetComponent<TomatoBullet>().Init(shootDirection);
         }
+        else if (CurrentBulletType == BulletType.Banana)
+        {
+            GameObject bullet =  Instantiate(BananaBulletPrefab, BulletSpawnPoint.position, Quaternion.LookRotation(shootDirection));
+            bullet.GetComponent<BananaBullet>().Init(shootDirection);
+        }
 
         // OLD
         //bullet.GetComponent<Rigidbody>().AddForce(shootDirection.normalized * ShootForce, ForceMode.Impulse);
@@ -120,7 +128,14 @@ public class ProjectileGun : MonoBehaviour
         canShoot = false;
         isReloading = true;
         _uiHandler.UpdateAmmoUI("Reloading...");
-        yield return new WaitForSeconds(reloadTime);
+
+        float finalReloadTime = _reloadTime - PlayerPrefs.GetInt("ReloadSpeedStat", 0) * 0.1f; // 0.1 seconds faster per stat level
+        if (finalReloadTime < 0.2f)
+        {
+            finalReloadTime = 0.2f; // Minimum reload time
+        }
+        yield return new WaitForSeconds(finalReloadTime);
+
         isReloading = false;
         currentAmmo = maxAmmo;
         canShoot = true;
@@ -135,7 +150,13 @@ public class ProjectileGun : MonoBehaviour
             _uiHandler.UpdateBulletTypeUI("Orange");
             timeBetweenShooting = OrangeBulletPrefab.GetComponent<OrangeBullet>().timeBetweenShooting;
         }
-        else
+        else if (CurrentBulletType == BulletType.Orange)
+        {
+            CurrentBulletType = BulletType.Banana;
+            _uiHandler.UpdateBulletTypeUI("Banana");
+            timeBetweenShooting = BananaBulletPrefab.GetComponent<BananaBullet>().timeBetweenShooting;
+        }
+        else if (CurrentBulletType == BulletType.Banana)
         {
             CurrentBulletType = BulletType.Tomato;
             _uiHandler.UpdateBulletTypeUI("Tomato");
