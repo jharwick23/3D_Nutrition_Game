@@ -3,7 +3,12 @@ guid: 2f2c30c8bedfefe40be1dee24398f372
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: iceCreamMat
+    second: {fileID: 2100000, guid: 730a4dc6d23c88b4b93878b35f240562, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
