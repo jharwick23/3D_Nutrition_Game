@@ -128,16 +128,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileGun
   OrangeBulletPrefab: {fileID: 370912169763564214, guid: e03102626fd8d4f4cab8ac4a55c7a19c, type: 3}
   TomatoBulletPrefab: {fileID: 3452694226032689571, guid: aa3fb751019881542b3e50d48d5e1220, type: 3}
+  BananaBulletPrefab: {fileID: 1857019382469395560, guid: ebca54da28623804f86e678fed6939ad, type: 3}
+  LemonBulletPrefab: {fileID: 3420666048653649957, guid: c5d3081e9b7e2f04eb69f92cbce0732b, type: 3}
+  CarrotBulletPrefab: {fileID: 5222569352696420437, guid: 658c984a508531b41a2fecb154dc2c7b, type: 3}
   BulletSpawnPoint: {fileID: 7980558542937126928}
   PlayerCamera: {fileID: 0}
   _uiHandler: {fileID: 0}
   PlayerController: {fileID: 0}
   MaxDistance: 100
+  raycastMask:
+    serializedVersion: 2
+    m_Bits: 0
   CurrentBulletType: 1
   maxAmmo: 0
   currentAmmo: 0
   timeBetweenShooting: 0
-  reloadTime: 1
 --- !u!114 &1177165208192014905
 MonoBehaviour:
   m_ObjectHideFlags: 0
