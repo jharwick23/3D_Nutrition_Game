@@ -115,6 +115,12 @@ public class InputHandlerV2 : MonoBehaviour
 
     private void OnAttackPerformed(InputAction.CallbackContext context)
     {
+        if(PlayerController.GetBlocking())
+        {
+            PlayerController.IsBashing();
+            PlayerController.SetShieldBash(true);
+            return;
+        }
         StandardProjectileGun.Shoot();
         PlayerController.SetHatEquipped(true);
         PlayerController._hatHandler.SetOnGun();

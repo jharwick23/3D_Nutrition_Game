@@ -4,6 +4,7 @@ public class AnimationEvents : MonoBehaviour
 {
     public KnifeController Knife;
     public PlayerControllerV2 PlayerController;
+    public PanController Pan;
     void Awake()
     {
         if (Knife == null)
@@ -13,6 +14,10 @@ public class AnimationEvents : MonoBehaviour
         if(PlayerController == null)
         {
             PlayerController = FindFirstObjectByType<PlayerControllerV2>();
+        }
+        if (Pan == null)
+        {
+            Pan = FindFirstObjectByType<PanController>();
         }
     }
 
