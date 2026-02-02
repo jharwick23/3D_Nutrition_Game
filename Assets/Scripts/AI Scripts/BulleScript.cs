@@ -15,10 +15,6 @@ public class BulleScript : MonoBehaviour
                 {
                     playerController.TakeDamage(10);
                 }
-                else
-                {
-                    playerController.TakeDamage(5);
-                }
             }
         }
         Destroy(gameObject);

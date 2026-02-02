@@ -13,10 +13,6 @@ public class DamageTest : MonoBehaviour
                 {
                     playerController.TakeDamage(10);
                 }
-                else
-                {
-                    playerController.TakeDamage(2);
-                }
             }
         }
     }
