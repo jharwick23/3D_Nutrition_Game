@@ -1375,6 +1375,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1753951911080693623, guid: bc1027c423416ea4ca05801b72324dac, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753951911080693623, guid: bc1027c423416ea4ca05801b72324dac, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+    - target: {fileID: 1753951911080693623, guid: bc1027c423416ea4ca05801b72324dac, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+    - target: {fileID: 2101334801027177731, guid: bc1027c423416ea4ca05801b72324dac, type: 3}
+      propertyPath: m_text
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101334801027177731, guid: bc1027c423416ea4ca05801b72324dac, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+    - target: {fileID: 2101334801027177731, guid: bc1027c423416ea4ca05801b72324dac, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
     - target: {fileID: 2139019898774527324, guid: bc1027c423416ea4ca05801b72324dac, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -4460,6 +4484,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5382255193665922164, guid: af8d7a3ae08bf1e4f9517eb3ebe563a6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5712578597439772712, guid: af8d7a3ae08bf1e4f9517eb3ebe563a6, type: 3}
       propertyPath: m_text
       value: 'Block Strength:'
@@ -4467,6 +4495,18 @@ PrefabInstance:
     - target: {fileID: 5951190462569213750, guid: af8d7a3ae08bf1e4f9517eb3ebe563a6, type: 3}
       propertyPath: m_Name
       value: UpgradeStatsManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7513284050178648608, guid: af8d7a3ae08bf1e4f9517eb3ebe563a6, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+    - target: {fileID: 7513284050178648608, guid: af8d7a3ae08bf1e4f9517eb3ebe563a6, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+    - target: {fileID: 7513284050178648608, guid: af8d7a3ae08bf1e4f9517eb3ebe563a6, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
