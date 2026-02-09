@@ -42,4 +42,22 @@ public class AnimationEvents : MonoBehaviour
 
         SFXManager.Instance.Play(SFXManager.SFXType.KnifeSwing);
     }
+
+    public void OnDeathAnimationFinished()
+    {
+        DeathScreenMenu deathScreenMenu = FindFirstObjectByType<DeathScreenMenu>();
+        if (deathScreenMenu)
+        {
+            deathScreenMenu.EnableDeathScreen();
+        }
+        else
+        {
+            Debug.Log("DeathScreenMenu Unavailable!");
+        }
+    }
+
+    //public void OnDeathAnimationStart()
+    //{
+    //    PlayerController.SetIsDead();
+    //}
 }
