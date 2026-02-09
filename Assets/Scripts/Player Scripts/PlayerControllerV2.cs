@@ -46,6 +46,7 @@ public class PlayerControllerV2 : MonoBehaviour
     private bool _dodgePressed = false;
     private bool _hasLanded = false;
     private bool _shieldBash = false;
+    private bool _isDead = false;
 
     void Awake()
     {
@@ -143,6 +144,9 @@ public class PlayerControllerV2 : MonoBehaviour
             Debug.LogWarning("CharacterController component is Currently Inactive.");
             return;
         }
+
+        // Does not allow movement if player is dead
+        if(_isDead) return;
         
         // If the player has landed stop horizontal movement momentarily
         if (_hasLanded)
@@ -300,15 +304,8 @@ public class PlayerControllerV2 : MonoBehaviour
             DeathSound();
             CurrentHealth = 0;
             _uiHandler.UpdateHealthUI(CurrentHealth, MaxHealth);
-            DeathScreenMenu deathScreenMenu = FindFirstObjectByType<DeathScreenMenu>();
-            if (deathScreenMenu)
-            {
-                deathScreenMenu.EnableDeathScreen();
-            }
-            else
-            {
-                Debug.Log("DeathScreenMenu Unavailable!");
-            }
+            _animator.SetTrigger("IsDead");
+            _isDead = true;
         }
         else
         {
@@ -435,6 +432,7 @@ public class PlayerControllerV2 : MonoBehaviour
             transform.position = respawnPoint.transform.position;
             _characterController.enabled = true;
             _verticalVelocity = -2f;
+            _isDead = false;
         }
         else
         {
