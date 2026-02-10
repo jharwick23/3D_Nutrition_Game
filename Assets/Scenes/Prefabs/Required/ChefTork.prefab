@@ -455,6 +455,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 645f396f605474448aff3111764f5b96, type: 2}
+    - target: {fileID: 5866666021909216657, guid: ef90c10646759156fb89d31cc35c9c73, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -561,6 +565,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimationEvents
   Knife: {fileID: 0}
   PlayerController: {fileID: 0}
+  Pan: {fileID: 0}
 --- !u!4 &2907628961156271006 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 366175167995203695, guid: ef90c10646759156fb89d31cc35c9c73, type: 3}

@@ -44,7 +44,7 @@ public class PlayerControllerV2 : MonoBehaviour
     private bool _isBlocking = false;
     private bool _isMeleeing = false;
     private bool _dodgePressed = false;
-    private bool _hasLanded = false;
+    //private bool _hasLanded = false;
     private bool _shieldBash = false;
     private bool _isDead = false;
 
@@ -148,11 +148,12 @@ public class PlayerControllerV2 : MonoBehaviour
         // Does not allow movement if player is dead
         if(_isDead) return;
         
+        // Redundant
         // If the player has landed stop horizontal movement momentarily
-        if (_hasLanded)
-        {
-            movementVector = Vector2.zero;
-        }
+        //if (_hasLanded)
+        //{
+        //    movementVector = Vector2.zero;
+        //}
 
         // Tells the animator whether or not the character is grounded
         _animator.SetBool("IsGrounded", IsGrounded());
@@ -491,10 +492,10 @@ public class PlayerControllerV2 : MonoBehaviour
         _lastShootingAttackTime = Time.time;
     }
 
-    public void SetHasLanded(bool hasLanded)
-    {
-        _hasLanded = hasLanded;
-    }
+    //public void SetHasLanded(bool hasLanded)
+    //{
+    //    _hasLanded = hasLanded;
+    //}
 
     // We want to check whether IsMovJump true or not so when we are falling it either uses the moving jump animation,
     // or the falling animation
