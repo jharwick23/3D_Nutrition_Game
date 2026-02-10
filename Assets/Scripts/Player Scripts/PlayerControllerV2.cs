@@ -39,6 +39,8 @@ public class PlayerControllerV2 : MonoBehaviour
     private float _verticalVelocity;
     private float _lastShootingAttackTime = 0f;
     private float _shootingHoldDuration = 5f;
+    [SerializeField] private float fallVelocityThreshold = -2.5f;
+    [SerializeField] private float fallTimeThreshold = 0.18f;
     private bool _isSprinting = false;
     private bool _isHatEquipped = false;
     private bool _isBlocking = false;
@@ -47,6 +49,8 @@ public class PlayerControllerV2 : MonoBehaviour
     //private bool _hasLanded = false;
     private bool _shieldBash = false;
     private bool _isDead = false;
+    private float _fallTime = 0f;
+    private bool _isHighFall = false;
 
     void Awake()
     {
@@ -155,11 +159,11 @@ public class PlayerControllerV2 : MonoBehaviour
         //    movementVector = Vector2.zero;
         //}
 
-        // Tells the animator whether or not the character is grounded
-        _animator.SetBool("IsGrounded", IsGrounded());
+        bool grounded = IsGrounded();
+        _animator.SetBool("IsGrounded", grounded);
 
         // Tells animator JumpRequested is false when player gets in the air after jump
-        if (!IsGrounded())
+        if (!grounded)
         {
             _animator.SetBool("JumpRequested", false);
         }
@@ -244,10 +248,23 @@ public class PlayerControllerV2 : MonoBehaviour
         _verticalVelocity += Gravity * Time.deltaTime;
 
         // Small downward force to keep grounded
-        if (_characterController.isGrounded && _verticalVelocity < 0)
+        if (grounded && _verticalVelocity < 0)
         {
             _verticalVelocity = -2f;
         }
+
+        // Detect if the player is falling from high ground
+        if (!grounded && _verticalVelocity < fallVelocityThreshold)
+        {
+            _fallTime += Time.deltaTime;
+        }
+        else
+        {
+            _fallTime = 0f;
+        }
+
+        _isHighFall = _fallTime >= fallTimeThreshold;
+        _animator.SetBool("IsHighFall", _isHighFall);
 
         _characterController.Move(new Vector3(0, _verticalVelocity, 0) * Time.deltaTime);
     }

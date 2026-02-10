@@ -457,7 +457,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 645f396f605474448aff3111764f5b96, type: 2}
     - target: {fileID: 5866666021909216657, guid: ef90c10646759156fb89d31cc35c9c73, type: 3}
       propertyPath: m_ApplyRootMotion
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -551,6 +551,8 @@ MonoBehaviour:
   JumpForce: 8
   Gravity: -25
   SprintMultiplier: 2
+  fallVelocityThreshold: -2.5
+  fallTimeThreshold: 0.18
 --- !u!114 &7548074881497688586
 MonoBehaviour:
   m_ObjectHideFlags: 0
