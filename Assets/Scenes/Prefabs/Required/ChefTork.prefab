@@ -187,6 +187,38 @@ Transform:
   - {fileID: 5716138333655475591}
   m_Father: {fileID: 8983336317258542745}
   m_LocalEulerAnglesHint: {x: 270, y: 0, z: 0}
+--- !u!1 &5716740551018617251
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7742325780353422868}
+  m_Layer: 0
+  m_Name: CameraRig
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7742325780353422868
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5716740551018617251}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7250876266448177484}
+  m_Father: {fileID: 3082619661729840154}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6867308114478873405
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,11 +308,11 @@ Transform:
   m_GameObject: {fileID: 7968526653312823047}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.455, y: 1.849, z: 0.3231238}
+  m_LocalPosition: {x: 0, y: 3.5, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3082619661729840154}
+  m_Father: {fileID: 7742325780353422868}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8701546465244393189
 GameObject:
@@ -464,7 +496,7 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: ef90c10646759156fb89d31cc35c9c73, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7250876266448177484}
+      addedObject: {fileID: 7742325780353422868}
     - targetCorrespondingSourceObject: {fileID: 5465940246521907071, guid: ef90c10646759156fb89d31cc35c9c73, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7977542091384325924}
@@ -540,6 +572,8 @@ MonoBehaviour:
   CurrentHealth: 100
   Coins: 0
   _uiHandler: {fileID: 0}
+  cameraRig: {fileID: 7742325780353422868}
+  cameraFollowTarget: {fileID: 7250876266448177484}
   _hatHandler: {fileID: 0}
   Knife: {fileID: 0}
   Pan: {fileID: 0}

@@ -10,9 +10,16 @@ public class PlayerControllerV2 : MonoBehaviour
     
     // --- Assigned Controllers Variables --- \\
     private CharacterController _characterController;
-    private CameraControllerV2 CameraController;
+    //private CameraControllerV2 CameraController;
     public UIHandler _uiHandler;
     private Animator _animator;
+
+    // Camera Variables
+    [SerializeField] private Transform cameraRig; // rotates yaw
+    [SerializeField] private Transform cameraFollowTarget; // pitch is applied
+
+    private float yaw;
+    private float pitch;
 
     // Handling Hat Object
     public HatHandler _hatHandler;
@@ -56,10 +63,10 @@ public class PlayerControllerV2 : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _characterController = GetComponent<CharacterController>();
-        if (CameraController == null)
-        {
-            CameraController = FindFirstObjectByType<CameraControllerV2>();
-        }
+        //if (CameraController == null)
+        //{
+        //    CameraController = FindFirstObjectByType<CameraControllerV2>();
+        //}
         if (_uiHandler == null)
         {
             _uiHandler = FindFirstObjectByType<UIHandler>();
@@ -281,14 +288,22 @@ public class PlayerControllerV2 : MonoBehaviour
             Debug.LogWarning("CharacterController component is Currently Inactive.");
             return;
         }
-        
-        // Character Horizontal rotation -- Camera follows the player rotation aswell (CameraControllerV2.cs)
-        _rotationY += lookVector.x * RotationSpeed * Time.deltaTime;
-        transform.localRotation = Quaternion.Euler(0, _rotationY, 0);
+        // Player yaw from Mouse X
+        yaw += lookVector.x * RotationSpeed * Time.deltaTime;
+        transform.rotation = Quaternion.Euler(0f, yaw, 0f);
 
-        // Camera Vertical rotation -- Camera pitch/angle
-        CameraController.CameraPitch -= lookVector.y * LookSensitivityY * Time.deltaTime;
-        CameraController.CameraPitch = Mathf.Clamp(CameraController.CameraPitch, MaxCamAngle, MinCamAngle);
+        // Camera rig yaw matches player yaw
+        if (cameraRig)
+            cameraRig.rotation = Quaternion.Euler(0f, yaw, 0f);
+
+        // Camera pitch from Mouse Y
+        pitch -= lookVector.y * LookSensitivityY * Time.deltaTime;
+        pitch = Mathf.Clamp(pitch, MaxCamAngle, MinCamAngle);
+
+        if(cameraFollowTarget)
+        {
+            cameraFollowTarget.localRotation = Quaternion.Euler(pitch, 0f, 0f);
+        }
     }
 
     public void Jump()
