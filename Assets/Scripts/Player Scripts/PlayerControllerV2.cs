@@ -288,6 +288,9 @@ public class PlayerControllerV2 : MonoBehaviour
             Debug.LogWarning("CharacterController component is Currently Inactive.");
             return;
         }
+        
+        if(_isDead) return;
+
         // Player yaw from Mouse X
         yaw += lookVector.x * RotationSpeed * Time.deltaTime;
         transform.rotation = Quaternion.Euler(0f, yaw, 0f);
