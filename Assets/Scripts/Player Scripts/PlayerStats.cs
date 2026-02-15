@@ -25,6 +25,7 @@ public class PlayerStats : MonoBehaviour
         PlayerPrefs.SetInt("ReloadSpeedStat", _reloadSpeedStat);
         PlayerPrefs.SetInt("HealingAmountStat", _healingAmountStat);
         PlayerPrefs.SetInt("BlockStrengthStat", _blockStrengthStat);
+        PlayerPrefs.Save();
     }
 
     private void LoadStats()

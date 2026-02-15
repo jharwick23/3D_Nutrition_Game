@@ -10,9 +10,16 @@ public class PlayerControllerV2 : MonoBehaviour
     
     // --- Assigned Controllers Variables --- \\
     private CharacterController _characterController;
-    private CameraControllerV2 CameraController;
+    //private CameraControllerV2 CameraController;
     public UIHandler _uiHandler;
     private Animator _animator;
+
+    // Camera Variables
+    [SerializeField] private Transform cameraRig; // rotates yaw
+    [SerializeField] private Transform cameraFollowTarget; // pitch is applied
+
+    private float yaw;
+    private float pitch;
 
     // Handling Hat Object
     public HatHandler _hatHandler;
@@ -39,23 +46,27 @@ public class PlayerControllerV2 : MonoBehaviour
     private float _verticalVelocity;
     private float _lastShootingAttackTime = 0f;
     private float _shootingHoldDuration = 5f;
+    [SerializeField] private float fallVelocityThreshold = -2.5f;
+    [SerializeField] private float fallTimeThreshold = 0.18f;
     private bool _isSprinting = false;
     private bool _isHatEquipped = false;
     private bool _isBlocking = false;
     private bool _isMeleeing = false;
     private bool _dodgePressed = false;
-    private bool _hasLanded = false;
+    //private bool _hasLanded = false;
     private bool _shieldBash = false;
     private bool _isDead = false;
+    private float _fallTime = 0f;
+    private bool _isHighFall = false;
 
     void Awake()
     {
         _animator = GetComponent<Animator>();
         _characterController = GetComponent<CharacterController>();
-        if (CameraController == null)
-        {
-            CameraController = FindFirstObjectByType<CameraControllerV2>();
-        }
+        //if (CameraController == null)
+        //{
+        //    CameraController = FindFirstObjectByType<CameraControllerV2>();
+        //}
         if (_uiHandler == null)
         {
             _uiHandler = FindFirstObjectByType<UIHandler>();
@@ -148,17 +159,18 @@ public class PlayerControllerV2 : MonoBehaviour
         // Does not allow movement if player is dead
         if(_isDead) return;
         
+        // Redundant
         // If the player has landed stop horizontal movement momentarily
-        if (_hasLanded)
-        {
-            movementVector = Vector2.zero;
-        }
+        //if (_hasLanded)
+        //{
+        //    movementVector = Vector2.zero;
+        //}
 
-        // Tells the animator whether or not the character is grounded
-        _animator.SetBool("IsGrounded", IsGrounded());
+        bool grounded = IsGrounded();
+        _animator.SetBool("IsGrounded", grounded);
 
         // Tells animator JumpRequested is false when player gets in the air after jump
-        if (!IsGrounded())
+        if (!grounded)
         {
             _animator.SetBool("JumpRequested", false);
         }
@@ -243,10 +255,23 @@ public class PlayerControllerV2 : MonoBehaviour
         _verticalVelocity += Gravity * Time.deltaTime;
 
         // Small downward force to keep grounded
-        if (_characterController.isGrounded && _verticalVelocity < 0)
+        if (grounded && _verticalVelocity < 0)
         {
             _verticalVelocity = -2f;
         }
+
+        // Detect if the player is falling from high ground
+        if (!grounded && _verticalVelocity < fallVelocityThreshold)
+        {
+            _fallTime += Time.deltaTime;
+        }
+        else
+        {
+            _fallTime = 0f;
+        }
+
+        _isHighFall = _fallTime >= fallTimeThreshold;
+        _animator.SetBool("IsHighFall", _isHighFall);
 
         _characterController.Move(new Vector3(0, _verticalVelocity, 0) * Time.deltaTime);
     }
@@ -263,14 +288,22 @@ public class PlayerControllerV2 : MonoBehaviour
             Debug.LogWarning("CharacterController component is Currently Inactive.");
             return;
         }
-        
-        // Character Horizontal rotation -- Camera follows the player rotation aswell (CameraControllerV2.cs)
-        _rotationY += lookVector.x * RotationSpeed * Time.deltaTime;
-        transform.localRotation = Quaternion.Euler(0, _rotationY, 0);
+        // Player yaw from Mouse X
+        yaw += lookVector.x * RotationSpeed * Time.deltaTime;
+        transform.rotation = Quaternion.Euler(0f, yaw, 0f);
 
-        // Camera Vertical rotation -- Camera pitch/angle
-        CameraController.CameraPitch -= lookVector.y * LookSensitivityY * Time.deltaTime;
-        CameraController.CameraPitch = Mathf.Clamp(CameraController.CameraPitch, MaxCamAngle, MinCamAngle);
+        // Camera rig yaw matches player yaw
+        if (cameraRig)
+            cameraRig.rotation = Quaternion.Euler(0f, yaw, 0f);
+
+        // Camera pitch from Mouse Y
+        pitch -= lookVector.y * LookSensitivityY * Time.deltaTime;
+        pitch = Mathf.Clamp(pitch, MaxCamAngle, MinCamAngle);
+
+        if(cameraFollowTarget)
+        {
+            cameraFollowTarget.localRotation = Quaternion.Euler(pitch, 0f, 0f);
+        }
     }
 
     public void Jump()
@@ -491,10 +524,10 @@ public class PlayerControllerV2 : MonoBehaviour
         _lastShootingAttackTime = Time.time;
     }
 
-    public void SetHasLanded(bool hasLanded)
-    {
-        _hasLanded = hasLanded;
-    }
+    //public void SetHasLanded(bool hasLanded)
+    //{
+    //    _hasLanded = hasLanded;
+    //}
 
     // We want to check whether IsMovJump true or not so when we are falling it either uses the moving jump animation,
     // or the falling animation

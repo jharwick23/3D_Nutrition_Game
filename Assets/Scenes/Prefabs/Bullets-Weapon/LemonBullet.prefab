@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 5892618693104116091}
   - component: {fileID: 8980908793699689386}
   - component: {fileID: 8019924485731110335}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LemonBullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a370cd808c1267f28944f0ad2399e1ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileSFX
-  splatSound: {fileID: 0}
+  splatSound: {fileID: 8300000, guid: efaa02213e30e90cb9012f6edbe987bb, type: 3}
 --- !u!114 &8019924485731110335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,3 +167,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18dd859c10b4fb14ea19a50c8c03f63a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LemonBullet
+  Speed: 100
+  bulletDamage: 10
+  BulletDrop: 5
+  LifeTime: 5
+  maxAmmo: 24
+  timeBetweenShooting: 0.2
+  ImpactDecalPrefab: {fileID: 5631425737720120280, guid: 5d175a2cbbc7c7f43b33138b69c7bc95, type: 3}
+  projectileSFX: {fileID: 0}
