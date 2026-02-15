@@ -1,18 +1,21 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
+
 
 public class BossController : MonoBehaviour
 {
     public enum BossState { PhaseOne, PhaseTwo, Charging, Stunned }
     public BossState currentState;
-    public float maxHealth = 100f;
-    private float currentHealth;
+    public int maxHealth = 100;
+    private int currentHealth;
     public GameObject[] minionPrefabs;
     public Transform[] minionSpawnPoints;
     public int maxMinionsAlive = 4;
-    public float minionDamageToBoss = 5f;
+    public int minionDamageToBoss = 5;
     private List<GameObject> activeMinions = new List<GameObject>();
     public Transform firePointLeft;
     public Transform firePointRight;
@@ -27,6 +30,8 @@ public class BossController : MonoBehaviour
     private Transform player;
     private bool isCharging = false;
     private Vector3 chargeDirection;
+    public Slider healthSlider;
+    [SerializeField]private AIEnemy newDamage;
 
     //Gets player automatically and begins phase one.
     void Start()
@@ -65,6 +70,8 @@ public class BossController : MonoBehaviour
     {
         GameObject bullet = Instantiate(projectilePrefab, firePointLeft.position, firePointLeft.rotation);
         GameObject bullet2 = Instantiate(projectilePrefab, firePointRight.position, firePointRight.rotation);
+        bullet.SetActive(true);
+        bullet2.SetActive(true);
 
         Vector3 direction = (player.position - firePointLeft.position).normalized;
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
@@ -97,11 +104,18 @@ public class BossController : MonoBehaviour
         int randomEnemy = Random.Range(0, minionPrefabs.Length);
         int randomSpawn = Random.Range(0, minionSpawnPoints.Length);
 
+        
+
         GameObject minion = Instantiate(
             minionPrefabs[randomEnemy],
             minionSpawnPoints[randomSpawn].position,
             Quaternion.identity
         );
+
+        if (randomEnemy == 0)
+        {
+            minion.GetComponent<AIEnemyS>().height = 28;
+        }
 
         activeMinions.Add(minion);
 
@@ -117,12 +131,16 @@ public class BossController : MonoBehaviour
     }
 
     //Handles actual value damage change
-    public void TakeDamage(float amount)
+    public void TakeDamage(int amount)
     {
         currentHealth -= amount;
+        healthSlider.value = currentHealth;
 
-        if (currentHealth <= maxHealth / 2f && currentState == BossState.PhaseOne)
+        if (currentHealth <= maxHealth / 2 && currentState == BossState.PhaseOne)
         {
+            StopAllCoroutines();
+
+            newDamage.enabled = true;
             StartCoroutine(EnterPhaseTwo());
         }
     }
@@ -132,14 +150,12 @@ public class BossController : MonoBehaviour
     {
         currentState = BossState.PhaseTwo;
 
-        StopAllCoroutines();
-
-        // Kill all minions
         foreach (GameObject m in activeMinions)
         {
             if (m != null)
                 Destroy(m);
         }
+        Debug.Log("Entered phase two");
 
         activeMinions.Clear();
 
@@ -156,6 +172,7 @@ public class BossController : MonoBehaviour
             yield return new WaitForSeconds(chargeCooldown);
 
             StartCharge();
+            Debug.Log("Charge Started");
         }
     }
 
