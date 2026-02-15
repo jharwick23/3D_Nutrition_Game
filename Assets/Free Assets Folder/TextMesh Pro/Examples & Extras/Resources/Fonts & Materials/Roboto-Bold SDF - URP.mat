@@ -8,12 +8,12 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Roboto-Bold SDF - URP
-  m_Shader: {fileID: 4800000, guid: 91b2bd6869356dcae870abad3c2d2fc1, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: a3d800b099a06e0478fb790c5e79057a, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
+  m_ValidKeywords: []
+  m_InvalidKeywords:
   - UNDERLAY_ON
-  m_InvalidKeywords: []
   m_LightmapFlags: 5
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -96,7 +96,7 @@ Material:
     - _Reflectivity: 10
     - _ScaleRatioA: 0.9
     - _ScaleRatioB: 0.5856164
-    - _ScaleRatioC: 0.64125
+    - _ScaleRatioC: 0.83076924
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
