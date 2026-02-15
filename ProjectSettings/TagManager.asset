@@ -12,6 +12,7 @@ TagManager:
   - EnemyZones
   - HUD
   - SideZone
+  - StunWall
   layers:
   - Default
   - TransparentFX
