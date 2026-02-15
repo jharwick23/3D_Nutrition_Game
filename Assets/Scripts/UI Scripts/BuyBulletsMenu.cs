@@ -83,6 +83,7 @@ public class BuyBulletsMenu : MonoBehaviour
 
     public void UpdateUI()
     {
+        PlayerPrefs.Save();
         OrangeButtonText.text = "Owned";
         if (PlayerPrefs.GetInt("Bullet_Tomato", 0) == 1)
         {

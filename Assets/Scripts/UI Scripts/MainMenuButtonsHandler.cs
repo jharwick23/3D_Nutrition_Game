@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ButtonHandler : MonoBehaviour
+public class MainMenuButtonsHandler : MonoBehaviour
 {
     [SerializeField] private GameObject main;
     [SerializeField] private GameObject control;
@@ -9,6 +9,14 @@ public class ButtonHandler : MonoBehaviour
     //Starts game and load main hub
     public void StartGame()
     {
+        SceneManager.LoadScene("MainScene");
+    }
+
+    //Starts new game, deletes all player prefs and load main hub
+    public void NewGame()
+    {
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
         SceneManager.LoadScene("MainScene");
     }
 
@@ -31,6 +39,5 @@ public class ButtonHandler : MonoBehaviour
     {
         main.SetActive(true); 
         control.SetActive(false);
-           
     }
 }
