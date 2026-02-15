@@ -14,6 +14,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FirstLevel.unity
     guid: 60571316681453e4ea663cf76d69fe17
+  - enabled: 1
+    path: Assets/Scenes/SideQuestOne.unity
+    guid: 3cfcbc94cb680c94b8d92ea9098625fc
+  - enabled: 1
+    path: Assets/Scenes/SecondLevel.unity
+    guid: 5bb3fa14419162f4e9321a53738263c9
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
