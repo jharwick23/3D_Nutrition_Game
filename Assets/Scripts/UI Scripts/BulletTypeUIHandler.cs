@@ -6,6 +6,9 @@ public class BulletTypeUIHandler : MonoBehaviour
     private Image _bulletTypeDisplay;
     public Sprite tomatoSprite;
     public Sprite orangeSprite;
+    public Sprite carrotSprite;
+    public Sprite bananaSprite;
+    public Sprite lemonSprite;
 
     void Awake()
     {
@@ -31,6 +34,15 @@ public class BulletTypeUIHandler : MonoBehaviour
             break;
             case "Tomato":
             _bulletTypeDisplay.sprite = tomatoSprite;
+            break;
+            case "Carrot":
+            _bulletTypeDisplay.sprite = carrotSprite;
+            break;
+            case "Banana":
+            _bulletTypeDisplay.sprite = bananaSprite;
+            break;
+            case "Lemon":
+            _bulletTypeDisplay.sprite = lemonSprite;
             break;
             default:
             Debug.LogWarning($"Unknown bullet type: {bulletType}. Sprite wasn't updated!");
