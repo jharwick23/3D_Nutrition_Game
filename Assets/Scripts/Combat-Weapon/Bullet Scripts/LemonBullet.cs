@@ -5,7 +5,7 @@ public class LemonBullet : MonoBehaviour
 {
     private Rigidbody rb;
     public float Speed = 100f;
-    public int bulletDamage = 10;
+    public int bulletDamage = 50;
     public float BulletDrop = 5f; // Gravity 
     public float LifeTime = 5f;
     public int maxAmmo = 24;

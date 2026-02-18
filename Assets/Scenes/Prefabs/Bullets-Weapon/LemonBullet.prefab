@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LemonBullet
   Speed: 100
-  bulletDamage: 10
+  bulletDamage: 50
   BulletDrop: 5
   LifeTime: 5
   maxAmmo: 24

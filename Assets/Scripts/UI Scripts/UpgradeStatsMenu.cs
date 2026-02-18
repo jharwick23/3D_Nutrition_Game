@@ -42,7 +42,7 @@ public class UpgradeStatsMenu : MonoBehaviour
         InputHandlerV2 inputHandler = FindFirstObjectByType<InputHandlerV2>();
         if (inputHandler)
         {
-            inputHandler.DisableInputs();
+            inputHandler.DisableInputsForVendors();
         }
         else
         {
@@ -84,6 +84,10 @@ public class UpgradeStatsMenu : MonoBehaviour
         Cursor.visible = false;
     }
 
+    public bool isUpgradeMenuActive()
+    {
+        return upgradePanel.activeSelf;
+    }
 
     public void UpdateUI()
     {

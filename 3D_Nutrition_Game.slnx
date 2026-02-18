@@ -1,34 +1,6 @@
 ﻿<Solution>
   <Project Path="Unity.AI.Navigation.Samples.csproj" />
-  <Project Path="Unity.AI.Navigation.Editor.ConversionSystem.csproj" />
-  <Project Path="Unity.VisualScripting.State.Editor.csproj" />
-  <Project Path="Autodesk.Fbx.csproj" />
-  <Project Path="Unity.Burst.CodeGen.csproj" />
-  <Project Path="Unity.Cinemachine.csproj" />
-  <Project Path="Unity.Postprocessing.Editor.csproj" />
-  <Project Path="Unity.VisualScripting.Flow.csproj" />
-  <Project Path="Unity.Splines.Editor.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
-  <Project Path="Unity.PerformanceTesting.csproj" />
-  <Project Path="Unity.PackageValidationSuite.Editor.csproj" />
-  <Project Path="Unity.Burst.Editor.csproj" />
-  <Project Path="Unity.Rider.Editor.csproj" />
-  <Project Path="Unity.VisualScripting.State.csproj" />
-  <Project Path="Unity.AI.Navigation.Updater.csproj" />
-  <Project Path="Unity.Formats.Fbx.Editor.csproj" />
-  <Project Path="Unity.Postprocessing.Runtime.csproj" />
-  <Project Path="Unity.AI.Navigation.Editor.csproj" />
-  <Project Path="Unity.InputSystem.ForUI.csproj" />
-  <Project Path="Unity.AI.Navigation.csproj" />
-  <Project Path="Unity.Collections.CodeGen.csproj" />
-  <Project Path="Unity.Mathematics.Editor.csproj" />
-  <Project Path="Unity.VisualScripting.SettingsProvider.Editor.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
   <Project Path="Unity.AI.Navigation.Samples.Initialization.Editor.csproj" />
-  <Project Path="Unity.Formats.Fbx.Runtime.csproj" />
-  <Project Path="Unity.VisualScripting.DocCodeExamples.csproj" />
-  <Project Path="Autodesk.Fbx.Editor.csproj" />
-  <Project Path="Unity.PlasticSCM.Editor.Entities.csproj" />
-  <Project Path="Unity.Collections.Editor.csproj" />
-  <Project Path="Autodesk.Fbx.BuildTestAssets.csproj" />
 </Solution>
