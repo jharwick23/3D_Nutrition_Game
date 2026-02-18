@@ -90,6 +90,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BulletTypeUIHandler
   tomatoSprite: {fileID: -22795330, guid: f5dca3a9792f0f2eebbc577a94a81ef0, type: 3}
   orangeSprite: {fileID: -998653912, guid: f5dca3a9792f0f2eebbc577a94a81ef0, type: 3}
+  carrotSprite: {fileID: -426730903, guid: d57c05be374d197d0bd2bb9a57685000, type: 3}
+  bananaSprite: {fileID: -171889416, guid: d57c05be374d197d0bd2bb9a57685000, type: 3}
+  lemonSprite: {fileID: -1691456405, guid: d57c05be374d197d0bd2bb9a57685000, type: 3}
 --- !u!1 &4053315324458975735
 GameObject:
   m_ObjectHideFlags: 0

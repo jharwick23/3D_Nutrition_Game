@@ -112,7 +112,7 @@ MonoBehaviour:
   attackDistance: 15
   fireRate: 0
   rotationSpeed: 5
-  height: 4
+  height: 3
   bobSpeed: 2
   bobAmount: 0.3
   frontScale: 1.5

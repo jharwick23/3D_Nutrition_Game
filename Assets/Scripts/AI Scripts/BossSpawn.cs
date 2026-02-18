@@ -42,5 +42,6 @@ public class BossSpawn : MonoBehaviour
         spawned = false;
         dead = true;
         portal.SetActive(false);
+        GetComponent<EnableWalls>().DeactivateWalls();
     }
 }
