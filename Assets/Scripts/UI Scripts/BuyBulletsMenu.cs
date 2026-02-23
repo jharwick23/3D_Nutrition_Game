@@ -39,7 +39,7 @@ public class BuyBulletsMenu : MonoBehaviour
         InputHandlerV2 inputHandler = FindFirstObjectByType<InputHandlerV2>();
         if (inputHandler)
         {
-            inputHandler.DisableInputs();
+            inputHandler.DisableInputsForVendors();
         }
         else
         {
@@ -79,6 +79,11 @@ public class BuyBulletsMenu : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    public bool isUpgradeMenuActive()
+    {
+        return buyBulletPanel.activeSelf;
     }
 
     public void UpdateUI()

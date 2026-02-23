@@ -7,9 +7,11 @@ public class InputHandlerV2 : MonoBehaviour
     public PlayerControllerV2 PlayerController;
     public ProjectileGun StandardProjectileGun;
     private InputAction _moveAction, _lookAction, _jumpAction, _attackAction, _sprintAction, _reloadAction, _switchBulletAction,
-                        _meleeAction, _blockAction, _dodgeAction, _pauseAction;
+                        _meleeAction, _blockAction, _dodgeAction, _pauseAction, _interactAction;
     private PlayerInput playerInput;
     public PauseMenu pauseMenu;
+    public BulletShopNPC bulletShopNPC;
+    public UpgradeMenuNPC upgradeMenuNPC;
 
     void Awake()
     {
@@ -24,6 +26,14 @@ public class InputHandlerV2 : MonoBehaviour
         if(pauseMenu == null)
         {
             pauseMenu = FindFirstObjectByType<PauseMenu>();
+        }
+        if (bulletShopNPC == null)
+        {
+            bulletShopNPC = FindFirstObjectByType<BulletShopNPC>();
+        }
+        if (upgradeMenuNPC == null)
+        {
+            upgradeMenuNPC = FindFirstObjectByType<UpgradeMenuNPC>();
         }
 
     }
@@ -44,6 +54,7 @@ public class InputHandlerV2 : MonoBehaviour
             _blockAction = playerInput.actions.FindAction("Block");
             _dodgeAction = playerInput.actions.FindAction("Dodge");
             _pauseAction = playerInput.actions.FindAction("Pause");
+            _interactAction = playerInput.actions.FindAction("Interact");
             _pauseAction.performed += OnPausePerformed;
             EnableInputs();
         }
@@ -51,10 +62,6 @@ public class InputHandlerV2 : MonoBehaviour
         {
             Debug.LogWarning("PlayerInput component not found on GameObject. Make sure an Input Actions asset or PlayerInput is present.");
         }
-
-        // Ensure actions are enabled
-        _moveAction?.Enable();
-        _lookAction?.Enable();
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -91,10 +98,15 @@ public class InputHandlerV2 : MonoBehaviour
         _switchBulletAction.performed -= OnSwitchBulletPerformed;
         _sprintAction.performed -= OnSprintPerformed;
         _sprintAction.canceled -= OnSprintCancelled;
+        _interactAction.performed -= OnInteractPerformed;
+        // Ensure actions are disabled
+        // _moveAction?.Disable();
+        _lookAction?.Disable();
     }
 
     public void EnableInputs()
     {
+        DisableInputs();
         _reloadAction.performed += OnReloadPerformed;
         _attackAction.performed += OnAttackPerformed;
         _meleeAction.performed += OnMeleePerformed;
@@ -106,6 +118,26 @@ public class InputHandlerV2 : MonoBehaviour
         _switchBulletAction.performed += OnSwitchBulletPerformed;
         _sprintAction.performed += OnSprintPerformed;
         _sprintAction.canceled += OnSprintCancelled;
+        _interactAction.performed += OnInteractPerformed;
+        // Ensure actions are enabled
+        _moveAction?.Enable();
+        _lookAction?.Enable();
+    }
+
+    public void DisableInputsForVendors()
+    {
+        _reloadAction.performed -= OnReloadPerformed;
+        _attackAction.performed -= OnAttackPerformed;
+        _meleeAction.performed -= OnMeleePerformed;
+        _meleeAction.canceled -= OnMeleeCancelled;
+        _blockAction.performed -= OnBlockingPerformed;
+        _blockAction.canceled -= OnBlockingCancelled;
+        _dodgeAction.performed -= OnDodgePerformed;
+        _jumpAction.performed -= OnJumpPerformed;
+        _switchBulletAction.performed -= OnSwitchBulletPerformed;
+        _sprintAction.performed -= OnSprintPerformed;
+        _sprintAction.canceled -= OnSprintCancelled;
+        _lookAction?.Disable();
     }
 
     private void OnJumpPerformed(InputAction.CallbackContext context)
@@ -179,5 +211,17 @@ public class InputHandlerV2 : MonoBehaviour
     private void OnPausePerformed(InputAction.CallbackContext context)
     {
         pauseMenu.PerformPause();
+    }
+
+    private void OnInteractPerformed(InputAction.CallbackContext context)
+    {
+        if (bulletShopNPC != null && bulletShopNPC.playerInRange)
+        {
+            bulletShopNPC.OnInteract();   
+        }
+        else if (upgradeMenuNPC != null && upgradeMenuNPC.playerInRange)
+        {
+            upgradeMenuNPC.OnInteract();   
+        }
     }
 }

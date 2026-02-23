@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIHandler : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class UIHandler : MonoBehaviour
     private AmmoUIHandler _ammoUIHandler;
     private BulletTypeUIHandler _bulletTypeUIHandler;
     private Image _crosshairImage;
+    private GameObject _interactPromptObject; 
 
     void Awake()
     {
@@ -17,6 +19,7 @@ public class UIHandler : MonoBehaviour
         _ammoUIHandler = GetComponentInChildren<AmmoUIHandler>();
         _bulletTypeUIHandler = GetComponentInChildren<BulletTypeUIHandler>();
         _crosshairImage = transform.Find("Crosshair").GetComponent<Image>();
+        _interactPromptObject = transform.Find("InteractPrompt").gameObject;
     }
 
     public void ToggleCrosshair(bool value)
@@ -69,6 +72,18 @@ public class UIHandler : MonoBehaviour
         else
         {
             Debug.LogWarning("BulletTypeUIHandler component not found.");
+        }
+    }
+
+    public void SetInteractPrompt(bool show)
+    {
+        if (_interactPromptObject != null)
+        {
+            _interactPromptObject.SetActive(show);
+        }
+        else
+        {
+            Debug.LogWarning("InteractPromptText component not found.");
         }
     }
 }

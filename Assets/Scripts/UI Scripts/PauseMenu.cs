@@ -97,6 +97,10 @@ public class PauseMenu : MonoBehaviour
         // Enable Crosshair
         UIHandler _uiHandler;
         _uiHandler = FindFirstObjectByType<UIHandler>();
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        
         if (_uiHandler)
         {
             _uiHandler.ToggleCrosshair(true);
@@ -127,9 +131,6 @@ public class PauseMenu : MonoBehaviour
         
         Time.timeScale = 1f;     
         isPaused = false;
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
     public void BackToMainMenu()

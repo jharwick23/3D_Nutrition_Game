@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BossSpawn : MonoBehaviour
 {
@@ -31,6 +32,15 @@ public class BossSpawn : MonoBehaviour
             if(newBoss == null)
             {
                 portal.SetActive(true);
+                // Check if current scene is "FirstLevel" and if so set playerpref firstlevelbossdefeated to true
+                if (SceneManager.GetActiveScene().name == "FirstLevel")
+                {
+                    PlayerPrefs.SetInt("FirstLevelCompleted", 1);
+                }
+                else if (SceneManager.GetActiveScene().name == "SecondLevel")
+                {
+                    PlayerPrefs.SetInt("SecondLevelCompleted", 1);
+                }
             }
         }
     }

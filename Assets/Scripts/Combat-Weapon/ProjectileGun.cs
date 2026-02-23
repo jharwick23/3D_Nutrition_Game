@@ -62,10 +62,16 @@ public class ProjectileGun : MonoBehaviour
     public void Shoot()
     {
         // -- Shooting Preconditions -- \\
-        if (!canShoot || currentAmmo <= 0 || isReloading || 
+        if (!canShoot || isReloading || 
             !PlayerController.GetHatEquipped() || PlayerController.GetBlocking()
             || PlayerController.GetMeleeAttacking())
             return;
+
+        if (currentAmmo <= 0)
+        {
+            StartReloading();
+            return;
+        }
 
         // -- Shoot Cooldown and Ammo Management -- \\
         StartCoroutine(ShootCooldown());
