@@ -38,4 +38,14 @@ public class AIEnemy : MonoBehaviour
             healthSlider.value = enemyHealth;
         }
     }
+
+    private void OnDestroy()
+    {
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        if (agent != null && agent.isActiveAndEnabled && agent.isOnNavMesh)
+        {
+            agent.isStopped = true;
+            agent.enabled = false;
+        }
+    }
 }

@@ -13,6 +13,7 @@ TagManager:
   - HUD
   - SideZone
   - StunWall
+  - Wall
   layers:
   - Default
   - TransparentFX

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Unity.VisualScripting;
 
 
 public class BossController : MonoBehaviour
@@ -26,17 +27,15 @@ public class BossController : MonoBehaviour
     public float playerDamage = 20f;
     public float knockbackForce = 6f;
     public float chargeCooldown = 2f;
-    private NavMeshAgent agent;
     private Transform player;
-    private bool isCharging = false;
     private Vector3 chargeDirection;
-    public Slider healthSlider;
-    [SerializeField]private AIEnemy newDamage;
+    public Slider HealthSlider;
+    private Rigidbody rbb;
 
     //Gets player automatically and begins phase one.
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+        rbb = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
         currentHealth = maxHealth;
@@ -47,12 +46,29 @@ public class BossController : MonoBehaviour
     }
 
     //Handles the charging movement and its interval
-    void Update()
+    void FixedUpdate()
     {
+        if (currentState == BossState.PhaseTwo)
+        {
+            currentState = BossState.Charging;
+            chargeDirection = player.position - rbb.position;
+            chargeDirection.y = 0f;
+            chargeDirection.Normalize();
+
+        }
         if (currentState == BossState.Charging)
         {
-            ChargeMovement();
+
+            Vector3 newPosition = rbb.position + chargeDirection * chargeSpeed * Time.fixedDeltaTime;
+            rbb.MovePosition(newPosition);
+
+            if (chargeDirection != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(chargeDirection);
+                rbb.MoveRotation(targetRotation);
+            }
         }
+
     }
 
     //Routine to shoot while in phase one
@@ -94,7 +110,7 @@ public class BossController : MonoBehaviour
                 SpawnMinion();
             }
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(2f);
         }
     }
 
@@ -130,17 +146,22 @@ public class BossController : MonoBehaviour
         TakeDamage(minionDamageToBoss);
     }
 
-    //Handles actual value damage change
+    //Handles actual value damage change, Adds new damage script for phase 2
     public void TakeDamage(int amount)
     {
         currentHealth -= amount;
-        healthSlider.value = currentHealth;
+        HealthSlider.value = currentHealth;
 
         if (currentHealth <= maxHealth / 2 && currentState == BossState.PhaseOne)
         {
             StopAllCoroutines();
-
-            newDamage.enabled = true;
+            
+            AIEnemy link = this.AddComponent<AIEnemy>();
+            link.enemyHealth = currentHealth;
+            link.healthSlider = HealthSlider;
+            link.healthSlider.maxValue = maxHealth;
+            link.healthSlider.value = currentHealth;
+            link.isCube = true;
             StartCoroutine(EnterPhaseTwo());
         }
     }
@@ -161,60 +182,20 @@ public class BossController : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        StartCoroutine(ChargeLoop());
-    }
-
-    //The initial charge loop, waits for a cooldown
-    IEnumerator ChargeLoop()
-    {
-        while (currentState == BossState.PhaseTwo)
-        {
-            yield return new WaitForSeconds(chargeCooldown);
-
-            StartCharge();
-            Debug.Log("Charge Started");
-        }
-    }
-
-    //Handles charge initialization
-    void StartCharge()
-    {
-        currentState = BossState.Charging;
-
-        agent.isStopped = true;
-
-        chargeDirection = (player.position - transform.position).normalized;
-
-        isCharging = true;
-    }
-
-    //Handles numerical charge speed
-    void ChargeMovement()
-    {
-        if (!isCharging) return;
-
-        transform.position += chargeDirection * chargeSpeed * Time.deltaTime;
-    }
-
-    //Sets charge flag to false
-    void StopCharge()
-    {
-        isCharging = false;
         currentState = BossState.PhaseTwo;
     }
 
-
     //Damage to player while also pushing away to avoid continuos damage, also handles stun if boss crashes
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        if (currentState != BossState.Charging)
+         if (currentState != BossState.Charging)
             return;
-
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            //Movement displacement to prevent continious damage TODO
+ 
+         if (other.gameObject.CompareTag("Player"))
+         {
+            //Movement displacement to prevent continious damage TODO / Maybe
             
-            PlayerControllerV2 playerController = collision.gameObject.GetComponent<PlayerControllerV2>();
+            PlayerControllerV2 playerController = other.gameObject.GetComponent<PlayerControllerV2>();
             if (playerController != null)
             {
                 if (!playerController.GetBlocking())
@@ -223,28 +204,26 @@ public class BossController : MonoBehaviour
                 }
             }
 
-            StopCharge();
-        }
-        else if (collision.gameObject.CompareTag("StunWall"))
-        {
-            StartCoroutine(Stun());
-        }
-        else 
-        {
-            StopCharge();
-        }
+            //TODO: Stun boss maybe, to give time window
+         }
+         else if (other.gameObject.CompareTag("StunWall"))
+         {
+             StartCoroutine(StunDuration(5f));
+         }
+         else if (other.gameObject.CompareTag("Wall"))
+         {
+            StartCoroutine(StunDuration(2f));
+         }
+    }
+
+    IEnumerator StunDuration(float time)
+    {
+        currentState = BossState.Stunned;
+        yield return new WaitForSeconds(time);
+        currentState = BossState.PhaseTwo;
     }
 
     //Simple time wait state change to display stun behavior
-    IEnumerator Stun()
-    {
-        isCharging = false;
-        currentState = BossState.Stunned;
-
-        yield return new WaitForSeconds(stunDuration);
-
-        currentState = BossState.PhaseTwo;
-    }
 
     //Destroys enemies when dead such as enemy reset via player death
     void OnDestroy()
