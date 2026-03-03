@@ -9,6 +9,7 @@ public class AIEnemy : MonoBehaviour
     public Slider healthSlider;
     public bool isCube;
     private DropService _dropService;
+    [SerializeField] private bool dropItems = true;
 
     void Awake()
     {
@@ -20,12 +21,20 @@ public class AIEnemy : MonoBehaviour
     {
         if (enemyHealth <= 0)
         {
-            _dropService.DropCoin(new Vector3(transform.position.x, transform.position.y, transform.position.z), 10); // Drop Coin
-            int val = Random.Range(0, 1);
-            if (val == 0)
+            if (dropItems)
             {
-                _dropService.DropHeal(new Vector3(transform.position.x, transform.position.y, transform.position.z), 20);
+                _dropService.DropCoin(new Vector3(transform.position.x, transform.position.y, transform.position.z), 10); // Drop Coin
+            
+                int val = Random.Range(0, 1);
+            
+                if (val == 0)
+            
+                {
+                    _dropService.DropHeal(new Vector3(transform.position.x, transform.position.y, transform.position.z), 20);          
+                }
+
             }
+            
             Destroy(gameObject);
         }
     }
