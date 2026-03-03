@@ -13053,15 +13053,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8698117372634448861, guid: d14bfc8888d9f6d4985cb6841c20b6a6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 53.887173
+      value: 470.7
       objectReference: {fileID: 0}
     - target: {fileID: 8698117372634448861, guid: d14bfc8888d9f6d4985cb6841c20b6a6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.65
+      value: 14.98
       objectReference: {fileID: 0}
     - target: {fileID: 8698117372634448861, guid: d14bfc8888d9f6d4985cb6841c20b6a6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 471.2865
+      value: 524.7
       objectReference: {fileID: 0}
     - target: {fileID: 8698117372634448861, guid: d14bfc8888d9f6d4985cb6841c20b6a6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -14092,6 +14092,10 @@ PrefabInstance:
       propertyPath: 'minionSpawnPoints.Array.data[2]'
       value: 
       objectReference: {fileID: 136362939}
+    - target: {fileID: 7230545712314835470, guid: 323ff76a2a55da4308b2a23dd6c4a0ec, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: c02c245970c0e0744b7fb8c1defc7666, type: 2}
     - target: {fileID: 8767631518617841092, guid: 323ff76a2a55da4308b2a23dd6c4a0ec, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
