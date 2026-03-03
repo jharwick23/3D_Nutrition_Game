@@ -14056,6 +14056,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4175948994300764878, guid: 323ff76a2a55da4308b2a23dd6c4a0ec, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 4579893436498421142, guid: 323ff76a2a55da4308b2a23dd6c4a0ec, type: 3}
       propertyPath: HealthSlider
       value: 
