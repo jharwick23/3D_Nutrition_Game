@@ -1,3 +1,4 @@
+using System.Data.SqlTypes;
 using UnityEngine;
 
 public class PlayerControllerV2 : MonoBehaviour
@@ -440,14 +441,26 @@ public class PlayerControllerV2 : MonoBehaviour
             // Delete all enemies in the scene
 
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("EnemyZones");
-
-            foreach (GameObject enemy in enemies) {
-                enemy.GetComponent<EnemySpawner>().ResetArea();
-                if (enemy.GetComponent<BossSpawn>() != null)
-                {
-                    enemy.GetComponent<BossSpawn>().ResetArea();
+            if (enemies != null || enemies.Length > 0)
+            {
+                foreach (GameObject enemy in enemies) {
+                
+                    if (enemy != null && enemy.GetComponent<EnemySpawner>())
+                    {
+                        enemy.GetComponent<EnemySpawner>().ResetArea();
+                    }
+                    else if(enemy != null && enemy.GetComponent<EnemySpawnerLevelTwo>())
+                    {
+                        enemy.GetComponent<EnemySpawnerLevelTwo>().ResetArea();
+                    }
+                    
+                    if (enemy.GetComponent<BossSpawn>() != null)
+                    {
+                        enemy.GetComponent<BossSpawn>().ResetArea();
+                    }
                 }
             }
+            
 
             GameObject zone = GameObject.FindGameObjectWithTag("SideZone");
             if (zone != null)

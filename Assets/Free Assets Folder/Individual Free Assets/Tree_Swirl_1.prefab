@@ -52,21 +52,52 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree_Swirl_1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 977cc56d3310b4d4a814b2ed99838588, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 977cc56d3310b4d4a814b2ed99838588, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5857865136923861451}
+      addedObject: {fileID: 6205534288181483441}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 977cc56d3310b4d4a814b2ed99838588, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8295929467462047145}
   m_SourcePrefab: {fileID: 100100000, guid: 977cc56d3310b4d4a814b2ed99838588, type: 3}
+--- !u!23 &7327741395079482138 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 977cc56d3310b4d4a814b2ed99838588, type: 3}
+  m_PrefabInstance: {fileID: 8246311199491348382}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &9129255532611037903 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 977cc56d3310b4d4a814b2ed99838588, type: 3}
   m_PrefabInstance: {fileID: 8246311199491348382}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &5857865136923861451
-BoxCollider:
+--- !u!205 &6205534288181483441
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9129255532611037903}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0.6764753, y: 3.67466, z: 0.43815064}
+  m_Size: 32
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.15070769
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 7327741395079482138}
+  m_Enabled: 1
+--- !u!136 &8295929467462047145
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -83,6 +114,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.605797, y: 7.34932, z: 1.6788754}
+  serializedVersion: 2
+  m_Radius: 2.07
+  m_Height: 8.73
+  m_Direction: 1
   m_Center: {x: 0.6764753, y: 3.67466, z: 0.43815064}
