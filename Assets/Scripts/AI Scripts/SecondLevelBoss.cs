@@ -31,6 +31,15 @@ public class BossController : MonoBehaviour
     private Vector3 chargeDirection;
     public Slider HealthSlider;
     private Rigidbody rbb;
+    public Animator animator;
+
+    void Awake()
+    {
+        if(!animator)
+        {
+            animator = GetComponent<Animator>();
+        }
+    }
 
     //Gets player automatically and begins phase one.
     void Start()
@@ -59,6 +68,9 @@ public class BossController : MonoBehaviour
         if (currentState == BossState.Charging)
         {
 
+            animator.SetBool("IsInjured", false);
+            animator.SetBool("IsRunning", true);
+
             Vector3 newPosition = rbb.position + chargeDirection * chargeSpeed * Time.fixedDeltaTime;
             rbb.MovePosition(newPosition);
 
@@ -67,6 +79,10 @@ public class BossController : MonoBehaviour
                 Quaternion targetRotation = Quaternion.LookRotation(chargeDirection);
                 rbb.MoveRotation(targetRotation);
             }
+        }
+        else if (currentState == BossState.Stunned)
+        {
+            animator.SetBool("IsInjured", true);
         }
 
     }
