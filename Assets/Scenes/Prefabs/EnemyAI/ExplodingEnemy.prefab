@@ -132,8 +132,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.1335983, y: 1.8659848, z: 2.151764}
+  m_Center: {x: -0.012653351, y: 0.33763164, z: 0.50413513}
 --- !u!65 &4743653597765903516
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -153,8 +153,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4, y: 2.6, z: 4}
-  m_Center: {x: 0, y: 0.84, z: 0}
+  m_Size: {x: 4, y: 2.817312, z: 4}
+  m_Center: {x: 0, y: 0.73134387, z: 0}
 --- !u!195 &6730715853130720839
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -165,7 +165,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: -334000983
   m_Radius: 0.5
-  m_Speed: 8
+  m_Speed: 16
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
