@@ -64,6 +64,7 @@ public class AiEnemyTurretCoke : MonoBehaviour
 
         }
 
+        //Checks if dead to prevent constant hit bug
         if (player.IsDead())
         {
             GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
@@ -74,6 +75,8 @@ public class AiEnemyTurretCoke : MonoBehaviour
             }
         }
     }
+
+    //Handles shooting, very high speeds to look like ray
     void Shoot()
     {
         // Spawn slightly in front of enemy
