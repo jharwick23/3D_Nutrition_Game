@@ -12,6 +12,7 @@ public class InputHandlerV2 : MonoBehaviour
     public PauseMenu pauseMenu;
     public BulletShopNPC bulletShopNPC;
     public UpgradeMenuNPC upgradeMenuNPC;
+    public TutorialManager tutorialManager;
 
     void Awake()
     {
@@ -35,7 +36,10 @@ public class InputHandlerV2 : MonoBehaviour
         {
             upgradeMenuNPC = FindFirstObjectByType<UpgradeMenuNPC>();
         }
-
+        if (tutorialManager == null)
+        {
+            tutorialManager = FindFirstObjectByType<TutorialManager>();
+        }
     }
     void Start()
     {
@@ -77,6 +81,11 @@ public class InputHandlerV2 : MonoBehaviour
 
         PlayerController.Move(movementVector);
         PlayerController.Rotate(lookVector);
+
+        // if(movementVector != Vector2.zero)
+        // {
+        //     tutorialManager.DoMovement();
+        // }
     }
 
     void OnDisable()

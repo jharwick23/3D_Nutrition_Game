@@ -15,6 +15,7 @@ public class ProjectileGun : MonoBehaviour
     public Camera PlayerCamera;
     public UIHandler _uiHandler;
     public PlayerControllerV2 PlayerController;
+    public TutorialManager tutorialManager;
     public float MaxDistance = 100f;
     public LayerMask raycastMask;
 
@@ -47,6 +48,10 @@ public class ProjectileGun : MonoBehaviour
         if (PlayerController == null)
         {
             PlayerController = FindFirstObjectByType<PlayerControllerV2>();
+        }
+        if (tutorialManager == null)
+        {
+            tutorialManager = FindFirstObjectByType<TutorialManager>();
         }
     }
     
@@ -120,6 +125,7 @@ public class ProjectileGun : MonoBehaviour
             GameObject bullet =  Instantiate(CarrotBulletPrefab, BulletSpawnPoint.position, Quaternion.LookRotation(shootDirection));
             bullet.GetComponent<CarrotBullet>().Init(shootDirection);
         }
+        tutorialManager.DoProjectileAttack();
     }
 
     public void LoadOwnedBullets()
@@ -159,6 +165,7 @@ public class ProjectileGun : MonoBehaviour
             PlayerController.SetHatEquipped(true);
             PlayerController._hatHandler.SetOnGun();
             PlayerController.SetLastShootingAttackTime();
+            tutorialManager.DoReloading();
             StartCoroutine(Reload());
         }
     }

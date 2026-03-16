@@ -14,6 +14,7 @@ public class PlayerControllerV2 : MonoBehaviour
     //private CameraControllerV2 CameraController;
     public UIHandler _uiHandler;
     private Animator _animator;
+    public TutorialManager tutorialManager;
 
     // Camera Variables
     [SerializeField] private Transform cameraRig; // rotates yaw
@@ -83,6 +84,10 @@ public class PlayerControllerV2 : MonoBehaviour
         if (Pan == null)
         {
             Pan = FindFirstObjectByType<PanController>();
+        }
+        if (tutorialManager == null)
+        {
+            tutorialManager = FindFirstObjectByType<TutorialManager>();
         }
     }
 
@@ -244,6 +249,7 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             _animator.SetTrigger("Dodge");
             _dodgePressed = false;
+            tutorialManager.DoDodge();
         }
         else
         {
@@ -316,12 +322,14 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             _animator.SetBool("JumpRequested", true);
             _verticalVelocity = JumpForce;
+            tutorialManager.DoJump();
         }
     }
 
     public void SetSprinting(bool isSprinting)
     {
         _isSprinting = isSprinting;
+        tutorialManager.DoMovement();
     }
 
     public void TakeDamage(float damageAmount)
