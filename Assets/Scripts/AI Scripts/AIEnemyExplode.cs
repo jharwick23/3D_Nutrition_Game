@@ -9,7 +9,7 @@ public class AIEnemyExplode : MonoBehaviour
     public float attackDistance;
     private NavMeshAgent agent;
     private float distance;
-    private bool attackInProg, playerInBox;
+    private bool attackInProg, playerInBox, routineCalled = false;
     private Collider playerCollider;
 
 
@@ -32,7 +32,12 @@ public class AIEnemyExplode : MonoBehaviour
         {
             agent.isStopped = true;
             attackInProg = true;
-            StartCoroutine(Explosion());
+            if (!routineCalled)
+            {
+                StartCoroutine(Explosion());
+                routineCalled = true;
+            }
+            
         }
         else
         {
@@ -56,6 +61,7 @@ public class AIEnemyExplode : MonoBehaviour
                 }
             }
         }
+        routineCalled = false;
         Destroy(gameObject);
     }
 

@@ -576,4 +576,16 @@ public class PlayerControllerV2 : MonoBehaviour
         // Grabs shieldbash variable
         return _shieldBash;
     }
+
+    public bool IsDead()
+    {
+        if (CurrentHealth <= 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
