@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class KnifeController : MonoBehaviour
 {
+    public TutorialManager tutorialManager;
     public Transform restKnifePoint;
     public Transform holdKnifePoint;
     public int knifeDamage = 25;
@@ -24,6 +25,10 @@ public class KnifeController : MonoBehaviour
 
     void Start()
     {
+        if (tutorialManager == null)
+        {
+            tutorialManager = FindFirstObjectByType<TutorialManager>();
+        }
         isOnHip = true;
     }
 
@@ -75,5 +80,7 @@ public class KnifeController : MonoBehaviour
         transform.SetParent(holdKnifePoint);
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
+        tutorialManager.DoMeleeAttack();
+        
     }
 }

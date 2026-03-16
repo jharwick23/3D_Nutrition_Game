@@ -9,6 +9,7 @@ public class PanController : MonoBehaviour
 
     private bool damageActive = false;
     private bool hasHitThisBash = false;
+    public TutorialManager tutorialManager;
     
     void Awake()
     {
@@ -26,6 +27,10 @@ public class PanController : MonoBehaviour
     void Start()
     {
         isOnBack = true;
+        if (tutorialManager == null)
+        {
+            tutorialManager = FindFirstObjectByType<TutorialManager>();
+        }
     }
 
     // Shield bash function (Only procs when hitting another collider)
@@ -68,6 +73,7 @@ public class PanController : MonoBehaviour
     public void EndBashDamage()
     {
         damageActive = false;
+        tutorialManager.DoBash();
     }
 
     public void SetPanOnBack()
@@ -84,5 +90,6 @@ public class PanController : MonoBehaviour
         transform.SetParent(holdPanPoint);
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
+        tutorialManager.DoBlock();
     }
 }

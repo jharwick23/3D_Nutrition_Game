@@ -6,6 +6,7 @@ public class PauseMenu : MonoBehaviour
 {
     [Header("UI")]
     [SerializeField] private GameObject pausePanel;
+    public TutorialManager tutorialManager;
     private bool isPaused = false;
 
     private void Awake()
@@ -25,6 +26,10 @@ public class PauseMenu : MonoBehaviour
     private void Start()
     {
         // Resume(); // Dont call resume, just disable PausePanel
+        if (tutorialManager == null)
+        {
+            tutorialManager = FindFirstObjectByType<TutorialManager>();
+        }
     }
 
     private void Update()
@@ -131,6 +136,11 @@ public class PauseMenu : MonoBehaviour
         
         Time.timeScale = 1f;     
         isPaused = false;
+    }
+
+    public void TutorialButtonClicked()
+    {
+        tutorialManager.TutorialButtonClicked();
     }
 
     public void BackToMainMenu()
