@@ -880,11 +880,11 @@ PrefabInstance:
       objectReference: {fileID: 2116034240}
     - target: {fileID: 3361188984381997923, guid: b34ed5f403da20c44b964238e1bae706, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3361188984381997923, guid: b34ed5f403da20c44b964238e1bae706, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6029187986069230084, guid: b34ed5f403da20c44b964238e1bae706, type: 3}
       propertyPath: m_Name
@@ -892,7 +892,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6029187986069230084, guid: b34ed5f403da20c44b964238e1bae706, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2746,11 +2746,11 @@ PrefabInstance:
       objectReference: {fileID: 2116034240}
     - target: {fileID: 3361188984381997923, guid: b34ed5f403da20c44b964238e1bae706, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3361188984381997923, guid: b34ed5f403da20c44b964238e1bae706, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6029187986069230084, guid: b34ed5f403da20c44b964238e1bae706, type: 3}
       propertyPath: m_Name
@@ -2758,7 +2758,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6029187986069230084, guid: b34ed5f403da20c44b964238e1bae706, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8958622929626323735, guid: b34ed5f403da20c44b964238e1bae706, type: 3}
       propertyPath: enemyHealth
