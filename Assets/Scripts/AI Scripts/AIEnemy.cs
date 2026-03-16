@@ -7,7 +7,7 @@ public class AIEnemy : MonoBehaviour
 
     public int enemyHealth = 100;
     public Slider healthSlider;
-    public bool isCube;
+    public bool isCube = true;
     private DropService _dropService;
     [SerializeField] private bool dropItems = true;
 
