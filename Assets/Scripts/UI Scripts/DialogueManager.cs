@@ -24,14 +24,14 @@ public class DialogueManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    void Start()
-    {
-        dialoguePanel.SetActive(false);
+    // void Start()
+    // {
+    //     dialoguePanel.SetActive(false);
 
-        var playerInput = FindFirstObjectByType<PlayerInput>();
-        interactAction = playerInput.actions.FindAction("Interact");
-        interactAction.performed += OnInteract;
-    }
+    //     // var playerInput = FindFirstObjectByType<PlayerInput>();
+    //     // interactAction = playerInput.actions.FindAction("Interact");
+    //     // interactAction.performed += OnInteract;
+    // }
 
     public void StartDialogue(string npcName, string[] lines)
     {
