@@ -34,6 +34,14 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        if (PlayerPrefs.GetInt("TutorialCompleted", 0) != 1)
+        {
+            StartTutorial();
+        }
+    }
+
     public void TutorialButtonClicked()
     {
         if (!_tutorialPanel.activeSelf)
@@ -131,13 +139,16 @@ public class TutorialManager : MonoBehaviour
         tutorialStep = 8;
 
         _tutorialTitleTMP.text = "Tutorial: COMPLETE";
-        _tutorialPromptTMP.text = "Well Done, you have completed the tutorial!";
+        _tutorialPromptTMP.text = "Well Done, you have completed the tutorial! You can always restart it in the 'ESC' Menu.";
         StartCoroutine(CompleteTutorial());
     }
 
     private IEnumerator CompleteTutorial()
     {
+        PlayerPrefs.SetInt("TutorialCompleted", 1);
+        PlayerPrefs.Save();
         yield return new WaitForSeconds(5);
+        
         EndTutorial();
     }
 }

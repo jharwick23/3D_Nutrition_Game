@@ -29,7 +29,7 @@ public class FirstLevelPortal : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && PlayerPrefs.GetInt("TutorialCompleted", 0) == 1)
         {
             SceneManager.LoadScene("FirstLevel");
         }
