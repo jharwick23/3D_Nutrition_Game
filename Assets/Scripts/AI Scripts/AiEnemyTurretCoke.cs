@@ -9,7 +9,7 @@ public class AiEnemyTurretCoke : MonoBehaviour
     [SerializeField] public float attackDistance;
     public LayerMask obstructionMask;
     [SerializeField] private float height = 1f, bobSpeed = 2f, bobAmount = 0.3f, rotationScaler = 1f, frontScale = 1.5f, bulletSpeed = 10f;
-    [SerializeField] private GameObject cokeBulletRay, nextTurret;
+    [SerializeField] private GameObject cokeBulletRay;
     private float fireRate = 0;
     [SerializeField] private float shootingRate;
     private PlayerControllerV2 player;
@@ -69,14 +69,11 @@ public class AiEnemyTurretCoke : MonoBehaviour
         if (player.IsDead())
         {
             GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
-
+            Debug.Log("Bullet Destroying");
             foreach (GameObject bullet in bullets)
             {
                 Destroy(bullet);
             }
-            AIEnemy script = GetComponent<AIEnemy>();
-            script.enemyHealth = 200;
-            script.UpdateUI();
         }
     }
 
@@ -95,11 +92,5 @@ public class AiEnemyTurretCoke : MonoBehaviour
         Destroy(bullet, 2f);
 
     }
-    private void OnDestroy()
-    {
-        if (nextTurret != null)
-        {
-            nextTurret.SetActive(true);
-        }
-    }
+    
 }

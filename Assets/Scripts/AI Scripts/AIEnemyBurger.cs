@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using UnityEngine.XR;
 using Random = UnityEngine.Random;
 
 public class AIEnemyBurger : MonoBehaviour
@@ -27,7 +28,7 @@ public class AIEnemyBurger : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         Vector3 origin = transform.position;
