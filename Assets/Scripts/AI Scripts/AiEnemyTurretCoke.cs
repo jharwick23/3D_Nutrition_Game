@@ -9,10 +9,11 @@ public class AiEnemyTurretCoke : MonoBehaviour
     [SerializeField] public float attackDistance;
     public LayerMask obstructionMask;
     [SerializeField] private float height = 1f, bobSpeed = 2f, bobAmount = 0.3f, rotationScaler = 1f, frontScale = 1.5f, bulletSpeed = 10f;
-    [SerializeField] private GameObject cokeBulletRay;
+    [SerializeField] private GameObject cokeBulletRay, nextTurret;
     private float fireRate = 0;
     [SerializeField] private float shootingRate;
     private PlayerControllerV2 player;
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,7 +32,7 @@ public class AiEnemyTurretCoke : MonoBehaviour
         float distance = Vector3.Distance(origin, target.position);
 
         //For Debuging to see if LOS is even being checked
-        Debug.DrawLine(origin, target.position, Color.red);
+        //Debug.DrawLine(origin, target.position, Color.red);
 
         LOS = false;
 
@@ -43,7 +44,7 @@ public class AiEnemyTurretCoke : MonoBehaviour
                 LOS = true;
             }
         }
-        Debug.Log(1f / Time.deltaTime);
+        //Debug.Log(1f / Time.deltaTime);
         
         //Attack pattern
         if (distance < attackDistance && LOS && !(player.IsDead()))
@@ -73,6 +74,9 @@ public class AiEnemyTurretCoke : MonoBehaviour
             {
                 Destroy(bullet);
             }
+            AIEnemy script = GetComponent<AIEnemy>();
+            script.enemyHealth = 200;
+            script.UpdateUI();
         }
     }
 
@@ -90,5 +94,12 @@ public class AiEnemyTurretCoke : MonoBehaviour
         rb.linearVelocity = direction * bulletSpeed;
         Destroy(bullet, 2f);
 
+    }
+    private void OnDestroy()
+    {
+        if (nextTurret != null)
+        {
+            nextTurret.SetActive(true);
+        }
     }
 }

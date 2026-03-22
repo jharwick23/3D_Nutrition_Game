@@ -4804,7 +4804,7 @@ MonoBehaviour:
   respawnAmount: 3
   respawnThreshold: 2
   spawningDone: 0
-  maxTotalSpawns: 20
+  maxTotalSpawns: 10
 --- !u!4 &313005744
 Transform:
   m_ObjectHideFlags: 0
@@ -19394,7 +19394,7 @@ MonoBehaviour:
   respawnAmount: 3
   respawnThreshold: 2
   spawningDone: 0
-  maxTotalSpawns: 20
+  maxTotalSpawns: 10
 --- !u!4 &1527785278
 Transform:
   m_ObjectHideFlags: 0
