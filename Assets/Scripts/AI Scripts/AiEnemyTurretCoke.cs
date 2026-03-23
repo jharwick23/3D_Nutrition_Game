@@ -13,6 +13,7 @@ public class AiEnemyTurretCoke : MonoBehaviour
     private float fireRate = 0;
     [SerializeField] private float shootingRate;
     private PlayerControllerV2 player;
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,7 +32,7 @@ public class AiEnemyTurretCoke : MonoBehaviour
         float distance = Vector3.Distance(origin, target.position);
 
         //For Debuging to see if LOS is even being checked
-        Debug.DrawLine(origin, target.position, Color.red);
+        //Debug.DrawLine(origin, target.position, Color.red);
 
         LOS = false;
 
@@ -43,7 +44,7 @@ public class AiEnemyTurretCoke : MonoBehaviour
                 LOS = true;
             }
         }
-        Debug.Log(1f / Time.deltaTime);
+        //Debug.Log(1f / Time.deltaTime);
         
         //Attack pattern
         if (distance < attackDistance && LOS && !(player.IsDead()))
@@ -68,7 +69,7 @@ public class AiEnemyTurretCoke : MonoBehaviour
         if (player.IsDead())
         {
             GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
-
+            Debug.Log("Bullet Destroying");
             foreach (GameObject bullet in bullets)
             {
                 Destroy(bullet);
@@ -91,4 +92,5 @@ public class AiEnemyTurretCoke : MonoBehaviour
         Destroy(bullet, 2f);
 
     }
+    
 }
