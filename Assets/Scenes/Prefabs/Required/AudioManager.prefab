@@ -46,7 +46,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.191
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -143,9 +143,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SFXManager
   audioSource: {fileID: 0}
-  knifeSwing: {fileID: 8300000, guid: c4d4f43ef4053e25e861471770eaa85f, type: 3}
-  damageTaken: {fileID: 8300000, guid: bb34b5fd04020dad98fbfd612cbf1459, type: 3}
-  death: {fileID: 8300000, guid: 42664ec0763cf98b99cf10a326ca3421, type: 3}
-  heal: {fileID: 8300000, guid: 9fb85c8e6e24901cc890f8f46f42cdae, type: 3}
-  shoot: {fileID: 8300000, guid: fde9abe5a4c15ad86a0b1e12e53c7d90, type: 3}
-  collectCoin: {fileID: 8300000, guid: 69d1c60dcde75e6448e889f14685a247, type: 3}
+  knifeSwing: {fileID: 8300000, guid: 97165b0389a325faabc6cffe10b65ad3, type: 3}
+  damageTaken: {fileID: 8300000, guid: e3cf4e182158453edb6c529d614e4c3c, type: 3}
+  death: {fileID: 8300000, guid: 0aef0bb6c165f51e1b3ee690ed69c246, type: 3}
+  heal: {fileID: 8300000, guid: 9bf829ed133a5b2948ba71c94ac03b92, type: 3}
+  shoot: {fileID: 8300000, guid: 744a2ad7ae7f3cf948ef98f654765f15, type: 3}
+  collectCoin: {fileID: 8300000, guid: 9c9d0416b1fe1b8b4af3ba1e7a1409e0, type: 3}
