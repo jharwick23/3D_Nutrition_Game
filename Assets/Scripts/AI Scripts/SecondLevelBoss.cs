@@ -11,7 +11,7 @@ public class BossController : MonoBehaviour
 {
     public enum BossState { PhaseOne, PhaseTwo, Charging, Stunned }
     public BossState currentState;
-    public int maxHealth = 100;
+    public int maxHealth = 1000;
     private int currentHealth;
     public GameObject[] minionPrefabs;
     public Transform[] minionSpawnPoints;
@@ -107,11 +107,11 @@ public class BossController : MonoBehaviour
 
         Vector3 direction = (player.position - firePointLeft.position).normalized;
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        rb.linearVelocity = direction * 10f;
+        rb.linearVelocity = direction * 100f;
 
         Vector3 direction2 = (player.position - firePointRight.position).normalized;
         Rigidbody rb2 = bullet2.GetComponent<Rigidbody>();
-        rb2.linearVelocity = direction2 * 10f;
+        rb2.linearVelocity = direction2 * 100f;
     }
 
     //Handles phase one minion enemy control

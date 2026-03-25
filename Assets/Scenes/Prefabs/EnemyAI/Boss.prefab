@@ -737,7 +737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossController
   currentState: 0
-  maxHealth: 100
+  maxHealth: 1000
   minionPrefabs:
   - {fileID: 0}
   - {fileID: 0}
@@ -757,4 +757,5 @@ MonoBehaviour:
   playerDamage: 20
   knockbackForce: 6
   chargeCooldown: 3
-  HealthSlider: {fileID: 0}
+  HealthSlider: {fileID: 6065741878811856381}
+  animator: {fileID: 0}
