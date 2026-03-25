@@ -61,11 +61,11 @@ public class SFXManager: MonoBehaviour
                 break;
 
             case SFXType.Death:
-                audioSource.PlayOneShot(death, 5f);
+                audioSource.PlayOneShot(death);
                 break;
 
             case SFXType.Heal:
-                audioSource.PlayOneShot(heal, 10f);
+                audioSource.PlayOneShot(heal, 0.75f);
                 break;
 
             case SFXType.Shoot:
