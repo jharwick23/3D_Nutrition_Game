@@ -46,8 +46,19 @@ public class AIEnemyExplode : MonoBehaviour
         }
     }
 
+    private void PlayExplosionSound()
+    {
+        if (!SFXManager.Instance)
+        {
+            Debug.LogError("SFXManager not found in scene");
+            return;
+        }
+
+        SFXManager.Instance.Play(SFXManager.SFXType.EnemyExploding);
+    }
+
     //Handles Damage explosion if player is in designated Area
-     private IEnumerator Explosion()
+    private IEnumerator Explosion()
     {
         yield return new WaitForSeconds(1.0f);
         if (playerInBox)
@@ -62,6 +73,7 @@ public class AIEnemyExplode : MonoBehaviour
             }
         }
         routineCalled = false;
+        PlayExplosionSound();
         Destroy(gameObject);
     }
 

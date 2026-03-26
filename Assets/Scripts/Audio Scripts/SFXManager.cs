@@ -11,7 +11,11 @@ public class SFXManager: MonoBehaviour
         Death,
         Heal,
         Shoot,
-        CollectCoin
+        CollectCoin,
+        SugarBullet,
+        SodaBullet,
+        CrashIntoWall,
+        EnemyExploding
     }
 
     [Header("Player")]
@@ -21,6 +25,10 @@ public class SFXManager: MonoBehaviour
     public AudioClip heal;
     public AudioClip shoot;
     public AudioClip collectCoin;
+    public AudioClip sugarBullet;
+    public AudioClip sodaBullet;
+    public AudioClip crashIntoWall;
+    public AudioClip enemyExploding;
 
     void Awake()
     {
@@ -74,6 +82,18 @@ public class SFXManager: MonoBehaviour
             
             case SFXType.CollectCoin:
                 audioSource.PlayOneShot(collectCoin);
+                break;
+            case SFXType.SugarBullet:
+                audioSource.PlayOneShot(sugarBullet);
+                break;
+            case SFXType.SodaBullet:
+                audioSource.PlayOneShot(sodaBullet);
+                break;
+            case SFXType.CrashIntoWall:
+                audioSource.PlayOneShot(crashIntoWall);
+                break;
+            case SFXType.EnemyExploding:
+                audioSource.PlayOneShot(enemyExploding, 10f);
                 break;
         }
     }

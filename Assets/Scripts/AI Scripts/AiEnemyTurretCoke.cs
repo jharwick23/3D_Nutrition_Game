@@ -90,7 +90,17 @@ public class AiEnemyTurretCoke : MonoBehaviour
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         rb.linearVelocity = direction * bulletSpeed;
         Destroy(bullet, 2f);
-
+        PlayShootingSound();
     }
     
+    void PlayShootingSound()
+    {
+        if (!SFXManager.Instance)
+        {
+            Debug.LogError("SFXManager not found in scene");
+            return;
+        }
+
+        SFXManager.Instance.Play(SFXManager.SFXType.SodaBullet);
+    }
 }

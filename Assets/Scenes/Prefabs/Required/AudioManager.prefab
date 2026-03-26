@@ -149,3 +149,7 @@ MonoBehaviour:
   heal: {fileID: 8300000, guid: 9bf829ed133a5b2948ba71c94ac03b92, type: 3}
   shoot: {fileID: 8300000, guid: 744a2ad7ae7f3cf948ef98f654765f15, type: 3}
   collectCoin: {fileID: 8300000, guid: 9c9d0416b1fe1b8b4af3ba1e7a1409e0, type: 3}
+  sugarBullet: {fileID: 8300000, guid: 0a291be673f84ba42ab24681a74f1573, type: 3}
+  sodaBullet: {fileID: 8300000, guid: 6245b99fa5529cf209e89042f3d33bc3, type: 3}
+  crashIntoWall: {fileID: 8300000, guid: 7132a5be00724d885b79e505750797cd, type: 3}
+  enemyExploding: {fileID: 8300000, guid: b1a9b9c0ece96300899e625bf4ffbbf8, type: 3}

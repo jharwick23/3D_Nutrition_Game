@@ -83,8 +83,31 @@ public class BossController : MonoBehaviour
         else if (currentState == BossState.Stunned)
         {
             animator.SetBool("IsInjured", true);
+            PlayCrashSound();
         }
 
+    }
+
+    void PlayCrashSound()
+    {
+        if (!SFXManager.Instance)
+        {
+            Debug.LogError("SFXManager not found in scene");
+            return;
+        }
+
+        SFXManager.Instance.Play(SFXManager.SFXType.CrashIntoWall);
+    }
+
+    void PlayShootingSound()
+    {
+        if (!SFXManager.Instance)
+        {
+            Debug.LogError("SFXManager not found in scene");
+            return;
+        }
+
+        SFXManager.Instance.Play(SFXManager.SFXType.SugarBullet);
     }
 
     //Routine to shoot while in phase one
@@ -112,6 +135,7 @@ public class BossController : MonoBehaviour
         Vector3 direction2 = (player.position - firePointRight.position).normalized;
         Rigidbody rb2 = bullet2.GetComponent<Rigidbody>();
         rb2.linearVelocity = direction2 * 100f;
+        PlayShootingSound();
     }
 
     //Handles phase one minion enemy control
