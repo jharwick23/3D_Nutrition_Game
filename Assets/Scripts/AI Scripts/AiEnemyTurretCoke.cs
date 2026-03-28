@@ -69,7 +69,7 @@ public class AiEnemyTurretCoke : MonoBehaviour
         if (player.IsDead())
         {
             GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
-            Debug.Log("Bullet Destroying");
+            //Debug.Log("Bullet Destroying");
             foreach (GameObject bullet in bullets)
             {
                 Destroy(bullet);

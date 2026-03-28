@@ -11,7 +11,7 @@ public class AIEnemyBurger : MonoBehaviour
     public Transform target;
     public float attackDistance;
     private NavMeshAgent agent;
-    private float distance;
+    //private float distance;
     public LayerMask obstructionMask;
     private bool LOS = false, following = false, routineCalled = false;
     [SerializeField] private Rigidbody rb;
@@ -70,12 +70,13 @@ public class AIEnemyBurger : MonoBehaviour
             Quaternion lookRotation = Quaternion.LookRotation(lookDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
 
-            
-            if (!routineCalled && rb.isKinematic)
-            {
-                StartCoroutine(Attack());
-                routineCalled = true;
-            }
+        
+            //Determiens routines by rigidbody and singleton routine handling
+        if (!routineCalled && rb.isKinematic)
+        {
+            StartCoroutine(Attack());
+            routineCalled = true;
+        }
             
             
         }
@@ -90,6 +91,7 @@ public class AIEnemyBurger : MonoBehaviour
         }
     }
 
+    //Handles Burger Attack Timer and agent and rigibody manipulation
     IEnumerator Attack()
     {
         yield return new WaitForSeconds(1.0f);
@@ -110,6 +112,7 @@ public class AIEnemyBurger : MonoBehaviour
         StartCoroutine(RecoverTime());
     }
 
+    //handles recovery time and rigidbody and agent manipulation
     IEnumerator RecoverTime()
     {
         yield return new WaitForSeconds(3.0f);
