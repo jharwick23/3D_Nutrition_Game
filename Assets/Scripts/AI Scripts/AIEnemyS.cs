@@ -49,6 +49,18 @@ public class AIEnemyS : MonoBehaviour
         GameObject bullet = Instantiate(sugarBullet, spawnPos, Quaternion.identity);
         Vector3 direction = (target.position - spawnPos).normalized;
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        rb.linearVelocity = direction * 10f;
+        rb.linearVelocity = direction * 50f;
+        PlayShootingSound();
+    }
+
+    void PlayShootingSound()
+    {
+        if (!SFXManager.Instance)
+        {
+            Debug.LogError("SFXManager not found in scene");
+            return;
+        }
+
+        SFXManager.Instance.Play(SFXManager.SFXType.SugarBullet);
     }
 }
