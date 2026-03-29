@@ -43,7 +43,7 @@ public class KnifeController : MonoBehaviour
         {
             hasHit = true;
 
-            enemy.enemyHealth -= knifeDamage;
+            enemy.DoDamage(knifeDamage);
             enemy.UpdateUI();
             enemy.DoDeath();
         }

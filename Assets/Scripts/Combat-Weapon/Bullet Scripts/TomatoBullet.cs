@@ -82,9 +82,9 @@ public class TomatoBullet : MonoBehaviour
         // Enemey damage logic
         bool isEnemy = collision.gameObject.CompareTag("Enemy");
 
-        if (isEnemy)
+        if (isEnemy && (collision.gameObject.GetComponent<AIEnemy>() != null))
         {
-            collision.gameObject.GetComponent<AIEnemy>().enemyHealth -= bulletDamage;
+            collision.gameObject.GetComponent<AIEnemy>().DoDamage(bulletDamage);
             collision.gameObject.GetComponent<AIEnemy>().UpdateUI();
             collision.gameObject.GetComponent<AIEnemy>().DoDeath();
         }

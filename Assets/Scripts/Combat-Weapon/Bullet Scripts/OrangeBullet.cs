@@ -84,7 +84,7 @@ public class OrangeBullet : MonoBehaviour
 
         if (isEnemy && (collision.gameObject.GetComponent<AIEnemy>() != null) )
         {
-            collision.gameObject.GetComponent<AIEnemy>().enemyHealth -= bulletDamage;
+            collision.gameObject.GetComponent<AIEnemy>().DoDamage(bulletDamage);
             collision.gameObject.GetComponent<AIEnemy>().UpdateUI();
             collision.gameObject.GetComponent<AIEnemy>().DoDeath();
         }

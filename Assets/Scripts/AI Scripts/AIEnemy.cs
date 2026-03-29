@@ -10,6 +10,7 @@ public class AIEnemy : MonoBehaviour
     public bool isCube = true;
     private DropService _dropService;
     [SerializeField] private bool dropItems = true;
+    private bool canDamage = true;
 
     void Awake()
     {
@@ -40,6 +41,23 @@ public class AIEnemy : MonoBehaviour
         }
     }
     
+    //Damage function to decoup function and allow added behaviors
+    public void DoDamage(int damage)
+    {
+        if (canDamage)
+        {
+            enemyHealth -= damage;
+        }
+        
+    }
+
+
+    //set bool if enemy can be damaged if immunity is needed
+    protected void SetImmunity(bool immunity)
+    {
+        canDamage = immunity;
+    }
+ 
     //Updates UI when for health tracking
     public void UpdateUI()
     {

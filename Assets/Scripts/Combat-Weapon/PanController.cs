@@ -50,7 +50,7 @@ public class PanController : MonoBehaviour
         if (enemy != null)
         {
             hasHitThisBash = true;
-            enemy.enemyHealth -= _shieldDamage;
+            enemy.DoDamage(_shieldDamage);
             enemy.UpdateUI();
             enemy.DoDeath();
         }
