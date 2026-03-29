@@ -549,6 +549,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d57d739e8735f254f90a9c38cb74d00d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  enemyHealth: 600
+  healthSlider: {fileID: 4516197549080615217}
+  isCube: 1
+  dropItems: 1
   slamTimer: 3
   shootTimer: 8
   spawnTimer: 10

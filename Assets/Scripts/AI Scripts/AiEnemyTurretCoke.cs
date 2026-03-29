@@ -1,7 +1,7 @@
 using UnityEngine;
 using static UnityEditor.PlayerSettings;
 
-public class AiEnemyTurretCoke : MonoBehaviour
+public class AiEnemyTurretCoke : AIEnemy
 {
     private bool LOS;
     public Transform target;

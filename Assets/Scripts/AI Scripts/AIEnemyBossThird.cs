@@ -4,7 +4,7 @@ using UnityEngine;
 using Unity.VisualScripting;
 using UnityEngine.Rendering;
 
-public class AIEnemyBossThird : MonoBehaviour
+public class AIEnemyBossThird : AIEnemy
 {
     private AIEnemy healthScript;
     private enum bossStage {FirstPhase, SecondPhase }

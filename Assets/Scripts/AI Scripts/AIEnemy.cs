@@ -23,6 +23,7 @@ public class AIEnemy : MonoBehaviour
         {
             if (dropItems)
             {
+                OnDeathEvent();
                 _dropService.DropCoin(new Vector3(transform.position.x, transform.position.y, transform.position.z), 10); // Drop Coin
             
                 int val = Random.Range(0, 1);
@@ -48,8 +49,14 @@ public class AIEnemy : MonoBehaviour
         }
     }
 
+    protected virtual void OnDeathEvent()
+    {
+
+    }
+
     private void OnDestroy()
     {
+
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
         if (agent != null && agent.isActiveAndEnabled && agent.isOnNavMesh)
         {
@@ -57,4 +64,5 @@ public class AIEnemy : MonoBehaviour
             agent.enabled = false;
         }
     }
+
 }
