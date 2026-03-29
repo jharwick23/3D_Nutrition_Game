@@ -12,17 +12,23 @@ public class AOEDamage : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //Routine to killitself afterwards
         StartCoroutine(Tick());
     }
 
+    //Call function for damdage if it enters trigger
     private void OnTriggerEnter(Collider other)
     {
         TryDealDamage(other.gameObject);
     }
+
+    //Calls same damage function if collider is still inside
     private void OnTriggerStay(Collider other)
     {
         TryDealDamage(other.gameObject);
     }
+
+    //Does damage over a second interval that can be modified
     void TryDealDamage(GameObject other)
     {
         if (!other.CompareTag("Player")) return;
@@ -37,6 +43,8 @@ public class AOEDamage : MonoBehaviour
             }
         }
     }
+
+    //Tick that after a timer goes off, it destroys itself
     IEnumerator Tick()
     {
         yield return new WaitForSeconds(timer);

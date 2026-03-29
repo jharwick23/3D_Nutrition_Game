@@ -49,11 +49,13 @@ public class AIEnemy : MonoBehaviour
         }
     }
 
+    //New protected event for enemies outside to be able to inherit and do extra functions: inheritance
     protected virtual void OnDeathEvent()
     {
 
     }
 
+    //Handles memory leak with nav mesh agents
     private void OnDestroy()
     {
 

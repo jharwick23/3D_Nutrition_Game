@@ -7,16 +7,20 @@ public class ParticleDamage : MonoBehaviour
 
     private float lastDamageTime = 0f;
 
+
+    //Calls particle damage if object enters
     void OnParticleCollision(GameObject other)
     {
         TryDealDamage(other);
     }
 
+    //Calls damage if object is still inside object
     private void OnTriggerStay(Collider other)
     {
         TryDealDamage(other.gameObject);
     }
 
+    //Does damage over a second of time 
     void TryDealDamage(GameObject other)
     {
         if (!other.CompareTag("Player")) return;

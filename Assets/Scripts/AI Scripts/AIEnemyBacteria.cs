@@ -1,8 +1,10 @@
 using System.Collections;
+using System.Net;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.UI.Image;
+
 
 public class AIEnemyBacteria : AIEnemy
 {
@@ -12,6 +14,7 @@ public class AIEnemyBacteria : AIEnemy
     private NavMeshAgent agent;
     private bool LOS = false, following = false, coreroutineCalled = false;
     private float distance;
+    private PlayerControllerV2 playerCont;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -21,6 +24,8 @@ public class AIEnemyBacteria : AIEnemy
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         GameObject camaratarget = player.transform.GetChild(2).GetChild(0).gameObject;
         target = camaratarget.transform;
+
+        playerCont = FindAnyObjectByType<PlayerControllerV2>();
     }
 
     // Update is called once per frame
@@ -49,6 +54,7 @@ public class AIEnemyBacteria : AIEnemy
 
         distance = Vector3.Distance(agent.transform.position, target.position);
 
+        //Does shooting if in line of sight or moves, prevents bullet to parent collision
         if (LOS && distance < attackDistance) 
         {
             if (!coreroutineCalled)
@@ -66,8 +72,20 @@ public class AIEnemyBacteria : AIEnemy
         pos.y = height;
         transform.position = pos;
         LookAtPlayer();
+
+        //Checks if dead to prevent constant hit bug
+        if (playerCont.IsDead())
+        {
+            GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
+            //Debug.Log("Bullet Destroying");
+            foreach (GameObject bullet in bullets)
+            {
+                Destroy(bullet);
+            }
+        }
     }
 
+    //Makes enemy look at player constantly after it has already had LOS once
     private void LookAtPlayer()
     {
         Vector3 direction = (target.position - transform.position).normalized;
@@ -75,6 +93,7 @@ public class AIEnemyBacteria : AIEnemy
         transform.rotation = Quaternion.LookRotation(direction);
     }
 
+    //Shooting function for enemy, lobbing behavior
     IEnumerator Shoot()
     {
         Vector3 spawnPos = transform.position + transform.forward * 1.5f;
@@ -92,4 +111,5 @@ public class AIEnemyBacteria : AIEnemy
         yield return new WaitForSeconds(shootCooldown);
         coreroutineCalled = false;
     }
+
 }

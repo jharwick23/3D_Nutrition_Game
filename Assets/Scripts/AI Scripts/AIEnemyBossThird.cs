@@ -104,6 +104,8 @@ public class AIEnemyBossThird : AIEnemy
         
     }
 
+
+    //Handles minion checking for more spawning
     IEnumerator MinionMaintanence()
     {
         while (true)
@@ -200,6 +202,8 @@ public class AIEnemyBossThird : AIEnemy
         currentAttack = bossAttack.NoAttack;
         StartCoroutine(SetTimer(shootTimer, "shoot"));
     }
+    
+    //Enables and disables the liquid rays if grease
     private void LiquidHandling(bool set)
     {
         bullet.SetActive(set);

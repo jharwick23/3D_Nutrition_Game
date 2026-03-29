@@ -115,6 +115,8 @@ public class AiEnemyVirus : AIEnemy
         
     }
     
+    
+    //Dash attack routine that sends the enemy forward
     IEnumerator DashAttack() 
     {
         
@@ -131,11 +133,14 @@ public class AiEnemyVirus : AIEnemy
         yield return new WaitForSeconds(interval);
         dashCooldown = false;
     }
+
+    //function that is called when enemies are spawned so they dont spawn more, disabling infinite spawning
     public void SetSpawn()
     {
         SubSpawn = false;
     }
 
+    //Funciton to spawn enemies
     private void SpawnEnemies()
     {
         if (SubSpawn == true)
@@ -155,6 +160,7 @@ public class AiEnemyVirus : AIEnemy
         
     }
 
+    //Inherited function that spawns enemies when death
     protected override void OnDeathEvent()
     {
         SpawnEnemies();
