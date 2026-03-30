@@ -135,7 +135,7 @@ Rigidbody:
     serializedVersion: 2
     m_Bits: 0
   m_ImplicitCom: 1
-  m_ImplicitTensor: 1
+  m_ImplicitTensor: 0
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
@@ -153,9 +153,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ca51b33682e6f644a45860a02d5a31c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TomatoBullet
-  Speed: 100
-  bulletDamage: 25
-  BulletDrop: 5
+  Speed: 25
+  bulletDamage: 50
+  BulletDrop: 30
   LifeTime: 5
   maxAmmo: 24
   timeBetweenShooting: 1

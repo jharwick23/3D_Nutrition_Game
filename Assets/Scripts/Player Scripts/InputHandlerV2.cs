@@ -13,6 +13,7 @@ public class InputHandlerV2 : MonoBehaviour
     public BulletShopNPC bulletShopNPC;
     public UpgradeMenuNPC upgradeMenuNPC;
     public TutorialManager tutorialManager;
+    private bool inputsEnabled = true;
 
     void Awake()
     {
@@ -82,6 +83,11 @@ public class InputHandlerV2 : MonoBehaviour
         PlayerController.Move(movementVector);
         PlayerController.Rotate(lookVector);
 
+        if (_attackAction != null && _attackAction.IsPressed() && inputsEnabled)
+        {
+            OnAttackPerformed();
+        }
+
         // if(movementVector != Vector2.zero)
         // {
         //     tutorialManager.DoMovement();
@@ -96,8 +102,9 @@ public class InputHandlerV2 : MonoBehaviour
 
     public void DisableInputs()
     {
+        inputsEnabled = false;
         _reloadAction.performed -= OnReloadPerformed;
-        _attackAction.performed -= OnAttackPerformed;
+        // _attackAction.performed -= OnAttackPerformed;
         _meleeAction.performed -= OnMeleePerformed;
         _meleeAction.canceled -= OnMeleeCancelled;
         _blockAction.performed -= OnBlockingPerformed;
@@ -116,8 +123,9 @@ public class InputHandlerV2 : MonoBehaviour
     public void EnableInputs()
     {
         DisableInputs();
+        inputsEnabled = true;
         _reloadAction.performed += OnReloadPerformed;
-        _attackAction.performed += OnAttackPerformed;
+        // _attackAction.performed += OnAttackPerformed;
         _meleeAction.performed += OnMeleePerformed;
         _meleeAction.canceled += OnMeleeCancelled;
         _blockAction.performed += OnBlockingPerformed;
@@ -135,8 +143,9 @@ public class InputHandlerV2 : MonoBehaviour
 
     public void DisableInputsForVendors()
     {
+        inputsEnabled = false;
         _reloadAction.performed -= OnReloadPerformed;
-        _attackAction.performed -= OnAttackPerformed;
+        // _attackAction.performed -= OnAttackPerformed;
         _meleeAction.performed -= OnMeleePerformed;
         _meleeAction.canceled -= OnMeleeCancelled;
         _blockAction.performed -= OnBlockingPerformed;
@@ -154,7 +163,7 @@ public class InputHandlerV2 : MonoBehaviour
         PlayerController.Jump();
     }
 
-    private void OnAttackPerformed(InputAction.CallbackContext context)
+    private void OnAttackPerformed()
     {
         if(PlayerController.GetBlocking())
         {

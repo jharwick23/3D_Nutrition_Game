@@ -11,11 +11,13 @@ public class BuyBulletsMenu : MonoBehaviour
     public TextMeshProUGUI BananaButtonText;
     public TextMeshProUGUI LemonButtonText;
     public TextMeshProUGUI CarrotButtonText;
+    public TextMeshProUGUI DescriptionText;
 
     private void Start()
     {
         _projectileGun ??= FindFirstObjectByType<ProjectileGun>();
         _playerController ??= FindFirstObjectByType<PlayerControllerV2>();
+        DescriptionText.text = "Select a bullet to see its description.";
         UpdateUI();
     }
 
@@ -200,5 +202,31 @@ public class BuyBulletsMenu : MonoBehaviour
         PlayerPrefs.DeleteKey("Bullet_Carrot");
         _projectileGun.LoadOwnedBullets();
         UpdateUI();
+    }
+
+    public void SelectBulletDescription(string bulletType)
+    {
+        // Build string
+        switch (bulletType)
+        {
+            case "Orange":
+                DescriptionText.text = "Orange:\n\n- Low damage\n\n- Short cooldown\n\n- High speed\n\n- Short range";
+                break;
+            case "Tomato":
+                DescriptionText.text = "Tomato:\n\n- Moderate damage\n\n- Long cooldown\n\n- Moderate speed\n\n- Moderate range";
+                break;
+            case "Banana":
+                DescriptionText.text = "Banana:\n\n- Low damage\n\n- Short cooldown\n\n- High speed\n\n- Short range";
+                break;
+            case "Lemon":
+                DescriptionText.text = "Lemon:\n\n- High damage\n\n- Short cooldown\n\n- Low speed\n\n- Long range";
+                break;
+            case "Carrot":
+                DescriptionText.text = "Carrot:\n\n- Moderate damage\n\n- Short cooldown\n\n- Moderate speed\n\n- Long range";
+                break;
+            default:
+                DescriptionText.text = "";
+                break;
+        }
     }
 }

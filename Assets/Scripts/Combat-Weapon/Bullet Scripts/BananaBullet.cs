@@ -6,7 +6,7 @@ public class BananaBullet : MonoBehaviour
     private Rigidbody rb;
     public float Speed = 100f;
     public int bulletDamage = 10;
-    public float BulletDrop = 5f; // Gravity 
+    public float BulletDrop = 0f; // Gravity 
     public float LifeTime = 5f;
     public int maxAmmo = 24;
     public float timeBetweenShooting = 0.2f;
