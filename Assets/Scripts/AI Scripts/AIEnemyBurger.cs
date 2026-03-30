@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using UnityEngine.XR;
 using Random = UnityEngine.Random;
 
 public class AIEnemyBurger : MonoBehaviour
@@ -12,7 +13,7 @@ public class AIEnemyBurger : MonoBehaviour
     private NavMeshAgent agent;
     private float distance;
     public LayerMask obstructionMask;
-    private bool LOS = false, attacking = false, routineCalled = false;
+    private bool LOS = false, following = false, routineCalled = false;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float forwardForce, upForce, randomForceModifier;
 
@@ -27,7 +28,7 @@ public class AIEnemyBurger : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         Vector3 origin = transform.position;
@@ -44,8 +45,15 @@ public class AIEnemyBurger : MonoBehaviour
             if (hit.transform.CompareTag("Player"))
             {
                 LOS = true;
+                following = true;
             }
         }
+
+        if (!following)
+        {
+            return;
+        }
+
 
         //Attack pattern
         if (distance < attackDistance && LOS)
