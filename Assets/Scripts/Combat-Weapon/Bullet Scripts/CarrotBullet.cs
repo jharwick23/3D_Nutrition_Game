@@ -9,7 +9,7 @@ public class CarrotBullet : MonoBehaviour
     public float BulletDrop = 0f; // Gravity 
     public float LifeTime = 5f;
     public int maxAmmo = 24;
-    public float timeBetweenShooting = 0.2f;
+    public float timeBetweenShooting = 1.2f;
     public GameObject ImpactDecalPrefab;
     public ProjectileSFX projectileSFX;
 

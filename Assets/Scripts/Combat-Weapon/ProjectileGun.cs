@@ -83,7 +83,7 @@ public class ProjectileGun : MonoBehaviour
         ShootSound();
         currentAmmo--;
         _uiHandler.UpdateAmmoUI(currentAmmo.ToString() + " / Inf");
-
+        
         // -- Shooting Logic -- \\
         Ray ray = PlayerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         Vector3 targetPoint;
