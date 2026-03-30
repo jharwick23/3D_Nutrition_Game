@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2936036202133490726}
   - component: {fileID: 696671488969139184}
   - component: {fileID: 7957408227849305800}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: CokeBullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}

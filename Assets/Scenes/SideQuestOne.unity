@@ -312,7 +312,7 @@ GameObject:
   - component: {fileID: 41692031}
   - component: {fileID: 41692030}
   m_Layer: 0
-  m_Name: SpawnPoints
+  m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1366,21 +1366,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1453485022173259434, guid: eb4b38db67a56dc469a2c2aafcc36add, type: 3}
   m_PrefabInstance: {fileID: 289829421}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &218385594
+--- !u!1 &218385594 stripped
 GameObject:
-  m_ObjectHideFlags: 8
   m_CorrespondingSourceObject: {fileID: 4532818023934514606, guid: 9714f6b3803db65f480c47e31bc96b46, type: 3}
   m_PrefabInstance: {fileID: 192722701}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component: []
-  m_Layer: 0
-  m_Name: 'PF_PortalGate (Missing Prefab with guid: 9714f6b3803db65f480c47e31bc96b46)'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1001 &234819895
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2901,7 +2891,7 @@ GameObject:
   - component: {fileID: 448155217}
   - component: {fileID: 448155216}
   m_Layer: 0
-  m_Name: SpawnPoints
+  m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9163,7 +9153,7 @@ GameObject:
   - component: {fileID: 1407632630}
   - component: {fileID: 1407632629}
   m_Layer: 0
-  m_Name: Spawner
+  m_Name: Cube
   m_TagString: SideZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14029,7 +14019,7 @@ GameObject:
   - component: {fileID: 2093102628}
   - component: {fileID: 2093102627}
   m_Layer: 0
-  m_Name: SpawnPoints
+  m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
