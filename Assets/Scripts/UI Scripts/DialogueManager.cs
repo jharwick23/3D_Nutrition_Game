@@ -46,6 +46,29 @@ public class DialogueManager : MonoBehaviour
         ShowLine();
 
         // Lock player input feel (simple version)
+        // Disable Crosshair
+        UIHandler _uiHandler;
+        _uiHandler = FindFirstObjectByType<UIHandler>();
+        if (_uiHandler)
+        {
+            _uiHandler.ToggleCrosshair(false);
+        }
+        else
+        {
+            Debug.Log("UI Handler was not set!");
+        }
+
+        // Disable Inputs
+        InputHandlerV2 inputHandler = FindFirstObjectByType<InputHandlerV2>();
+        if (inputHandler)
+        {
+            inputHandler.DisableInputsForVendors();
+        }
+        else
+        {
+            Debug.Log("Inputhandler not found!");
+        }
+
         Time.timeScale = 0f;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -100,6 +123,29 @@ public class DialogueManager : MonoBehaviour
         if (dialoguePanel != null)
             dialoguePanel.SetActive(false);
 
+        // Enable Crosshair
+        UIHandler _uiHandler;
+        _uiHandler = FindFirstObjectByType<UIHandler>();
+        if (_uiHandler)
+        {
+            _uiHandler.ToggleCrosshair(true);
+        }
+        else
+        {
+            Debug.Log("UI Handler was not set!");
+        }
+
+        // Enable Inputs
+        InputHandlerV2 inputHandler = FindFirstObjectByType<InputHandlerV2>();
+        if (inputHandler)
+        {
+            inputHandler.EnableInputs();
+        }
+        else
+        {
+            Debug.Log("Inputhandler not found!");
+        }
+        
         Time.timeScale = 1f;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;

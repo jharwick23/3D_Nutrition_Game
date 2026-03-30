@@ -5,11 +5,11 @@ public class OrangeBullet : MonoBehaviour
 {
     private Rigidbody rb;
     public float Speed = 100f;
-    public int bulletDamage = 10;
+    public int bulletDamage = 20;
     public float BulletDrop = 5f; // Gravity 
     public float LifeTime = 5f;
     public int maxAmmo = 24;
-    public float timeBetweenShooting = 0.2f;
+    public float timeBetweenShooting = 0.5f;
     public GameObject ImpactDecalPrefab;
     public ProjectileSFX projectileSFX;
 

@@ -4,9 +4,9 @@ using UnityEngine;
 public class LemonBullet : MonoBehaviour
 {
     private Rigidbody rb;
-    public float Speed = 100f;
-    public int bulletDamage = 50;
-    public float BulletDrop = 5f; // Gravity 
+    public float Speed = 500f;
+    public int bulletDamage = 12;
+    public float BulletDrop = 2f; // Gravity 
     public float LifeTime = 5f;
     public int maxAmmo = 24;
     public float timeBetweenShooting = 0.2f;
