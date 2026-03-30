@@ -15,12 +15,12 @@ public class BlockingPlacementBehavior : StateMachineBehaviour
     //}
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        if(animator.GetComponent<PlayerControllerV2>().GetShieldBash() == false){
-            animator.GetComponent<PlayerControllerV2>().Pan.SetPanOnBack();
-        }
-    }
+    // override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    // {
+    //     if(animator.GetComponent<PlayerControllerV2>().GetShieldBash() == false){
+    //         animator.GetComponent<PlayerControllerV2>().Pan.SetPanOnBack();
+    //     }
+    // }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
