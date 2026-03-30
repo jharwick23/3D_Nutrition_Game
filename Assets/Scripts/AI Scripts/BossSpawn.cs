@@ -41,6 +41,11 @@ public class BossSpawn : MonoBehaviour
                 {
                     PlayerPrefs.SetInt("SecondLevelCompleted", 1);
                 }
+                else if (SceneManager.GetActiveScene().name == "ThirdLevel")
+                {
+                    PlayerPrefs.SetInt("ThirdLevelCompleted", 1);
+                }
+                PlayerPrefs.Save();
             }
         }
     }

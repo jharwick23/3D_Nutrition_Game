@@ -1,19 +1,30 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class NPCPlaceholder : MonoBehaviour
+public class StarterNPC : MonoBehaviour
 {
     public string npcName = "NPC";
     [TextArea] public string[] dialogueLines;
 
     private bool playerInRange;
     private InputAction interactAction;
+    public UIHandler uiHandler;
+
+    void Start()
+    {
+        uiHandler = FindFirstObjectByType<UIHandler>();
+        if (uiHandler == null)
+        {
+            Debug.Log("UIHandler not found!");
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (!other.transform.root.CompareTag("Player")) return;
 
         playerInRange = true;
+        uiHandler.SetInteractPrompt(true);
 
         var playerInput = other.transform.root.GetComponentInChildren<PlayerInput>();
         interactAction = playerInput != null ? playerInput.actions.FindAction("Interact", false) : null;
@@ -25,6 +36,7 @@ public class NPCPlaceholder : MonoBehaviour
     {
         if (!other.transform.root.CompareTag("Player")) return;
         playerInRange = false;
+        uiHandler.SetInteractPrompt(false);
     }
 
     private void Update()
