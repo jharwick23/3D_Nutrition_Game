@@ -96,7 +96,7 @@ public class AIEnemyBacteria : AIEnemy
     //Shooting function for enemy, lobbing behavior
     IEnumerator Shoot()
     {
-        Vector3 spawnPos = transform.position + transform.forward * 1.5f;
+        Vector3 spawnPos = transform.position + transform.forward * 3.5f;
         spawnPos.y += 1f;
         GameObject bullet = Instantiate(aoeBullet, spawnPos, Quaternion.identity);
         Rigidbody rbb = bullet.GetComponent<Rigidbody>();
