@@ -2192,11 +2192,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1430954838916978884, guid: 971f932bb32e33f3682a3d7c64264fc2, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1430954838916978884, guid: 971f932bb32e33f3682a3d7c64264fc2, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1986235517804599024, guid: 971f932bb32e33f3682a3d7c64264fc2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2887,7 +2887,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1282676086327093282, guid: 5b61c2a420f4d674998620f2122ce662, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1282676086327093282, guid: 5b61c2a420f4d674998620f2122ce662, type: 3}
       propertyPath: m_TagString
@@ -2959,11 +2959,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8794905235079208026, guid: 5b61c2a420f4d674998620f2122ce662, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8794905235079208026, guid: 5b61c2a420f4d674998620f2122ce662, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2984,7 +2984,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 752927871117156641, guid: 46e9351690db0a44d9f9d5517248469c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5492281647009890819, guid: 46e9351690db0a44d9f9d5517248469c, type: 3}
       propertyPath: firstSetOfSickRays
@@ -3056,11 +3056,11 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: cee7dacbd02f9be11bf8294f6ebcebc2, type: 2}
     - target: {fileID: 8668342688003194248, guid: 46e9351690db0a44d9f9d5517248469c, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8668342688003194248, guid: 46e9351690db0a44d9f9d5517248469c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

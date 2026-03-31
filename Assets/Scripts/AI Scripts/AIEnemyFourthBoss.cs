@@ -16,6 +16,7 @@ public class AIEnemyFourthBoss : AIEnemy
     [SerializeField] private GameObject SecondPhaseSwitchSpot;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip liquidAudio;
+    [SerializeField] private Animator animator;
     private bool easyRaySwicth = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -114,6 +115,7 @@ public class AIEnemyFourthBoss : AIEnemy
             easyRaySwicth = !easyRaySwicth;
             firstSetOfSickRays.SetActive(easyRaySwicth);
             secondSetOfSickRays.SetActive(!easyRaySwicth);
+            animator.SetTrigger("ThirdPhaseSummoning");
             yield return new WaitForSeconds(liquidChangeRate);
         }
     }
