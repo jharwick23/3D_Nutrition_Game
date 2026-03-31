@@ -508,6 +508,7 @@ MonoBehaviour:
   bullet: {fileID: 7946557371837356021}
   audioSource: {fileID: 0}
   greaseSound: {fileID: 8300000, guid: 3d3dcbddae705d65eb9b450835a329a9, type: 3}
+  animator: {fileID: 7098359212327931201}
 --- !u!114 &8642550105926578781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -540,8 +541,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 3.1395178, y: 2, z: 3.6739283}
+  m_Center: {x: 0.16071558, y: 0, z: -0.07269001}
 --- !u!82 &2179203445684959962
 AudioSource:
   m_ObjectHideFlags: 0
@@ -844,6 +845,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: a713af6ad10721eb78f6bf225f56f884, type: 2}
+    - target: {fileID: 5866666021909216657, guid: cc53399dee1d47d4e9e339bee4c2fe25, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -852,6 +857,11 @@ PrefabInstance:
 --- !u!4 &3774681472415323963 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: cc53399dee1d47d4e9e339bee4c2fe25, type: 3}
+  m_PrefabInstance: {fileID: 3740492041875697872}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7098359212327931201 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: cc53399dee1d47d4e9e339bee4c2fe25, type: 3}
   m_PrefabInstance: {fileID: 3740492041875697872}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5906385793878004916

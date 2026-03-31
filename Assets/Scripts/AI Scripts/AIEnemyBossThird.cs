@@ -20,6 +20,7 @@ public class AIEnemyBossThird : AIEnemy
     [SerializeField] private GameObject enemy, bullet;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip greaseSound;
+    [SerializeField] private Animator animator;
     
 
     // initialized the boss
@@ -84,6 +85,20 @@ public class AIEnemyBossThird : AIEnemy
                 }
             }
         }
+
+        // Check if Boss is grounded for jump
+        float radius = 0.5f;
+        float distance = 1.5f;
+
+        bool grounded = Physics.SphereCast(
+            transform.position + Vector3.up * 0.1f,
+            radius,
+            Vector3.down,
+            out RaycastHit hit,
+            distance
+        );
+
+        animator.SetBool("IsGrounded", grounded);
     }
 
 
@@ -159,6 +174,8 @@ public class AIEnemyBossThird : AIEnemy
         rb.angularVelocity = Vector3.zero;
         rb.linearVelocity = Vector3.zero;  
 
+        animator.SetTrigger("SlamJumpRequested");
+
         //Add force for jump
         rb.AddForce(Vector3.up * 800f, ForceMode.Impulse);
         //Debug.Log("Attmepted slam");
@@ -185,6 +202,7 @@ public class AIEnemyBossThird : AIEnemy
     //Does shooting, looks complex but not
     IEnumerator Shoot()
     {
+        animator.SetBool("IsSpinning", true);
         //Debug.Log("Attempting shot");
 
         //Spinning and enabling if the liquid effect which have damage handling
@@ -203,6 +221,8 @@ public class AIEnemyBossThird : AIEnemy
         rb.angularVelocity = Vector3.zero;
         LiquidHandling(false);
         StopLiquidSound();
+
+        animator.SetBool("IsSpinning", false);
 
         currentAttack = bossAttack.NoAttack;
         StartCoroutine(SetTimer(shootTimer, "shoot"));
