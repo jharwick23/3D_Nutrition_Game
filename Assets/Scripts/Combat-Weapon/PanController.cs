@@ -13,6 +13,11 @@ public class PanController : MonoBehaviour
     
     void Awake()
     {
+
+    }
+
+    void Start()
+    {
         if (holdPanPoint == null)
         {
             holdPanPoint = GameObject.Find("HoldPanPoint").transform;
@@ -22,10 +27,6 @@ public class PanController : MonoBehaviour
         {
             restPanPoint = GameObject.Find("PanRestPoint").transform;
         }
-    }
-
-    void Start()
-    {
         isOnBack = true;
         if (tutorialManager == null)
         {

@@ -12,6 +12,10 @@ public class KnifeController : MonoBehaviour
 
     void Awake()
     {
+    }
+
+    void Start()
+    {
         if (holdKnifePoint == null)
         {
             holdKnifePoint = GameObject.Find("HoldKnifePoint").transform;
@@ -21,10 +25,6 @@ public class KnifeController : MonoBehaviour
         {
             restKnifePoint = GameObject.Find("RestKnifePoint").transform;
         }
-    }
-
-    void Start()
-    {
         if (tutorialManager == null)
         {
             tutorialManager = FindFirstObjectByType<TutorialManager>();

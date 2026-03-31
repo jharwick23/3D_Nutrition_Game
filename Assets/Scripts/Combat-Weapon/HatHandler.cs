@@ -5,7 +5,7 @@ public class HatHandler : MonoBehaviour
     public Transform headAttachPoint;
     public Transform gunHoldPoint;
 
-    void Awake()
+    void Start()
     {
         if (headAttachPoint == null)
         {
