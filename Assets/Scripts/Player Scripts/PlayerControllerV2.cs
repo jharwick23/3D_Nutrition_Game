@@ -490,6 +490,9 @@ public class PlayerControllerV2 : MonoBehaviour
             _characterController.enabled = true;
             _verticalVelocity = -2f;
             _isDead = false;
+
+            _animator.Rebind();
+            _animator.Update(0f);
         }
         else
         {
