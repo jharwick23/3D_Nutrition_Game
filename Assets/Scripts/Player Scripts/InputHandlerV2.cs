@@ -20,33 +20,6 @@ public class InputHandlerV2 : MonoBehaviour
 
     void Awake()
     {
-        if (PlayerController == null)
-        {
-            PlayerController = FindFirstObjectByType<PlayerControllerV2>();
-        }
-        if (StandardProjectileGun == null)
-        {
-            StandardProjectileGun = FindFirstObjectByType<ProjectileGun>();
-        }
-        if(pauseMenu == null)
-        {
-            pauseMenu = FindFirstObjectByType<PauseMenu>();
-        }
-        if (bulletShopNPC == null)
-        {
-            bulletShopNPC = FindFirstObjectByType<BulletShopNPC>();
-        }
-        if (upgradeMenuNPC == null)
-        {
-            upgradeMenuNPC = FindFirstObjectByType<UpgradeMenuNPC>();
-        }
-        if (tutorialManager == null)
-        {
-            tutorialManager = FindFirstObjectByType<TutorialManager>();
-        }
-    }
-    void Start()
-    {
         playerInput = GetComponent<PlayerInput>();
 
         if (playerInput != null)
@@ -73,6 +46,33 @@ public class InputHandlerV2 : MonoBehaviour
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+    void Start()
+    {
+        if (PlayerController == null)
+        {
+            PlayerController = FindFirstObjectByType<PlayerControllerV2>();
+        }
+        if (StandardProjectileGun == null)
+        {
+            StandardProjectileGun = FindFirstObjectByType<ProjectileGun>();
+        }
+        if(pauseMenu == null)
+        {
+            pauseMenu = FindFirstObjectByType<PauseMenu>();
+        }
+        if (bulletShopNPC == null)
+        {
+            bulletShopNPC = FindFirstObjectByType<BulletShopNPC>();
+        }
+        if (upgradeMenuNPC == null)
+        {
+            upgradeMenuNPC = FindFirstObjectByType<UpgradeMenuNPC>();
+        }
+        if (tutorialManager == null)
+        {
+            tutorialManager = FindFirstObjectByType<TutorialManager>();
+        }
     }
 
     void Update()
