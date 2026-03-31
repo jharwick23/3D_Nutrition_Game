@@ -14,7 +14,10 @@ public class AIEnemy : MonoBehaviour
 
     void Awake()
     {
-        _dropService = GameObject.FindWithTag("DropService").GetComponent<DropService>();
+        if(!_dropService)
+        {
+            _dropService = GameObject.FindWithTag("DropService").GetComponent<DropService>();
+        }
     }
 
     //Checks if game object has no health so it can destroy itself
@@ -25,6 +28,8 @@ public class AIEnemy : MonoBehaviour
             if (dropItems)
             {
                 OnDeathEvent();
+                //Debug.Log(_dropService);
+                //Debug.Log(transform);
                 _dropService.DropCoin(new Vector3(transform.position.x, transform.position.y, transform.position.z), 10); // Drop Coin
             
                 int val = Random.Range(0, 1);

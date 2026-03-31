@@ -15,15 +15,11 @@ public class AiEnemyTurretCoke : AIEnemy
     private PlayerControllerV2 player;
     public AudioClip cokeBullet;
     public AudioSource audioSource;
-    
-    void Awake()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         player = FindAnyObjectByType<PlayerControllerV2>();
     }
 
