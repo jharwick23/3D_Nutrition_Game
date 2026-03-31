@@ -1,4 +1,5 @@
 using System.Data.SqlTypes;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerControllerV2 : MonoBehaviour
@@ -31,6 +32,9 @@ public class PlayerControllerV2 : MonoBehaviour
 
     // Pan Object
     public PanController Pan;
+
+    // Input Handler Object
+    [SerializeField] private InputHandlerV2 _inputHandler;
     
     // --- Player Movement/Camera Variables --- \\
     [SerializeField] private float MovementSpeed = 5f;
@@ -349,6 +353,7 @@ public class PlayerControllerV2 : MonoBehaviour
             DeathSound();
             CurrentHealth = 0;
             _uiHandler.UpdateHealthUI(CurrentHealth, MaxHealth);
+            _inputHandler.DisableInputs();
             _animator.SetTrigger("IsDead");
             _isDead = true;
         }
@@ -490,6 +495,7 @@ public class PlayerControllerV2 : MonoBehaviour
             _characterController.enabled = true;
             _verticalVelocity = -2f;
             _isDead = false;
+            StartCoroutine(EnableInputsNextFrame());
 
             _animator.Rebind();
             _animator.Update(0f);
@@ -498,6 +504,12 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             Debug.LogError("RespawnPoint not found in the scene.");
         }
+    }
+
+    IEnumerator EnableInputsNextFrame()
+    {
+        yield return null;
+        _inputHandler.EnableInputs();
     }
 
     public bool IsMaxHealth()
