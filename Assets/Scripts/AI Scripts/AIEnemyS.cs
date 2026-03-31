@@ -9,9 +9,13 @@ public class AIEnemyS : MonoBehaviour
     private NavMeshAgent agent;
     private float distance;
     public float height = 2f, bobSpeed = 2f, bobAmount = 0.3f, frontScale = 1.5f, randomX = 2f, randomY = 4f;
+    public AudioClip sugarBulletAudio;
+    public AudioSource audioSource;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         agent = GetComponent<NavMeshAgent>();
         agent.updatePosition = false;
         agent.updateUpAxis = false;
@@ -55,12 +59,9 @@ public class AIEnemyS : MonoBehaviour
 
     void PlayShootingSound()
     {
-        if (!SFXManager.Instance)
+        if (sugarBulletAudio)
         {
-            Debug.LogError("SFXManager not found in scene");
-            return;
+            audioSource.PlayOneShot(sugarBulletAudio, 0.5f);
         }
-
-        SFXManager.Instance.Play(SFXManager.SFXType.SugarBullet);
     }
 }

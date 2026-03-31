@@ -11,12 +11,12 @@ public class AIEnemyExplode : MonoBehaviour
     private float distance;
     private bool attackInProg, playerInBox, routineCalled = false;
     private Collider playerCollider;
+    public AudioClip explodeAudio;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
         agent = GetComponent<NavMeshAgent>();
         attackInProg = false;
         playerInBox = false;
@@ -48,13 +48,10 @@ public class AIEnemyExplode : MonoBehaviour
 
     private void PlayExplosionSound()
     {
-        if (!SFXManager.Instance)
+        if (explodeAudio)
         {
-            Debug.LogError("SFXManager not found in scene");
-            return;
+            AudioSource.PlayClipAtPoint(explodeAudio, transform.position, 5f);
         }
-
-        SFXManager.Instance.Play(SFXManager.SFXType.EnemyExploding);
     }
 
     //Handles Damage explosion if player is in designated Area

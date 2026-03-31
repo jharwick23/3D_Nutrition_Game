@@ -18,11 +18,14 @@ public class AIEnemyBossThird : AIEnemy
 
     [SerializeField] private Transform target, spawnpos1, spawnpos2;
     [SerializeField] private GameObject enemy, bullet;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip greaseSound;
     
 
     // initialized the boss
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         healthScript = GetComponent<AIEnemy>();
         currentStage = bossStage.FirstPhase;
         currentAttack = bossAttack.NoAttack;
@@ -187,6 +190,7 @@ public class AIEnemyBossThird : AIEnemy
         //Spinning and enabling if the liquid effect which have damage handling
         float timer = 0f;
         rb.angularDamping = 0f;
+        StartLiquidSound();
         LiquidHandling(true);
         while (timer < SpinTimer)
         {
@@ -198,6 +202,7 @@ public class AIEnemyBossThird : AIEnemy
         rb.angularDamping = 0.05f;
         rb.angularVelocity = Vector3.zero;
         LiquidHandling(false);
+        StopLiquidSound();
 
         currentAttack = bossAttack.NoAttack;
         StartCoroutine(SetTimer(shootTimer, "shoot"));
@@ -216,5 +221,19 @@ public class AIEnemyBossThird : AIEnemy
         {
             Destroy(gameObject);
         }
+    }
+
+    void StartLiquidSound()
+    {
+        if (greaseSound == null) return;
+
+        audioSource.clip = greaseSound;
+        audioSource.loop = true;
+        audioSource.Play();
+    }
+
+    void StopLiquidSound()
+    {
+        audioSource.Stop();
     }
 }

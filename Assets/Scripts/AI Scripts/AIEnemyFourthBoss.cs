@@ -14,11 +14,14 @@ public class AIEnemyFourthBoss : AIEnemy
     [SerializeField] private GameObject firstSetOfSickRays, secondSetOfSickRays;
     [SerializeField] private GameObject[] ListOfSwicthSpots;
     [SerializeField] private GameObject SecondPhaseSwitchSpot;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip liquidAudio;
     private bool easyRaySwicth = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         //Sets camara follow for target looking and other functions
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         GameObject camaratarget = player.transform.GetChild(2).GetChild(0).gameObject;
@@ -85,6 +88,7 @@ public class AIEnemyFourthBoss : AIEnemy
     {
         Debug.Log("Third Phase");
         SetImmunity(true);
+        StartLiquidSound();
         StartCoroutine (Shooting(thirdPhaseBulletSpeed, thirdPhaseBulletRate));
         StartCoroutine(SwitchFunction(thirdPhaseSwicthRate));
         StartCoroutine(RayOfLiquidChangeInterval(liquidChangeRate));
@@ -162,10 +166,26 @@ public class AIEnemyFourthBoss : AIEnemy
     //Destroys all liquidrays
     private void OnDestroy()
     {
+        StopLiquidSound();
+
         GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
         foreach (GameObject bullet in bullets)
         {
             Destroy(bullet);
         }
+    }
+
+    void StartLiquidSound()
+    {
+        if (liquidAudio == null) return;
+
+        audioSource.clip = liquidAudio;
+        audioSource.loop = true;
+        audioSource.Play();
+    }
+
+    void StopLiquidSound()
+    {
+        audioSource.Stop();
     }
 }
