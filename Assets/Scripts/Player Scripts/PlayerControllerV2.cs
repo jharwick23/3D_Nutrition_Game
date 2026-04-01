@@ -69,6 +69,10 @@ public class PlayerControllerV2 : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _characterController = GetComponent<CharacterController>();
+    }
+
+    void Start()
+    {
         //if (CameraController == null)
         //{
         //    CameraController = FindFirstObjectByType<CameraControllerV2>();
@@ -93,10 +97,6 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             tutorialManager = FindFirstObjectByType<TutorialManager>();
         }
-    }
-
-    void Start()
-    {
         // Initialize Player Data
         InitializePlayerData();
 
