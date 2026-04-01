@@ -338,6 +338,8 @@ public class PlayerControllerV2 : MonoBehaviour
 
     public void TakeDamage(float damageAmount)
     {
+        if (_isDead) return;
+        
         if (GetBlocking())
         {
             float baseReduction = 0.30f;

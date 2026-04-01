@@ -59,7 +59,7 @@ public class AOEDamage : MonoBehaviour
     {
         if(acidSound)
         {
-            audioSource.PlayOneShot(acidSound);
+            audioSource.PlayOneShot(acidSound, 0.5f);
         }
     }
 }
