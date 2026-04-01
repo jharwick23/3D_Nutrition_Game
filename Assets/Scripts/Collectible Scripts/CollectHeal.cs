@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class CollectHeal : MonoBehaviour
 {
+    private UIHandler _uiHandler;
     public float bobbleHeight = 0.25f;
     public float bobbleSpeed = 2f;
     public int baseHealAmount = 10;
@@ -11,6 +12,7 @@ public class CollectHeal : MonoBehaviour
     {
         // Save starting position
         startPos = transform.position;
+        _uiHandler ??= FindFirstObjectByType<UIHandler>();
     }
 
     private void Update()
@@ -35,6 +37,7 @@ public class CollectHeal : MonoBehaviour
                     int finalHealAmount = baseHealAmount + (5 * PlayerPrefs.GetInt("HealingAmountStat", 0));
                     playerController.Heal(finalHealAmount);
                     Destroy(gameObject);
+                    _uiHandler.SetAlertPrompt("+" + finalHealAmount + " Health!", 1.5f, Color.green);
                 }
             }
         }
