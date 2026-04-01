@@ -617,6 +617,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VirusBossAnim
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: b8d06553310dc1214afd5afe8b299f1f, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: cee7dacbd02f9be11bf8294f6ebcebc2, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
