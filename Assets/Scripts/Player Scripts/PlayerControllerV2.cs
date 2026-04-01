@@ -37,14 +37,15 @@ public class PlayerControllerV2 : MonoBehaviour
     [SerializeField] private InputHandlerV2 _inputHandler;
     
     // --- Player Movement/Camera Variables --- \\
-    [SerializeField] private float MovementSpeed = 5f;
+    private float StartingMovementSpeed = 3f;
+    [SerializeField] private float MovementSpeed = 3f;
     [SerializeField] private float RotationSpeed = 20f; // Horizontal Look Speed
     [SerializeField] private float LookSensitivityY = 20f; // Veritical Look Speed
     [SerializeField] private float MinCamAngle = 45f;
     [SerializeField] private float MaxCamAngle = -75f;
     [SerializeField] private float JumpForce = 8f;
     [SerializeField] private float Gravity = -25f;
-    [SerializeField] private float SprintMultiplier = 2f;
+    [SerializeField] private float SprintMultiplier = 1.8f;
     private float distanceFromGroundThreshold = 0.4f;
 
     // Movement and Animation variables
@@ -69,10 +70,6 @@ public class PlayerControllerV2 : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _characterController = GetComponent<CharacterController>();
-    }
-
-    void Start()
-    {
         //if (CameraController == null)
         //{
         //    CameraController = FindFirstObjectByType<CameraControllerV2>();
@@ -97,6 +94,14 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             tutorialManager = FindFirstObjectByType<TutorialManager>();
         }
+        if (_inputHandler == null)
+        {
+            // _inputHandler = FindFirstObjectByType<InputHandlerV2>();
+        }
+    }
+
+    void Start()
+    {
         // Initialize Player Data
         InitializePlayerData();
 
@@ -133,7 +138,7 @@ public class PlayerControllerV2 : MonoBehaviour
         Coins = PlayerPrefs.GetInt("Coins", 0);
         _uiHandler.UpdateCoinUI(Coins);
 
-        MovementSpeed = 5f + PlayerPrefs.GetInt("MovementSpeedStat", 0) * 0.5f;
+        MovementSpeed = StartingMovementSpeed +PlayerPrefs.GetInt("MovementSpeedStat", 0) * 0.25f;
         
     }
 
@@ -497,7 +502,7 @@ public class PlayerControllerV2 : MonoBehaviour
             _characterController.enabled = true;
             _verticalVelocity = -2f;
             _isDead = false;
-            StartCoroutine(EnableInputsNextFrame());
+            // StartCoroutine(EnableInputsNextFrame());
 
             _animator.Rebind();
             _animator.Update(0f);
@@ -508,11 +513,11 @@ public class PlayerControllerV2 : MonoBehaviour
         }
     }
 
-    IEnumerator EnableInputsNextFrame()
-    {
-        yield return null;
-        _inputHandler.EnableInputs();
-    }
+    // IEnumerator EnableInputsNextFrame()
+    // {
+    //     yield return null;
+    //     _inputHandler.EnableInputs();
+    // }
 
     public bool IsMaxHealth()
     {

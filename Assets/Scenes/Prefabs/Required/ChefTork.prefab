@@ -582,14 +582,14 @@ MonoBehaviour:
   Knife: {fileID: 0}
   Pan: {fileID: 0}
   _inputHandler: {fileID: 1925598985958938286}
-  MovementSpeed: 5
+  MovementSpeed: 3
   RotationSpeed: 20
   LookSensitivityY: 20
   MinCamAngle: 45
   MaxCamAngle: -75
   JumpForce: 8
   Gravity: -25
-  SprintMultiplier: 2
+  SprintMultiplier: 1.8
   fallVelocityThreshold: -2.5
   fallTimeThreshold: 0.18
 --- !u!114 &7548074881497688586
