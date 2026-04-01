@@ -382,10 +382,7 @@ MonoBehaviour:
   obstructionMask:
     serializedVersion: 2
     m_Bits: 256
-  rb: {fileID: 0}
-  forwardForce: 80
-  upForce: 15
-  randomForceModifier: 3
+  forwardForce: 40
 --- !u!54 &5933523724343548103
 Rigidbody:
   m_ObjectHideFlags: 0
