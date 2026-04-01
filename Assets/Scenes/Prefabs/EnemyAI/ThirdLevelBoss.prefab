@@ -387,7 +387,6 @@ GameObject:
   - component: {fileID: 982475442455046745}
   - component: {fileID: 1466492024288136811}
   - component: {fileID: 7221395099178725420}
-  - component: {fileID: 4747024845479808947}
   - component: {fileID: 7983895715000133951}
   - component: {fileID: 8642550105926578781}
   - component: {fileID: 8391113207205816289}
@@ -454,33 +453,6 @@ MonoBehaviour:
   healthSlider: {fileID: 4516197549080615217}
   isCube: 1
   dropItems: 1
---- !u!54 &4747024845479808947
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8505377640766458918}
-  serializedVersion: 5
-  m_Mass: 50
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &7983895715000133951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -521,7 +493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3bfc0eeed0ab6c46bcbf2e4b33098e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageTest
-  damage: 30
+  damage: 50
 --- !u!65 &8391113207205816289
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -541,8 +513,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.1395178, y: 2, z: 3.6739283}
-  m_Center: {x: 0.16071558, y: 0, z: -0.07269001}
+  m_Size: {x: 3.646741, y: 2, z: 3.5722823}
+  m_Center: {x: 0.20649004, y: 0, z: -0.0048606396}
 --- !u!82 &2179203445684959962
 AudioSource:
   m_ObjectHideFlags: 0
@@ -564,7 +536,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.8247948
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0

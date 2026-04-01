@@ -102,8 +102,7 @@ public class AIEnemyBurger : MonoBehaviour
 
         float attackDuration = 0.3f;
         float timer = 0f;
-        float jumpHeight = 1.0f;
-        float checkDistance = 0.5f;
+        float jumpHeight = 0.5f;
 
         Vector3 startPos = transform.position;
         Vector3 endPos = startPos + direction * forwardForce * attackDuration;
