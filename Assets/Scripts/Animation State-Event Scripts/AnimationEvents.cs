@@ -5,7 +5,7 @@ public class AnimationEvents : MonoBehaviour
     public KnifeController Knife;
     public PlayerControllerV2 PlayerController;
     public PanController Pan;
-    void Awake()
+    void Start()
     {
         if (Knife == null)
         {

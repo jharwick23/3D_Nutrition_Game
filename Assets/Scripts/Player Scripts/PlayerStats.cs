@@ -9,7 +9,7 @@ public class PlayerStats : MonoBehaviour
     private int _healingAmountStat;
     private int _blockStrengthStat;
 
-    private void Awake()
+    private void Start()
     {
         if (PlayerController == null)
         {

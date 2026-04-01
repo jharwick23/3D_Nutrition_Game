@@ -36,6 +36,10 @@ public class ProjectileGun : MonoBehaviour
 
     void Awake()
     {
+    }
+    
+    private void Start()
+    {
         if (PlayerCamera == null)
         {
             PlayerCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
@@ -53,10 +57,6 @@ public class ProjectileGun : MonoBehaviour
         {
             tutorialManager = FindFirstObjectByType<TutorialManager>();
         }
-    }
-    
-    private void Start()
-    {
         LoadOwnedBullets();
         maxAmmo = OrangeBulletPrefab.GetComponent<OrangeBullet>().maxAmmo;
         currentAmmo = maxAmmo;
