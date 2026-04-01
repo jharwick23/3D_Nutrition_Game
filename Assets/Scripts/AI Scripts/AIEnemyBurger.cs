@@ -154,7 +154,8 @@ public class AIEnemyBurger : MonoBehaviour
             yield return null;
         }
 
-        routineCalled = false;
+
+        //routineCalled = false;
 
         StartCoroutine(RecoverTime());
     }
@@ -162,7 +163,8 @@ public class AIEnemyBurger : MonoBehaviour
     //handles recovery time and rigidbody and agent manipulation
     IEnumerator RecoverTime()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(2.0f);
+        routineCalled = false;
 
         agent.Warp(transform.position);
         agent.updatePosition = true;

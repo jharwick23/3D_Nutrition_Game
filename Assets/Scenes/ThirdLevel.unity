@@ -5670,6 +5670,28 @@ PrefabInstance:
       propertyPath: m_text
       value: Prisoner
       objectReference: {fileID: 0}
+    - target: {fileID: 2654009489137010105, guid: 8ac75baa71dea4540a767932dd7bbcd0, type: 3}
+      propertyPath: dialogueLines.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2654009489137010105, guid: 8ac75baa71dea4540a767932dd7bbcd0, type: 3}
+      propertyPath: 'dialogueLines.Array.data[0]'
+      value: Thank You!!
+      objectReference: {fileID: 0}
+    - target: {fileID: 2654009489137010105, guid: 8ac75baa71dea4540a767932dd7bbcd0, type: 3}
+      propertyPath: 'dialogueLines.Array.data[1]'
+      value: I overheard the burgers talking, they set up these beacons of grease
+        to block the entrance to the boss.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2654009489137010105, guid: 8ac75baa71dea4540a767932dd7bbcd0, type: 3}
+      propertyPath: 'dialogueLines.Array.data[2]'
+      value: Find them and break them, that should allow you to confront the grease
+        boss.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4659957031842918325, guid: 8ac75baa71dea4540a767932dd7bbcd0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8469381889631142583, guid: 8ac75baa71dea4540a767932dd7bbcd0, type: 3}
       propertyPath: m_Name
       value: HubDialogueNPC
@@ -18571,7 +18593,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -33956,6 +33978,24 @@ PrefabInstance:
     - target: {fileID: 2190991820445826276, guid: 8ac75baa71dea4540a767932dd7bbcd0, type: 3}
       propertyPath: m_text
       value: Prisoner
+      objectReference: {fileID: 0}
+    - target: {fileID: 2654009489137010105, guid: 8ac75baa71dea4540a767932dd7bbcd0, type: 3}
+      propertyPath: dialogueLines.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2654009489137010105, guid: 8ac75baa71dea4540a767932dd7bbcd0, type: 3}
+      propertyPath: 'dialogueLines.Array.data[0]'
+      value: Thank You!!
+      objectReference: {fileID: 0}
+    - target: {fileID: 2654009489137010105, guid: 8ac75baa71dea4540a767932dd7bbcd0, type: 3}
+      propertyPath: 'dialogueLines.Array.data[1]'
+      value: I overheard the burgers talking, they set up these beacons of grease
+        to block the entrance to the boss.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2654009489137010105, guid: 8ac75baa71dea4540a767932dd7bbcd0, type: 3}
+      propertyPath: 'dialogueLines.Array.data[2]'
+      value: Find them and break them, that should allow you to confront the grease
+        boss.
       objectReference: {fileID: 0}
     - target: {fileID: 8469381889631142583, guid: 8ac75baa71dea4540a767932dd7bbcd0, type: 3}
       propertyPath: m_Name
