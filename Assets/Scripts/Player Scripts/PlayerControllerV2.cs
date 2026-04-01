@@ -102,10 +102,7 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             // _inputHandler = FindFirstObjectByType<InputHandlerV2>();
         }
-    }
-
-    void Start()
-    {
+        
         // Initialize Player Data
         InitializePlayerData();
 
