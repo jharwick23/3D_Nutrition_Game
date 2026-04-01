@@ -11,7 +11,7 @@ public class BossController : MonoBehaviour
 {
     public enum BossState { PhaseOne, PhaseTwo, Charging, Stunned }
     public BossState currentState;
-    public int maxHealth = 1000;
+    public int maxHealth = 500;
     private int currentHealth;
     public GameObject[] minionPrefabs;
     public Transform[] minionSpawnPoints;
@@ -181,7 +181,9 @@ public class BossController : MonoBehaviour
     public void TakeDamage(int amount)
     {
         currentHealth -= amount;
+        Debug.Log(currentHealth);
         HealthSlider.value = currentHealth;
+        Debug.Log(HealthSlider.value);
 
         if (currentHealth <= maxHealth / 2 && currentState == BossState.PhaseOne)
         {

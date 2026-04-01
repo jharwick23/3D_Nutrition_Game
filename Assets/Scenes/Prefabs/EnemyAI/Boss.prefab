@@ -455,9 +455,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 150
+  m_MaxValue: 500
   m_WholeNumbers: 0
-  m_Value: 150
+  m_Value: 500
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -740,7 +740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossController
   currentState: 0
-  maxHealth: 100
+  maxHealth: 500
   minionPrefabs:
   - {fileID: 0}
   - {fileID: 0}
