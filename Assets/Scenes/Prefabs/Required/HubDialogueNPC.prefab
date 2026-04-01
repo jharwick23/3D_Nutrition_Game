@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6368500924098183510}
   - component: {fileID: 3356856502937797474}
   - component: {fileID: 7533737624992321026}
-  - component: {fileID: 6459527944030062709}
+  - component: {fileID: 5404994638983091732}
   m_Layer: 0
   m_Name: 'CornNPC [HubDialogue]'
   m_TagString: Untagged
@@ -95,8 +95,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6459527944030062709
-BoxCollider:
+--- !u!64 &5404994638983091732
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -111,11 +111,12 @@ BoxCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 1
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 2.5306048, y: 4.0359526, z: 3.1526985}
-  m_Center: {x: 0.036058664, y: 2.0701537, z: 0.21163368}
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5209544823049156314, guid: 63bf064e28eb55e069b05061f98a0593, type: 3}
 --- !u!1 &5712935144502703053
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,6 +529,7 @@ MonoBehaviour:
   - It seems that alot of unhealthy things are attacking, we need you chef to help
     save us
   - step through the portal when you are ready, come back here for help with upgrades
+  uiHandler: {fileID: 0}
 --- !u!1 &8469381889631142583
 GameObject:
   m_ObjectHideFlags: 0

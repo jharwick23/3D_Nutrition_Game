@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class CollectCoin : MonoBehaviour
 {
+    private UIHandler _uiHandler;
     public float bobbleHeight = 0.25f;
     public float bobbleSpeed = 2f;
     public int coinAmount = 1;
@@ -11,6 +12,7 @@ public class CollectCoin : MonoBehaviour
     {
         // Save starting position
         startPos = transform.position;
+        _uiHandler ??= FindFirstObjectByType<UIHandler>();
     }
 
     private void Update()
@@ -32,6 +34,8 @@ public class CollectCoin : MonoBehaviour
             {
                 CollectSound();
                 playerController.AddCoins(coinAmount);
+                _uiHandler.SetAlertPrompt("+" + coinAmount + " Coins!", 1.5f, Color.yellow);
+
             }
             Destroy(gameObject);
         }
