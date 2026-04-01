@@ -11,13 +11,11 @@ public class AiEnemyVirus : AIEnemy
     [SerializeField] private float dashForce, interval, height, bobSpeed, bobAmount;
     private bool LOS = false, following = false, dashCooldown = false, SubSpawn = true; 
     private NavMeshAgent agent;
-    private Rigidbody rb;
     
     
     // Gets rigibody, agent components
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
@@ -66,16 +64,16 @@ public class AiEnemyVirus : AIEnemy
         //If LOS, looks at player and doea attack if not on cooldown, otherwise navmesh pathing
         if (LOS)
         {
-            rb.isKinematic = false;
-            agent.enabled = false;
-            
+            agent.isStopped = true;
+            agent.updatePosition = false;
+
             LookAtPlayer();
+
             if (!dashCooldown)
             {
                 dashCooldown = true;
                 StartCoroutine(DashAttack());
             }
-            
         }
         else
         {
@@ -97,38 +95,55 @@ public class AiEnemyVirus : AIEnemy
     private void NavAgentOn()
     {
         //Debug.Log("Attempting movement");
-        if (!rb.isKinematic)
+        if (agent.enabled && agent.isOnNavMesh)
         {
-            rb.angularVelocity = Vector3.zero;
-            rb.linearVelocity = Vector3.zero;
-        }
-        rb.isKinematic = true;
-        agent.enabled = true;
-        
-        if (agent.enabled)
-        { 
             agent.updateUpAxis = false;
+            agent.updatePosition = true;
             agent.isStopped = false;
-           
-        }
-        agent.destination = target.position;
-        
+            agent.destination = target.position;
+        }  
     }
     
     
     //Dash attack routine that sends the enemy forward
     IEnumerator DashAttack() 
     {
-        
-
-        //Does force application
         Vector3 direction = (target.position - transform.position).normalized;
-        Vector3 Force = direction * dashForce;
+        direction.y = 0f;
 
-        rb.angularVelocity = Vector3.zero;
-        rb.linearVelocity = Vector3.zero;
-        rb.AddForce(Force, ForceMode.Impulse);
+        float dashDuration = 0.2f;
+        float timer = 0f;
 
+        Vector3 startPos = transform.position;
+        Vector3 endPos = startPos + direction * dashForce * dashDuration;
+
+        while (timer < dashDuration)
+        {
+            float t = timer / dashDuration;
+
+            Vector3 pos = Vector3.Lerp(startPos, endPos, t);
+
+            // optional: simple hover/bob instead of physics
+            pos.y = height + Mathf.Sin(Time.time * bobSpeed) * bobAmount;
+
+            // collision stop
+            Vector3 moveDir = (pos - transform.position).normalized;
+            float dist = Vector3.Distance(transform.position, pos);
+
+            if (Physics.Raycast(transform.position, moveDir, dist))
+            {
+                break;
+            }
+
+            transform.position = pos;
+
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        agent.Warp(transform.position);
+        agent.updatePosition = true;
+        agent.isStopped = false;
 
         yield return new WaitForSeconds(interval);
         dashCooldown = false;

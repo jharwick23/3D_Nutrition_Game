@@ -393,7 +393,6 @@ GameObject:
   - component: {fileID: 8282676236287986388}
   - component: {fileID: 5676284486132124826}
   - component: {fileID: 732574368829542010}
-  - component: {fileID: 3325909986486651713}
   - component: {fileID: 4361614222537367346}
   m_Layer: 0
   m_Name: VirusEnemy
@@ -504,38 +503,11 @@ MonoBehaviour:
   losMask:
     serializedVersion: 2
     m_Bits: 256
-  dashForce: 200
+  dashForce: 75
   interval: 3
   height: 3.5
   bobSpeed: 1
   bobAmount: 0.5
---- !u!54 &3325909986486651713
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8208910801977227525}
-  serializedVersion: 5
-  m_Mass: 20
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &4361614222537367346
 MonoBehaviour:
   m_ObjectHideFlags: 0
