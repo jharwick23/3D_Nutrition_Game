@@ -191,7 +191,10 @@ MonoBehaviour:
   attackDistance: 15
   shootCooldown: 3
   upForce: 3
-  height: 0
+  height: 3.5
+  selfMask:
+    serializedVersion: 2
+    m_Bits: 0
   aoeBullet: {fileID: 4264110813379687517, guid: c8057b0dd25de3e40aeea269f3dcdcce, type: 3}
 --- !u!65 &2272108029272032259
 BoxCollider:
