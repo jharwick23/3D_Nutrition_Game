@@ -10,6 +10,7 @@ public class AIEnemyBacteria : AIEnemy
 {
     [SerializeField] private Transform target;
     [SerializeField] private float attackDistance, shootCooldown, upForce, height;
+    [SerializeField] private LayerMask selfMask;
     [SerializeField] private GameObject aoeBullet;
     private NavMeshAgent agent;
     private bool LOS = false, following = false, coreroutineCalled = false;
@@ -31,7 +32,20 @@ public class AIEnemyBacteria : AIEnemy
     // Update is called once per frame
     void Update()
     {
+        Vector3 direction = (target.position - transform.position).normalized;
+        direction.y = 0f;
+        transform.rotation = Quaternion.LookRotation(direction);
+
         Vector3 origin = transform.position;
+        float distance = Vector3.Distance(origin, target.position);
+
+        //For Debuging to see if LOS is even being checked
+        Debug.DrawLine(origin, target.position, Color.red);
+
+        Vector3 pos = transform.position;
+        pos.y = height;
+        transform.position = pos;
+
 
         //Determines if Player is LOS and sets bool
         if (Physics.Linecast(origin, target.position, out RaycastHit hit))
@@ -44,6 +58,7 @@ public class AIEnemyBacteria : AIEnemy
             else
             {
                 LOS = false;
+                //Debug.Log(hit.transform.gameObject.name);
             }
         }
 
@@ -68,9 +83,9 @@ public class AIEnemyBacteria : AIEnemy
             agent.isStopped = false;
             agent.destination = target.position;
         }
-        Vector3 pos = agent.nextPosition;
-        pos.y = height;
-        transform.position = pos;
+        //Vector3 pos = agent.nextPosition;
+        //pos.y = height;
+        //transform.position = pos;
         LookAtPlayer();
 
         //Checks if dead to prevent constant hit bug
@@ -96,15 +111,14 @@ public class AIEnemyBacteria : AIEnemy
     //Shooting function for enemy, lobbing behavior
     IEnumerator Shoot()
     {
-        Vector3 spawnPos = transform.position + transform.forward * 3.5f;
-        spawnPos.y += 1f;
+        Vector3 spawnPos = transform.position + transform.forward * 1.5f;
         GameObject bullet = Instantiate(aoeBullet, spawnPos, Quaternion.identity);
         Rigidbody rbb = bullet.GetComponent<Rigidbody>();
         Vector3 dir = (target.position - transform.position);
         dir.y = 0;
         dir.Normalize();
 
-        Vector3 force = dir * distance + Vector3.up * upForce;
+        Vector3 force = dir * 15f + Vector3.up * upForce;
 
         rbb.AddForce(force, ForceMode.Impulse);
 

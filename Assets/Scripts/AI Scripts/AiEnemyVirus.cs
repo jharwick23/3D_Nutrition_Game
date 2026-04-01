@@ -39,6 +39,10 @@ public class AiEnemyVirus : AIEnemy
         //For Debuging to see if LOS is even being checked
         Debug.DrawLine(origin, target.position, Color.red);
 
+        Vector3 pos = transform.position;
+        pos.y = height;
+        transform.position = pos;
+
         //Determines if Player is LOS and sets bool
         if (Physics.Linecast(origin, target.position, out RaycastHit hit))
         {
@@ -50,6 +54,7 @@ public class AiEnemyVirus : AIEnemy
             else
             {
                 LOS = false;
+                //Debug.Log(hit.transform.gameObject.name);
             }
         }
 
@@ -63,9 +68,7 @@ public class AiEnemyVirus : AIEnemy
         {
             rb.isKinematic = false;
             agent.enabled = false;
-            Vector3 pos = transform.position;
-            pos.y = height;
-            transform.position = pos;
+            
             LookAtPlayer();
             if (!dashCooldown)
             {
@@ -76,9 +79,6 @@ public class AiEnemyVirus : AIEnemy
         }
         else
         {
-            Vector3 pos = transform.position;
-            pos.y = height;
-            transform.position = pos;
             NavAgentOn();
 
         }
