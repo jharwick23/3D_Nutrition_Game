@@ -4,10 +4,12 @@ using TMPro;
 
 public class FourthLevelPortal : MonoBehaviour
 {
+    private UIHandler _uiHandler;
     private TMP_Text nameTagText;
     private Material insideMat;
     private void Start()
     {
+        _uiHandler ??= FindFirstObjectByType<UIHandler>();
         nameTagText = transform.Find("NameTagCanvas/Text (TMP)").GetComponent<TMP_Text>();
         insideMat = transform.Find("Mesh/Portal").GetComponent<MeshRenderer>().materials[1];
 
@@ -42,6 +44,8 @@ public class FourthLevelPortal : MonoBehaviour
         if (other.CompareTag("Player") && PlayerPrefs.GetInt("ThirdLevelCompleted", 0) == 1)
         {
             SceneManager.LoadScene("FourthLevel");
+            return;
         }
+        _uiHandler.SetAlertPrompt("Complete the previous level to unlock this portal!", 2f, Color.red);
     }
 }

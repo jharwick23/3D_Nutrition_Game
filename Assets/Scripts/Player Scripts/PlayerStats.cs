@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     public PlayerControllerV2 PlayerController;
+    private UIHandler _uiHandler;
     private int _maxHeathStat;
     private int _movementSpeedStat;
     private int _reloadSpeedStat;
@@ -15,6 +16,7 @@ public class PlayerStats : MonoBehaviour
         {
             PlayerController = FindFirstObjectByType<PlayerControllerV2>();
         }
+        _uiHandler ??= FindFirstObjectByType<UIHandler>();
         LoadStats();
     }
 
@@ -42,6 +44,7 @@ public class PlayerStats : MonoBehaviour
         if (PlayerPrefs.GetInt("Coins", 0) < 50)
         {
             Debug.Log("Not enough coins to upgrade Max Health!");
+            _uiHandler.SetAlertPrompt("Not enough coins to upgrade Max Health!", 2f, Color.red);
             return;
         }
         
@@ -49,6 +52,7 @@ public class PlayerStats : MonoBehaviour
         SaveStats();
         PlayerController.AddCoins(-50);
         PlayerController.InitializePlayerData();
+        _uiHandler.SetAlertPrompt("Max Health Upgraded!", 2f, Color.green);
     }
 
     public void UpgradeMovementSpeed()
@@ -56,6 +60,7 @@ public class PlayerStats : MonoBehaviour
         if (PlayerPrefs.GetInt("Coins", 0) < 50)
         {
             Debug.Log("Not enough coins to upgrade Movement Speed!");
+            _uiHandler.SetAlertPrompt("Not enough coins to upgrade Movement Speed!", 2f, Color.red);
             return;
         }
         
@@ -63,6 +68,7 @@ public class PlayerStats : MonoBehaviour
         SaveStats();
         PlayerController.AddCoins(-50);
         PlayerController.InitializePlayerData();
+        _uiHandler.SetAlertPrompt("Movement Speed Upgraded!", 2f, Color.green);
     }
 
     public void UpgradeReloadSpeed()
@@ -70,6 +76,7 @@ public class PlayerStats : MonoBehaviour
         if (PlayerPrefs.GetInt("Coins", 0) < 50)
         {
             Debug.Log("Not enough coins to upgrade Reload Speed!");
+            _uiHandler.SetAlertPrompt("Not enough coins to upgrade Reload Speed!", 2f, Color.red);
             return;
         }
         
@@ -77,6 +84,7 @@ public class PlayerStats : MonoBehaviour
         SaveStats();
         PlayerController.AddCoins(-50);
         PlayerController.InitializePlayerData();
+        _uiHandler.SetAlertPrompt("Reload Speed Upgraded!", 2f, Color.green);
     }
 
     public void UpgradeHealingAmount()
@@ -84,6 +92,7 @@ public class PlayerStats : MonoBehaviour
         if (PlayerPrefs.GetInt("Coins", 0) < 50)
         {
             Debug.Log("Not enough coins to upgrade Healing Amount!");
+            _uiHandler.SetAlertPrompt("Not enough coins to upgrade Healing Amount!", 2f, Color.red);
             return;
         }
         
@@ -91,6 +100,7 @@ public class PlayerStats : MonoBehaviour
         SaveStats();
         PlayerController.AddCoins(-50);
         PlayerController.InitializePlayerData();
+        _uiHandler.SetAlertPrompt("Healing Amount Upgraded!", 2f, Color.green);
     }
 
     public void UpgradeBlockStrength()
@@ -98,6 +108,7 @@ public class PlayerStats : MonoBehaviour
         if (PlayerPrefs.GetInt("Coins", 0) < 50)
         {
             Debug.Log("Not enough coins to upgrade Block Strength!");
+            _uiHandler.SetAlertPrompt("Not enough coins to upgrade Block Strength!", 2f, Color.red);
             return;
         }
         
@@ -105,6 +116,7 @@ public class PlayerStats : MonoBehaviour
         SaveStats();
         PlayerController.AddCoins(-50);
         PlayerController.InitializePlayerData();
+        _uiHandler.SetAlertPrompt("Block Strength Upgraded!", 2f, Color.green);
     }
    
    public void WipeStats()
@@ -116,5 +128,6 @@ public class PlayerStats : MonoBehaviour
         PlayerPrefs.DeleteKey("BlockStrengthStat");
         LoadStats();
         PlayerController.InitializePlayerData();
+        _uiHandler.SetAlertPrompt("Stats Wiped!", 2f, Color.green);
     }
 }

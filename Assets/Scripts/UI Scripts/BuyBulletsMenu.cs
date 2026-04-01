@@ -6,6 +6,7 @@ public class BuyBulletsMenu : MonoBehaviour
     private ProjectileGun _projectileGun;
     [SerializeField] private GameObject buyBulletPanel;
     private PlayerControllerV2 _playerController;
+    private UIHandler _uiHandler;
     public TextMeshProUGUI OrangeButtonText;
     public TextMeshProUGUI TomatoButtonText;
     public TextMeshProUGUI BananaButtonText;
@@ -17,6 +18,7 @@ public class BuyBulletsMenu : MonoBehaviour
     {
         _projectileGun ??= FindFirstObjectByType<ProjectileGun>();
         _playerController ??= FindFirstObjectByType<PlayerControllerV2>();
+        _uiHandler ??= FindFirstObjectByType<UIHandler>();
         DescriptionText.text = "Select a bullet to see its description.";
         UpdateUI();
     }
@@ -135,6 +137,7 @@ public class BuyBulletsMenu : MonoBehaviour
         if (PlayerPrefs.GetInt("Coins", 0) < 300 || PlayerPrefs.GetInt("Bullet_Tomato", 0) == 1)
         {
             Debug.Log("Not enough coins to buy Tomato Bullets or you already own this bullet!");
+            _uiHandler.SetAlertPrompt("Not enough coins to buy Tomato Bullets or you already own this bullet!", 2f, Color.red);
             return;
         }
         else
@@ -143,6 +146,7 @@ public class BuyBulletsMenu : MonoBehaviour
             _projectileGun.LoadOwnedBullets();
             _playerController.AddCoins(-300);
             UpdateUI();
+            _uiHandler.SetAlertPrompt("Tomato Bullets Purchased!", 2f, Color.green);
         }
     }
 
@@ -151,6 +155,7 @@ public class BuyBulletsMenu : MonoBehaviour
         if (PlayerPrefs.GetInt("Coins", 0) < 300 || PlayerPrefs.GetInt("Bullet_Banana", 0) == 1)
         {
             Debug.Log("Not enough coins to buy Banana Bullets or you already own this bullet!");
+            _uiHandler.SetAlertPrompt("Not enough coins to buy Banana Bullets or you already own this bullet!", 2f, Color.red);
             return;
         }
         else
@@ -159,6 +164,7 @@ public class BuyBulletsMenu : MonoBehaviour
             _projectileGun.LoadOwnedBullets();
             _playerController.AddCoins(-300);
             UpdateUI();
+            _uiHandler.SetAlertPrompt("Banana Bullets Purchased!", 2f, Color.green);
         }
     }
 
@@ -167,6 +173,7 @@ public class BuyBulletsMenu : MonoBehaviour
         if (PlayerPrefs.GetInt("Coins", 0) < 300 || PlayerPrefs.GetInt("Bullet_Lemon", 0) == 1)
         {
             Debug.Log("Not enough coins to buy Lemon Bullets or you already own this bullet!");
+            _uiHandler.SetAlertPrompt("Not enough coins to buy Lemon Bullets or you already own this bullet!", 2f, Color.red);
             return;
         }
         else
@@ -175,6 +182,7 @@ public class BuyBulletsMenu : MonoBehaviour
             _projectileGun.LoadOwnedBullets();
             _playerController.AddCoins(-300);
             UpdateUI();
+            _uiHandler.SetAlertPrompt("Lemon Bullets Purchased!", 2f, Color.green);
         }
     }
 
@@ -183,6 +191,7 @@ public class BuyBulletsMenu : MonoBehaviour
         if (PlayerPrefs.GetInt("Coins", 0) < 300 || PlayerPrefs.GetInt("Bullet_Carrot", 0) == 1)
         {
             Debug.Log("Not enough coins to buy Carrot Bullets or you already own this bullet!");
+            _uiHandler.SetAlertPrompt("Not enough coins to buy Carrot Bullets or you already own this bullet!", 2f, Color.red);
             return;
         }
         else
@@ -191,6 +200,7 @@ public class BuyBulletsMenu : MonoBehaviour
             _projectileGun.LoadOwnedBullets();
             _playerController.AddCoins(-300);
             UpdateUI();
+            _uiHandler.SetAlertPrompt("Carrot Bullets Purchased!", 2f, Color.green);
         }
     }
 
@@ -202,6 +212,7 @@ public class BuyBulletsMenu : MonoBehaviour
         PlayerPrefs.DeleteKey("Bullet_Carrot");
         _projectileGun.LoadOwnedBullets();
         UpdateUI();
+        _uiHandler.SetAlertPrompt("Bullets Wiped!", 2f, Color.green);
     }
 
     public void SelectBulletDescription(string bulletType)

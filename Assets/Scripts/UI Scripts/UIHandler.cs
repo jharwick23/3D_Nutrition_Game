@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
+using System.Collections.Generic;
 
 public class UIHandler : MonoBehaviour
 {
@@ -11,6 +13,8 @@ public class UIHandler : MonoBehaviour
     private BulletTypeUIHandler _bulletTypeUIHandler;
     private Image _crosshairImage;
     private GameObject _interactPromptObject; 
+    private GameObject _alertPromptObject;
+    private Coroutine _alertCoroutine; 
 
     void Awake()
     {
@@ -20,6 +24,7 @@ public class UIHandler : MonoBehaviour
         _bulletTypeUIHandler = GetComponentInChildren<BulletTypeUIHandler>();
         _crosshairImage = transform.Find("Crosshair").GetComponent<Image>();
         _interactPromptObject = transform.Find("InteractPrompt").gameObject;
+        _alertPromptObject = transform.Find("AlertPrompt").gameObject;
     }
 
     public void ToggleCrosshair(bool value)
@@ -85,5 +90,29 @@ public class UIHandler : MonoBehaviour
         {
             Debug.LogWarning("InteractPromptText component not found.");
         }
+    }
+
+    public void SetAlertPrompt(string message = "", float duration = 2f, Color? color = null)
+    {
+        if (_alertPromptObject == null) return;
+        
+        TextMeshProUGUI alertText = _alertPromptObject.GetComponent<TextMeshProUGUI>();
+        if (alertText == null) return;
+
+        if (_alertCoroutine != null)
+        {
+            StopCoroutine(_alertCoroutine);
+        }
+
+        alertText.text = message;
+        alertText.color = color ?? Color.red;
+        _alertPromptObject.SetActive(true);
+        _alertCoroutine = StartCoroutine(AlertTimer(duration));
+    }
+    
+    private IEnumerator AlertTimer(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        _alertPromptObject.SetActive(false);
     }
 }

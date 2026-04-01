@@ -161,6 +161,9 @@ public class PlayerControllerV2 : MonoBehaviour
 
     public void Move(Vector2 movementVector)
     {
+        // Does not allow movement if player is dead
+        if(_isDead) return;
+
         if (_characterController == null)
         {
             Debug.LogWarning("CharacterController component not found.");
@@ -171,9 +174,6 @@ public class PlayerControllerV2 : MonoBehaviour
             Debug.LogWarning("CharacterController component is Currently Inactive.");
             return;
         }
-
-        // Does not allow movement if player is dead
-        if(_isDead) return;
         
         // Redundant
         // If the player has landed stop horizontal movement momentarily
@@ -362,6 +362,7 @@ public class PlayerControllerV2 : MonoBehaviour
             CurrentHealth = 0;
             _uiHandler.UpdateHealthUI(CurrentHealth, MaxHealth);
             _inputHandler.DisableInputs();
+            _animator.SetBool("IsGrounded", true);
             _animator.SetTrigger("IsDead");
             _isDead = true;
         }
