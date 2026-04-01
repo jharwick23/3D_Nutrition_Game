@@ -317,7 +317,7 @@ MonoBehaviour:
     m_Bits: 256
   dashForce: 400
   interval: 3
-  height: 1.5
+  height: 3.5
   bobSpeed: 1
   bobAmount: 0.5
 --- !u!54 &9131139313399344015

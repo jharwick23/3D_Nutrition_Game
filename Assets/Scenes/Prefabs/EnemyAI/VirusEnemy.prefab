@@ -412,8 +412,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -23.35, y: 1.035, z: -10.572485}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8114141410011279793}
   - {fileID: 5700704204905770869}
@@ -506,7 +506,7 @@ MonoBehaviour:
     m_Bits: 256
   dashForce: 200
   interval: 3
-  height: 1.5
+  height: 3.5
   bobSpeed: 1
   bobAmount: 0.5
 --- !u!54 &3325909986486651713

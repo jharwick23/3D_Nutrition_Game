@@ -131,8 +131,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bc4a547536dd2b4497c3242a19558db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  takeDamageNum: 10
-  height: 0
+  takeDamageNum: 0
+  height: 2.1
   AOE: {fileID: 6513212597340157193, guid: 48fed416c6d1cd14b9715d6adaef8a73, type: 3}
 --- !u!135 &4042297845602951584
 SphereCollider:
