@@ -99,7 +99,7 @@ public class AiEnemyTurretCoke : AIEnemy
     {
         if (cokeBullet)
         {
-            audioSource.PlayOneShot(cokeBullet, 0.8f);
+            audioSource.PlayOneShot(cokeBullet, 0.2f);
         }
     }
 }
