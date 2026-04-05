@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
+using UnityEngine.UI;
 
 
 public class PauseMenu : MonoBehaviour
@@ -7,6 +9,13 @@ public class PauseMenu : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject pausePanel;
     public TutorialManager tutorialManager;
+    private PlayerControllerV2 _playerController;
+    public GameObject VerticalSensitivityTitle;
+    public GameObject HorizontalSensitivityTitle;
+    private Slider VerticalSensitivitySlider;
+    private Slider HorizontalSensitivitySlider;
+    private TextMeshProUGUI VerticalSensitivityValueText;
+    private TextMeshProUGUI HorizontalSensitivityValueText;
     private bool isPaused = false;
 
     private void Awake()
@@ -26,10 +35,38 @@ public class PauseMenu : MonoBehaviour
     private void Start()
     {
         // Resume(); // Dont call resume, just disable PausePanel
+        pausePanel.SetActive(true);
         if (tutorialManager == null)
         {
             tutorialManager = FindFirstObjectByType<TutorialManager>();
         }
+        if (_playerController == null)
+        {
+            _playerController = FindFirstObjectByType<PlayerControllerV2>();
+        }
+        
+        if (VerticalSensitivityTitle == null)
+        {
+            VerticalSensitivityTitle = GameObject.Find("VerticalSensitivityTitle");
+        }
+        VerticalSensitivitySlider = VerticalSensitivityTitle.GetComponentInChildren<Slider>();
+        VerticalSensitivityValueText = VerticalSensitivityTitle.transform.Find("Value").GetComponentInChildren<TextMeshProUGUI>();
+
+        _playerController.LookSensitivityY = PlayerPrefs.GetFloat("VerticalSensitivity", 20);
+        VerticalSensitivitySlider.value = _playerController.LookSensitivityY;
+        VerticalSensitivityValueText.text = _playerController.LookSensitivityY.ToString("F1");
+        
+        if (HorizontalSensitivityTitle == null)
+        {
+            HorizontalSensitivityTitle = GameObject.Find("HorizontalSensitivityTitle");
+        }
+        HorizontalSensitivitySlider = HorizontalSensitivityTitle.GetComponentInChildren<Slider>();
+        HorizontalSensitivityValueText = HorizontalSensitivityTitle.transform.Find("Value").GetComponentInChildren<TextMeshProUGUI>();
+
+        _playerController.RotationSpeed = PlayerPrefs.GetFloat("HorizontalSensitivity", 20);
+        HorizontalSensitivitySlider.value = _playerController.RotationSpeed;
+        HorizontalSensitivityValueText.text = _playerController.RotationSpeed.ToString("F1");
+        pausePanel.SetActive(false);
     }
 
     private void Update()
@@ -171,5 +208,22 @@ public class PauseMenu : MonoBehaviour
 
         
     }
+
+    public void OnHorizontalSensitivityChanged()
+    {
+        float value = HorizontalSensitivitySlider.value;
+        PlayerPrefs.SetFloat("HorizontalSensitivity", value);
+        _playerController.RotationSpeed = value;
+        HorizontalSensitivityValueText.text = value.ToString("F1");
+    }
+
+    public void OnVerticalSensitivityChanged()
+    {
+        float value = VerticalSensitivitySlider.value;
+        PlayerPrefs.SetFloat("VerticalSensitivity", value);
+        _playerController.LookSensitivityY = value;
+        VerticalSensitivityValueText.text = value.ToString("F1");
+    }
+    
 }
 

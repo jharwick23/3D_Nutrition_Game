@@ -37,10 +37,10 @@ public class PlayerControllerV2 : MonoBehaviour
     [SerializeField] private InputHandlerV2 _inputHandler;
     
     // --- Player Movement/Camera Variables --- \\
-    private float StartingMovementSpeed = 3f;
-    [SerializeField] private float MovementSpeed = 3f;
-    [SerializeField] private float RotationSpeed = 20f; // Horizontal Look Speed
-    [SerializeField] private float LookSensitivityY = 20f; // Veritical Look Speed
+    private float StartingMovementSpeed = 4f;
+    [SerializeField] private float MovementSpeed = 4f;
+    public float RotationSpeed = 20f; // Horizontal Look Speed
+    public float LookSensitivityY = 20f; // Veritical Look Speed
     [SerializeField] private float MinCamAngle = 45f;
     [SerializeField] private float MaxCamAngle = -75f;
     [SerializeField] private float JumpForce = 8f;

@@ -183,13 +183,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68186f0cf2a077d49a3d23cd3809ae69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  enemyHealth: 200
+  enemyHealth: 140
   healthSlider: {fileID: 4024398406059388754}
   isCube: 1
   dropItems: 1
   target: {fileID: 0}
   attackDistance: 15
-  shootCooldown: 3
+  shootCooldown: 4
   upForce: 3
   height: 3.5
   selfMask:
@@ -375,9 +375,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 200
+  m_MaxValue: 140
   m_WholeNumbers: 0
-  m_Value: 200
+  m_Value: 140
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

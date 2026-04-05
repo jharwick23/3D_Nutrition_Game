@@ -83,9 +83,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 100
+  m_MaxValue: 80
   m_WholeNumbers: 0
-  m_Value: 100
+  m_Value: 80
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5a73acdd0fc1574f90e97b0945f599e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  enemyHealth: 100
+  enemyHealth: 80
   healthSlider: {fileID: 75562864363189902}
   isCube: 1
   dropItems: 1

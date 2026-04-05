@@ -5,6 +5,7 @@ public class MainMenuButtonsHandler : MonoBehaviour
 {
     [SerializeField] private GameObject main;
     [SerializeField] private GameObject control;
+    [SerializeField] private GameObject credits;
 
     //Starts game and load main hub
     public void StartGame()
@@ -39,5 +40,12 @@ public class MainMenuButtonsHandler : MonoBehaviour
     {
         main.SetActive(true); 
         control.SetActive(false);
+        credits.SetActive(false);
+    }
+
+    public void Credits()
+    {
+        main.SetActive(false);
+        credits.SetActive(true);
     }
 }

@@ -260,9 +260,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 150
+  m_MaxValue: 110
   m_WholeNumbers: 0
-  m_Value: 150
+  m_Value: 110
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -361,7 +361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d949d5511290da5418016c903bd098a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AIEnemy
-  enemyHealth: 150
+  enemyHealth: 110
   healthSlider: {fileID: 6540563178851217556}
   isCube: 1
   dropItems: 1
