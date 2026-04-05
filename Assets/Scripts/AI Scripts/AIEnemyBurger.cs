@@ -163,7 +163,7 @@ public class AIEnemyBurger : MonoBehaviour
     //handles recovery time and rigidbody and agent manipulation
     IEnumerator RecoverTime()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(3.5f);
         routineCalled = false;
 
         agent.Warp(transform.position);

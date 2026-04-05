@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.32138985, y: -0.0000002659787, z: -0.00000009027207, w: -0.946947}
   m_LocalPosition: {x: -0, y: -0.13, z: 0.042}
-  m_LocalScale: {x: 3.8, y: -6.13252, z: 3.815447}
+  m_LocalScale: {x: 2.192308, y: -14.151971, z: 2.4}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3022307920660866533}
@@ -4836,8 +4836,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -22.76117, y: -0, z: -9.95746}
-  m_LocalScale: {x: 3.8, y: -0.5854651, z: 3.7779071}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 2.65, y: -0.5854651, z: 3.7779071}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4679094135387004278}
   - {fileID: 301681066026850149}
@@ -4862,7 +4862,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.42
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3080048056310392796
 MonoBehaviour:
@@ -4876,9 +4876,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef5b5852b4cca7b4ea471e5bb15d3c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  damage: 10
+  damage: 5
   damageInterval: 1
-  timer: 10
+  timer: 4
   acidSound: {fileID: 8300000, guid: 2c75dd2cf1d97d9b2872ff05aa289a48, type: 3}
   audioSource: {fileID: 0}
 --- !u!82 &-8693233036028102002
@@ -5015,12 +5015,16 @@ PrefabInstance:
       value: Bullet
       objectReference: {fileID: 0}
     - target: {fileID: 4859880167833556, guid: 6f672a31584a6a748912a49c1dce2f0c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 4859880167833556, guid: 6f672a31584a6a748912a49c1dce2f0c, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.2500008
+      value: 0.28947386
       objectReference: {fileID: 0}
     - target: {fileID: 4859880167833556, guid: 6f672a31584a6a748912a49c1dce2f0c, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.2500008
+      value: 0.24084209
       objectReference: {fileID: 0}
     - target: {fileID: 4859880167833556, guid: 6f672a31584a6a748912a49c1dce2f0c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5061,6 +5065,10 @@ PrefabInstance:
     - target: {fileID: 4859880167833556, guid: 6f672a31584a6a748912a49c1dce2f0c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4859880167833556, guid: 6f672a31584a6a748912a49c1dce2f0c, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 198206152677216326, guid: 6f672a31584a6a748912a49c1dce2f0c, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key0.a

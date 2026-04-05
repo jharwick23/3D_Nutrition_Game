@@ -6825,6 +6825,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d14bfc8888d9f6d4985cb6841c20b6a6, type: 3}
+--- !u!1 &111770244 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2573999938333104862, guid: d14bfc8888d9f6d4985cb6841c20b6a6, type: 3}
+  m_PrefabInstance: {fileID: 111770243}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &114200673 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 44becae6b81657f4991dd17059e45da7, type: 3}
@@ -85824,11 +85829,11 @@ MonoBehaviour:
   - {fileID: 707816272}
   - {fileID: 348088579}
   - {fileID: 1446763081}
-  initialSpawnCount: 4
-  respawnAmount: 1
-  respawnThreshold: 3
+  initialSpawnCount: 2
+  respawnAmount: 0
+  respawnThreshold: 2
   spawningDone: 0
-  maxTotalSpawns: 6
+  maxTotalSpawns: 4
 --- !u!65 &1277282508
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -111989,9 +111994,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1504002248}
     - target: {fileID: 5492281647009890819, guid: 46e9351690db0a44d9f9d5517248469c, type: 3}
+      propertyPath: thirdPhaseBulletRate
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5492281647009890819, guid: 46e9351690db0a44d9f9d5517248469c, type: 3}
       propertyPath: SecondPhaseSwitchSpot
       value: 
       objectReference: {fileID: 913933601}
+    - target: {fileID: 5492281647009890819, guid: 46e9351690db0a44d9f9d5517248469c, type: 3}
+      propertyPath: firstPhaseBulletSpeed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5492281647009890819, guid: 46e9351690db0a44d9f9d5517248469c, type: 3}
+      propertyPath: secondPhaseBulletRate
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5492281647009890819, guid: 46e9351690db0a44d9f9d5517248469c, type: 3}
+      propertyPath: thirdPhaseBulletSpeed
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 5492281647009890819, guid: 46e9351690db0a44d9f9d5517248469c, type: 3}
+      propertyPath: secondPhaseBulletSpeed
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 5492281647009890819, guid: 46e9351690db0a44d9f9d5517248469c, type: 3}
       propertyPath: ListOfSwicthSpots.Array.size
       value: 38
@@ -127076,6 +127101,7 @@ GameObject:
   - component: {fileID: 1824871469}
   - component: {fileID: 1824871472}
   - component: {fileID: 1824871471}
+  - component: {fileID: 1824871473}
   m_Layer: 2
   m_Name: BossSpawner
   m_TagString: EnemyZones
@@ -127147,6 +127173,20 @@ MonoBehaviour:
   enemyTypeA: {fileID: 1614016612}
   portal: {fileID: 911708301}
   transform: {fileID: 1614016613}
+--- !u!114 &1824871473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824871468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b57ba4524978b3045a47a21fcc83343f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SetSpawnPoint
+  spawnPoint: {fileID: 2111831069}
+  checkpoint: {fileID: 111770244}
 --- !u!4 &1825331705 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 44becae6b81657f4991dd17059e45da7, type: 3}
@@ -144697,6 +144737,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d14bfc8888d9f6d4985cb6841c20b6a6, type: 3}
+--- !u!1 &2111831069 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2573999938333104862, guid: d14bfc8888d9f6d4985cb6841c20b6a6, type: 3}
+  m_PrefabInstance: {fileID: 2111831068}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2112105751
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -145659,11 +145704,11 @@ MonoBehaviour:
   - {fileID: 691293232}
   - {fileID: 1150895159}
   - {fileID: 779014500}
-  initialSpawnCount: 4
+  initialSpawnCount: 3
   respawnAmount: 1
-  respawnThreshold: 3
+  respawnThreshold: 2
   spawningDone: 0
-  maxTotalSpawns: 6
+  maxTotalSpawns: 4
 --- !u!65 &2129806878
 BoxCollider:
   m_ObjectHideFlags: 0

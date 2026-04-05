@@ -150,9 +150,9 @@ MonoBehaviour:
   isCube: 1
   dropItems: 1
   bullet: {fileID: 5531058492062523310, guid: 18eec0e68ff614e47b59f474cc2f524f, type: 3}
-  firstPhaseBulletSpeed: 70
-  secondPhaseBulletSpeed: 150
-  thirdPhaseBulletSpeed: 80
+  firstPhaseBulletSpeed: 50
+  secondPhaseBulletSpeed: 100
+  thirdPhaseBulletSpeed: 70
   firstPhaseSwicthRate: 10
   thirdPhaseSwicthRate: 4
   liquidChangeRate: 5
