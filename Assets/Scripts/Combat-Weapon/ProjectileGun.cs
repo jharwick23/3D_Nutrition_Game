@@ -97,7 +97,10 @@ public class ProjectileGun : MonoBehaviour
             targetPoint = ray.origin + ray.direction * MaxDistance;
         }
 
-        Vector3 shootDirection = (targetPoint - BulletSpawnPoint.position).normalized;
+        // Vector3 cameraForwardPoint = PlayerCamera.transform.position + PlayerCamera.transform.forward * 0.6f; // tweak distance
+        // Vector3 shootDirection = (targetPoint - cameraForwardPoint).normalized;
+        // Vector3 shootDirection = (targetPoint - BulletSpawnPoint.position).normalized;
+        Vector3 shootDirection = (targetPoint - ray.origin).normalized;
 
         // -- Instantiate Current Bullet -- \\
         if (CurrentBulletType == BulletType.Orange)

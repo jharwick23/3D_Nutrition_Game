@@ -56,7 +56,7 @@ public class AIEnemy : MonoBehaviour
             
                 if (val == 0)
                 {
-                    _dropService.DropHeal(new Vector3(transform.position.x, transform.position.y, transform.position.z), 20);          
+                    _dropService.DropHeal(new Vector3(transform.position.x, transform.position.y, transform.position.z), 15);          
                 }
 
             }
