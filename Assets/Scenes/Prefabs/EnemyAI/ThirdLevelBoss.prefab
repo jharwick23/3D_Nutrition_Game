@@ -158,9 +158,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 600
+  m_MaxValue: 700
   m_WholeNumbers: 0
-  m_Value: 600
+  m_Value: 700
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -386,7 +386,6 @@ GameObject:
   m_Component:
   - component: {fileID: 982475442455046745}
   - component: {fileID: 1466492024288136811}
-  - component: {fileID: 7221395099178725420}
   - component: {fileID: 7983895715000133951}
   - component: {fileID: 8642550105926578781}
   - component: {fileID: 8391113207205816289}
@@ -437,22 +436,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.7618608, z: 1}
   m_Center: {x: 0, y: -0.12984037, z: 0}
---- !u!114 &7221395099178725420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8505377640766458918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d949d5511290da5418016c903bd098a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AIEnemy
-  enemyHealth: 600
-  healthSlider: {fileID: 4516197549080615217}
-  isCube: 1
-  dropItems: 1
 --- !u!114 &7983895715000133951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,7 +448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d57d739e8735f254f90a9c38cb74d00d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  enemyHealth: 600
+  enemyHealth: 700
   healthSlider: {fileID: 4516197549080615217}
   isCube: 1
   dropItems: 1
