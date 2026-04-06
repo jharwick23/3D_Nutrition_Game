@@ -12,6 +12,7 @@ public class AIEnemyExplode : MonoBehaviour
     private bool attackInProg, playerInBox, routineCalled = false;
     private Collider playerCollider;
     public AudioClip explodeAudio;
+    public GameObject explosionVFX;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -71,6 +72,10 @@ public class AIEnemyExplode : MonoBehaviour
         }
         routineCalled = false;
         PlayExplosionSound();
+        if(explosionVFX != null)
+        {
+            Instantiate(explosionVFX, transform.position, Quaternion.identity);
+        }
         Destroy(gameObject);
     }
 

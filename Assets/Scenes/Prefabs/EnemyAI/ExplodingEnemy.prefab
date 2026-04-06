@@ -208,6 +208,7 @@ MonoBehaviour:
   target: {fileID: 0}
   attackDistance: 2
   explodeAudio: {fileID: 8300000, guid: b1a9b9c0ece96300899e625bf4ffbbf8, type: 3}
+  explosionVFX: {fileID: 1742013225946848, guid: b3d8264aa7d2d824a8a503e45291ddf4, type: 3}
 --- !u!1 &4806936029441778592
 GameObject:
   m_ObjectHideFlags: 0

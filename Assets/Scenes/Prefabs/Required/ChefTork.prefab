@@ -581,7 +581,7 @@ MonoBehaviour:
   _hatHandler: {fileID: 0}
   Knife: {fileID: 0}
   Pan: {fileID: 0}
-  _inputHandler: {fileID: 0}
+  _inputHandler: {fileID: 1925598985958938286}
   MovementSpeed: 4
   RotationSpeed: 20
   LookSensitivityY: 20

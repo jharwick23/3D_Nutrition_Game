@@ -17,6 +17,8 @@ public class InputHandlerV2 : MonoBehaviour
     private bool attackHeld = false;
     private float hatEquipShootDelay = 0.2f; // 0.1 - 0.3
     private float nextAllowedShootTime = 0f;
+    private float bashDelay = 1f;
+    private float lastBashTime = 0f;
 
     void Awake()
     {
@@ -177,8 +179,12 @@ public class InputHandlerV2 : MonoBehaviour
 
         if(PlayerController.GetBlocking())
         {
-            PlayerController.IsBashing();
-            PlayerController.SetShieldBash(true);
+            if(Time.time >= lastBashTime + bashDelay)
+            {
+                lastBashTime = Time.time;
+                PlayerController.IsBashing();
+                PlayerController.SetShieldBash(true);
+            }
             return;
         }
 

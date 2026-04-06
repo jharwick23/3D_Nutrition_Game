@@ -16,7 +16,7 @@ public class AIEnemyBossThird : AIEnemy
     private GameObject[] enemies = new GameObject[2];
 
     [SerializeField] private Transform target, spawnpos1, spawnpos2;
-    [SerializeField] private GameObject enemy, bullet;
+    [SerializeField] private GameObject enemy, bullet, slamVFX;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip greaseSound;
     [SerializeField] private Animator animator;
@@ -224,6 +224,10 @@ public class AIEnemyBossThird : AIEnemy
         }
 
         // small delay after landing (impact feel)
+        if(slamVFX != null)
+        {
+            Instantiate(slamVFX, transform.position, Quaternion.identity);
+        }
         yield return new WaitForSeconds(0.4f);
 
         currentAttack = bossAttack.NoAttack;
