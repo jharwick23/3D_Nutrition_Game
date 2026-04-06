@@ -38,4 +38,23 @@ public class DropService : MonoBehaviour
             Debug.LogWarning("MelonCoinPrefab not assigned!");
         }
     }
+
+    public void DeleteAllDrops()
+    {
+        CollectHeal[] heals = FindObjectsByType<CollectHeal>(FindObjectsSortMode.None);
+        foreach (CollectHeal heal in heals)
+        {
+            // Check scale of heal before destroying to avoid deleting inital spawns
+            if (heal.transform.localScale.x < 1.5f)
+            {
+                Destroy(heal.gameObject);   
+            }
+        }
+        
+        CollectCoin[] coins = FindObjectsByType<CollectCoin>(FindObjectsSortMode.None);
+        foreach (CollectCoin coin in coins)
+        {
+            Destroy(coin.gameObject);
+        }
+    }
 }

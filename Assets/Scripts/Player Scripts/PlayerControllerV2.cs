@@ -16,6 +16,7 @@ public class PlayerControllerV2 : MonoBehaviour
     public UIHandler _uiHandler;
     private Animator _animator;
     public TutorialManager tutorialManager;
+    private DropService _dropService;
 
     // Camera Variables
     [SerializeField] private Transform cameraRig; // rotates yaw
@@ -101,7 +102,11 @@ public class PlayerControllerV2 : MonoBehaviour
         }
         if (_inputHandler == null)
         {
-            // _inputHandler = FindFirstObjectByType<InputHandlerV2>();
+            _inputHandler = FindFirstObjectByType<InputHandlerV2>();
+        }
+        if (_dropService == null)
+        {
+            _dropService = FindFirstObjectByType<DropService>();
         }
         
         // Initialize Player Data
@@ -483,6 +488,9 @@ public class PlayerControllerV2 : MonoBehaviour
                     }
                 }
             }
+
+            // Delete all drops in the scene
+            _dropService.DeleteAllDrops();
             
 
             GameObject zone = GameObject.FindGameObjectWithTag("SideZone");
