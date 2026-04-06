@@ -180,10 +180,9 @@ public class BossController : MonoBehaviour
     //Handles actual value damage change, Adds new damage script for phase 2
     public void TakeDamage(int amount)
     {
+        if(currentState == BossState.Charging) return;
         currentHealth -= amount;
-        Debug.Log(currentHealth);
         HealthSlider.value = currentHealth;
-        Debug.Log(HealthSlider.value);
 
         if (currentHealth <= maxHealth / 2 && currentState == BossState.PhaseOne)
         {
