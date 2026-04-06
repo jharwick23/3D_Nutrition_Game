@@ -100,7 +100,7 @@ public class PlayerControllerV2 : MonoBehaviour
         }
         if (_inputHandler == null)
         {
-            // _inputHandler = FindFirstObjectByType<InputHandlerV2>();
+            _inputHandler = FindFirstObjectByType<InputHandlerV2>();
         }
         
         // Initialize Player Data
