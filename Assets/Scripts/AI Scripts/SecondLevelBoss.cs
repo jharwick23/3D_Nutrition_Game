@@ -11,7 +11,7 @@ public class BossController : MonoBehaviour
 {
     public enum BossState { PhaseOne, PhaseTwo, Charging, Stunned }
     public BossState currentState;
-    public int maxHealth = 1000;
+    public int maxHealth = 500;
     private int currentHealth;
     public GameObject[] minionPrefabs;
     public Transform[] minionSpawnPoints;
@@ -32,6 +32,8 @@ public class BossController : MonoBehaviour
     public Slider HealthSlider;
     private Rigidbody rbb;
     public Animator animator;
+    public AudioSource audioSource;
+    public AudioClip sugarBulletAudio, crashAudio;
 
     void Awake()
     {
@@ -45,6 +47,7 @@ public class BossController : MonoBehaviour
     void Start()
     {
         rbb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
         currentHealth = maxHealth;
@@ -80,34 +83,22 @@ public class BossController : MonoBehaviour
                 rbb.MoveRotation(targetRotation);
             }
         }
-        else if (currentState == BossState.Stunned)
-        {
-            animator.SetBool("IsInjured", true);
-            PlayCrashSound();
-        }
-
     }
 
     void PlayCrashSound()
     {
-        if (!SFXManager.Instance)
+        if (crashAudio)
         {
-            Debug.LogError("SFXManager not found in scene");
-            return;
+            audioSource.PlayOneShot(crashAudio);
         }
-
-        SFXManager.Instance.Play(SFXManager.SFXType.CrashIntoWall);
     }
 
     void PlayShootingSound()
     {
-        if (!SFXManager.Instance)
+        if (sugarBulletAudio)
         {
-            Debug.LogError("SFXManager not found in scene");
-            return;
+            audioSource.PlayOneShot(sugarBulletAudio, 0.5f);
         }
-
-        SFXManager.Instance.Play(SFXManager.SFXType.SugarBullet);
     }
 
     //Routine to shoot while in phase one
@@ -190,7 +181,9 @@ public class BossController : MonoBehaviour
     public void TakeDamage(int amount)
     {
         currentHealth -= amount;
+        Debug.Log(currentHealth);
         HealthSlider.value = currentHealth;
+        Debug.Log(HealthSlider.value);
 
         if (currentHealth <= maxHealth / 2 && currentState == BossState.PhaseOne)
         {
@@ -259,6 +252,10 @@ public class BossController : MonoBehaviour
     IEnumerator StunDuration(float time)
     {
         currentState = BossState.Stunned;
+
+        animator.SetBool("IsInjured", true);
+        PlayCrashSound();
+
         yield return new WaitForSeconds(time);
         currentState = BossState.PhaseTwo;
     }

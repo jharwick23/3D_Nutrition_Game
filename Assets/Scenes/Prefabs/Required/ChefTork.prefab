@@ -112,6 +112,9 @@ MonoBehaviour:
   PlayerController: {fileID: 0}
   StandardProjectileGun: {fileID: 0}
   pauseMenu: {fileID: 0}
+  bulletShopNPC: {fileID: 0}
+  upgradeMenuNPC: {fileID: 0}
+  tutorialManager: {fileID: 0}
 --- !u!114 &3994879083126744176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -572,19 +575,21 @@ MonoBehaviour:
   CurrentHealth: 100
   Coins: 0
   _uiHandler: {fileID: 0}
+  tutorialManager: {fileID: 0}
   cameraRig: {fileID: 7742325780353422868}
   cameraFollowTarget: {fileID: 7250876266448177484}
   _hatHandler: {fileID: 0}
   Knife: {fileID: 0}
   Pan: {fileID: 0}
-  MovementSpeed: 5
+  _inputHandler: {fileID: 0}
+  MovementSpeed: 4
   RotationSpeed: 20
   LookSensitivityY: 20
   MinCamAngle: 45
   MaxCamAngle: -75
   JumpForce: 8
   Gravity: -25
-  SprintMultiplier: 2
+  SprintMultiplier: 1.8
   fallVelocityThreshold: -2.5
   fallTimeThreshold: 0.18
 --- !u!114 &7548074881497688586

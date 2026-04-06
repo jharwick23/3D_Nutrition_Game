@@ -13,11 +13,13 @@ public class AiEnemyTurretCoke : AIEnemy
     private float fireRate = 0;
     [SerializeField] private float shootingRate;
     private PlayerControllerV2 player;
-    
+    public AudioClip cokeBullet;
+    public AudioSource audioSource;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         player = FindAnyObjectByType<PlayerControllerV2>();
     }
 
@@ -95,12 +97,9 @@ public class AiEnemyTurretCoke : AIEnemy
     
     void PlayShootingSound()
     {
-        if (!SFXManager.Instance)
+        if (cokeBullet)
         {
-            Debug.LogError("SFXManager not found in scene");
-            return;
+            audioSource.PlayOneShot(cokeBullet, 0.2f);
         }
-
-        SFXManager.Instance.Play(SFXManager.SFXType.SodaBullet);
     }
 }

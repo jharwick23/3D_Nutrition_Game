@@ -45,6 +45,10 @@ public class BossSpawn : MonoBehaviour
                 {
                     PlayerPrefs.SetInt("ThirdLevelCompleted", 1);
                 }
+                else if (SceneManager.GetActiveScene().name == "FourthLevel")
+                {
+                    PlayerPrefs.SetInt("FourthLevelCompleted", 1);
+                }
                 PlayerPrefs.Save();
             }
         }
@@ -57,6 +61,10 @@ public class BossSpawn : MonoBehaviour
         spawned = false;
         dead = true;
         portal.SetActive(false);
-        GetComponent<EnableWalls>().DeactivateWalls();
+        EnableWalls walls = GetComponent<EnableWalls>();
+        if (walls != null)
+        {
+            walls.DeactivateWalls();
+        }
     }
 }

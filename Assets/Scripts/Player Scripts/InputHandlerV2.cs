@@ -14,35 +14,11 @@ public class InputHandlerV2 : MonoBehaviour
     public UpgradeMenuNPC upgradeMenuNPC;
     public TutorialManager tutorialManager;
     private bool inputsEnabled = true;
+    private bool attackHeld = false;
+    private float hatEquipShootDelay = 0.2f; // 0.1 - 0.3
+    private float nextAllowedShootTime = 0f;
 
     void Awake()
-    {
-        if (PlayerController == null)
-        {
-            PlayerController = FindFirstObjectByType<PlayerControllerV2>();
-        }
-        if (StandardProjectileGun == null)
-        {
-            StandardProjectileGun = FindFirstObjectByType<ProjectileGun>();
-        }
-        if(pauseMenu == null)
-        {
-            pauseMenu = FindFirstObjectByType<PauseMenu>();
-        }
-        if (bulletShopNPC == null)
-        {
-            bulletShopNPC = FindFirstObjectByType<BulletShopNPC>();
-        }
-        if (upgradeMenuNPC == null)
-        {
-            upgradeMenuNPC = FindFirstObjectByType<UpgradeMenuNPC>();
-        }
-        if (tutorialManager == null)
-        {
-            tutorialManager = FindFirstObjectByType<TutorialManager>();
-        }
-    }
-    void Start()
     {
         playerInput = GetComponent<PlayerInput>();
 
@@ -71,6 +47,33 @@ public class InputHandlerV2 : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
+    void Start()
+    {
+        if (PlayerController == null)
+        {
+            PlayerController = FindFirstObjectByType<PlayerControllerV2>();
+        }
+        if (StandardProjectileGun == null)
+        {
+            StandardProjectileGun = FindFirstObjectByType<ProjectileGun>();
+        }
+        if(pauseMenu == null)
+        {
+            pauseMenu = FindFirstObjectByType<PauseMenu>();
+        }
+        if (bulletShopNPC == null)
+        {
+            bulletShopNPC = FindFirstObjectByType<BulletShopNPC>();
+        }
+        if (upgradeMenuNPC == null)
+        {
+            upgradeMenuNPC = FindFirstObjectByType<UpgradeMenuNPC>();
+        }
+        if (tutorialManager == null)
+        {
+            tutorialManager = FindFirstObjectByType<TutorialManager>();
+        }
+    }
 
     void Update()
     {
@@ -83,15 +86,20 @@ public class InputHandlerV2 : MonoBehaviour
         PlayerController.Move(movementVector);
         PlayerController.Rotate(lookVector);
 
-        if (_attackAction != null && _attackAction.IsPressed() && inputsEnabled)
+        // Shoot if hat is equipped
+        if (attackHeld && inputsEnabled)
         {
-            OnAttackPerformed();
+            if (PlayerController.GetHatEquipped() && Time.time >= nextAllowedShootTime)
+            {
+                StandardProjectileGun.Shoot();
+                PlayerController.SetLastShootingAttackTime();
+            }
         }
 
-        // if(movementVector != Vector2.zero)
-        // {
-        //     tutorialManager.DoMovement();
-        // }
+        if (PlayerController.IsDead())
+        {
+            attackHeld = false;
+        }
     }
 
     void OnDisable()
@@ -104,7 +112,8 @@ public class InputHandlerV2 : MonoBehaviour
     {
         inputsEnabled = false;
         _reloadAction.performed -= OnReloadPerformed;
-        // _attackAction.performed -= OnAttackPerformed;
+        _attackAction.performed -= OnAttackPerformed;
+        _attackAction.canceled -= OnAttackCanceled;
         _meleeAction.performed -= OnMeleePerformed;
         _meleeAction.canceled -= OnMeleeCancelled;
         _blockAction.performed -= OnBlockingPerformed;
@@ -125,7 +134,8 @@ public class InputHandlerV2 : MonoBehaviour
         DisableInputs();
         inputsEnabled = true;
         _reloadAction.performed += OnReloadPerformed;
-        // _attackAction.performed += OnAttackPerformed;
+        _attackAction.performed += OnAttackPerformed;
+        _attackAction.canceled += OnAttackCanceled;
         _meleeAction.performed += OnMeleePerformed;
         _meleeAction.canceled += OnMeleeCancelled;
         _blockAction.performed += OnBlockingPerformed;
@@ -145,7 +155,8 @@ public class InputHandlerV2 : MonoBehaviour
     {
         inputsEnabled = false;
         _reloadAction.performed -= OnReloadPerformed;
-        // _attackAction.performed -= OnAttackPerformed;
+        _attackAction.performed -= OnAttackPerformed;
+        _attackAction.canceled -= OnAttackCanceled;
         _meleeAction.performed -= OnMeleePerformed;
         _meleeAction.canceled -= OnMeleeCancelled;
         _blockAction.performed -= OnBlockingPerformed;
@@ -163,24 +174,42 @@ public class InputHandlerV2 : MonoBehaviour
         PlayerController.Jump();
     }
 
-    private void OnAttackPerformed()
+    private void OnAttackPerformed(InputAction.CallbackContext context)
     {
+        if (!inputsEnabled) return;
+
+        attackHeld = true;
+
         if(PlayerController.GetBlocking())
         {
             PlayerController.IsBashing();
             PlayerController.SetShieldBash(true);
             return;
         }
-        StandardProjectileGun.Shoot();
-        PlayerController.SetHatEquipped(true);
-        PlayerController._hatHandler.SetOnGun();
-        PlayerController.SetLastShootingAttackTime();
+
+        // Equip hat only
+        if (!PlayerController.GetHatEquipped())
+        {
+            PlayerController.SetHatEquipped(true);
+            PlayerController._hatHandler.SetOnGun();
+            PlayerController.SetLastShootingAttackTime();
+            nextAllowedShootTime = Time.time + hatEquipShootDelay;
+            return;
+        }
+    }
+
+    private void OnAttackCanceled(InputAction.CallbackContext context)
+    {
+        attackHeld = false;
     }
 
     private void OnMeleePerformed(InputAction.CallbackContext context)
     {
-        PlayerController.IsMeleeAttacking(true);
-        PlayerController.Knife.HoldKnifeInHand();
+        if (!PlayerController.GetBlocking())
+        {
+            PlayerController.IsMeleeAttacking(true);
+            PlayerController.Knife.HoldKnifeInHand();
+        }
     }
 
     private void OnMeleeCancelled(InputAction.CallbackContext context)
@@ -190,13 +219,17 @@ public class InputHandlerV2 : MonoBehaviour
 
     private void OnBlockingPerformed(InputAction.CallbackContext context)
     {
-        PlayerController.IsBlocking(true);
-        PlayerController.Pan.HoldPanInHand();
+        if (!PlayerController.GetMeleeAttacking())
+        {
+            PlayerController.IsBlocking(true);
+            PlayerController.Pan.HoldPanInHand();   
+        }
     }
 
     private void OnBlockingCancelled(InputAction.CallbackContext context)
     {
         PlayerController.IsBlocking(false);
+        PlayerController.Pan.SetPanOnBack();
     }
 
     private void OnDodgePerformed(InputAction.CallbackContext context)

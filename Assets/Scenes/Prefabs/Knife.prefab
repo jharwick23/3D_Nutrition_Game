@@ -95,9 +95,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bf4fcbc34093aea9af18a9c0881b5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KnifeOnHit
+  tutorialManager: {fileID: 0}
   restKnifePoint: {fileID: 0}
   holdKnifePoint: {fileID: 0}
-  knifeDamage: 25
+  knifeDamage: 50
 --- !u!54 &7319041372355195276
 Rigidbody:
   m_ObjectHideFlags: 0

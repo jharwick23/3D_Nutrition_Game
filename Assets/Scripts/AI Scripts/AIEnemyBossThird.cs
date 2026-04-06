@@ -14,19 +14,21 @@ public class AIEnemyBossThird : AIEnemy
     private bool slam = true, liquidShot = true, enemySpawn = true, enemiesDead = true;
     [SerializeField] float slamTimer, shootTimer, spawnTimer, SpinTimer;
     private GameObject[] enemies = new GameObject[2];
-    private Rigidbody rb;
 
     [SerializeField] private Transform target, spawnpos1, spawnpos2;
     [SerializeField] private GameObject enemy, bullet;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip greaseSound;
+    [SerializeField] private Animator animator;
     
 
     // initialized the boss
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         healthScript = GetComponent<AIEnemy>();
         currentStage = bossStage.FirstPhase;
         currentAttack = bossAttack.NoAttack;
-        rb = GetComponent<Rigidbody>();
         StartCoroutine(MinionMaintanence());
     }
 
@@ -81,6 +83,20 @@ public class AIEnemyBossThird : AIEnemy
                 }
             }
         }
+
+        // Check if Boss is grounded for jump
+        float radius = 2.5f;
+        float distance = 1.5f;
+
+        bool grounded = Physics.SphereCast(
+            transform.position + Vector3.up * 0.1f,
+            radius,
+            Vector3.down,
+            out RaycastHit hit,
+            distance
+        );
+
+        animator.SetBool("IsGrounded", grounded);
     }
 
 
@@ -149,55 +165,97 @@ public class AIEnemyBossThird : AIEnemy
         }
     }
 
-    //Coreroutine for small attack
     IEnumerator SlamAttack()
     {
-        //Reset any velocity
-        rb.angularVelocity = Vector3.zero;
-        rb.linearVelocity = Vector3.zero;  
+        yield return new WaitForSeconds(0.4f);
 
-        //Add force for jump
-        rb.AddForce(Vector3.up * 800f, ForceMode.Impulse);
-        //Debug.Log("Attmepted slam");
+        animator.SetTrigger("SlamJumpRequested");
 
+        float upwardVelocity = 35f;
+        float gravity = -60f;
+        float moveSpeed = 16f;
+        float airControl = 0.6f;
 
-        yield return new WaitForSeconds(2f);
+        Vector3 toPlayer = target.position - transform.position;
+        toPlayer.y = 0f;
 
-        //Add force for slam
-        rb.linearVelocity = Vector3.zero;
-        Vector3 distance = (target.position - transform.position).normalized;
-        Vector3 SlamForce = (distance * 3000f) + (Vector3.down * 500f);
-        rb.AddForce(SlamForce, ForceMode.Impulse);
+        float distance = toPlayer.magnitude;
+        Vector3 dir = toPlayer.normalized;
 
-        yield return new WaitForSeconds(2f);
+        // dynamic offset so it doesn't land on player
+        float safeRadius = 0.01f;
+
+        Vector3 targetPos = target.position - dir * safeRadius;
+
+        Vector3 velocity = Vector3.up * upwardVelocity;
+
+        bool grounded = false;
+
+        while (!grounded)
+        {
+            // horizontal movement toward locked position
+            Vector3 moveDir = (targetPos - transform.position).normalized * moveSpeed;
+
+            // smoother air control (prevents overshoot)
+            velocity.x = Mathf.Lerp(velocity.x, moveDir.x, airControl);
+            velocity.z = Mathf.Lerp(velocity.z, moveDir.z, airControl);
+
+            // gravity
+            velocity.y += gravity * Time.deltaTime;
+
+            // move
+            transform.position += velocity * Time.deltaTime;
+
+            // ground check
+            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 2f))
+            {
+                float offset = GetComponent<Collider>().bounds.extents.y;
+
+                if (transform.position.y <= hit.point.y + offset + 0.05f)
+                {
+                    // snap cleanly to ground (no sinking)
+                    transform.position = hit.point + Vector3.up * (offset + 0.25f);
+
+                    grounded = true;
+                }
+            }
+
+            yield return null;
+        }
+
+        // small delay after landing (impact feel)
+        yield return new WaitForSeconds(0.4f);
 
         currentAttack = bossAttack.NoAttack;
+
         if (currentStage == bossStage.SecondPhase)
         {
             StartCoroutine(SetTimer(slamTimer, "slam"));
         }
-        
     }
 
     //Does shooting, looks complex but not
     IEnumerator Shoot()
     {
-        //Debug.Log("Attempting shot");
+        animator.SetBool("IsSpinning", true);
 
-        //Spinning and enabling if the liquid effect which have damage handling
         float timer = 0f;
-        rb.angularDamping = 0f;
+        //Spinning and enabling if the liquid effect which have damage handling
+        StartLiquidSound();
         LiquidHandling(true);
+
         while (timer < SpinTimer)
         {
-            rb.angularVelocity = Vector3.up * 5f;
+            transform.Rotate(Vector3.up * 300f * Time.deltaTime);
 
             timer += Time.deltaTime;
             yield return null;
         }
-        rb.angularDamping = 0.05f;
-        rb.angularVelocity = Vector3.zero;
+
         LiquidHandling(false);
+        StopLiquidSound();
+
+        animator.SetBool("IsSpinning", false);
 
         currentAttack = bossAttack.NoAttack;
         StartCoroutine(SetTimer(shootTimer, "shoot"));
@@ -216,5 +274,19 @@ public class AIEnemyBossThird : AIEnemy
         {
             Destroy(gameObject);
         }
+    }
+
+    void StartLiquidSound()
+    {
+        if (greaseSound == null) return;
+
+        audioSource.clip = greaseSound;
+        audioSource.loop = true;
+        audioSource.Play();
+    }
+
+    void StopLiquidSound()
+    {
+        audioSource.Stop();
     }
 }

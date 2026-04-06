@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3342048734010483912}
   - component: {fileID: 6231257517571906988}
   - component: {fileID: 3648598860081435821}
+  - component: {fileID: 3772619097586774274}
   m_Layer: 7
   m_Name: CarrotBullet
   m_TagString: Bullet
@@ -110,7 +111,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
@@ -172,6 +173,27 @@ MonoBehaviour:
   BulletDrop: 0
   LifeTime: 5
   maxAmmo: 24
-  timeBetweenShooting: 0.2
+  timeBetweenShooting: 1.2
   ImpactDecalPrefab: {fileID: 5631425737720120280, guid: 5d175a2cbbc7c7f43b33138b69c7bc95, type: 3}
   projectileSFX: {fileID: 0}
+--- !u!65 &3772619097586774274
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5222569352696420437}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.05, y: 0.05, z: 0.05}
+  m_Center: {x: 0, y: 0.00000013411045, z: -0.000000007450581}

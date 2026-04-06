@@ -13,6 +13,11 @@ public class PanController : MonoBehaviour
     
     void Awake()
     {
+
+    }
+
+    void Start()
+    {
         if (holdPanPoint == null)
         {
             holdPanPoint = GameObject.Find("HoldPanPoint").transform;
@@ -22,10 +27,6 @@ public class PanController : MonoBehaviour
         {
             restPanPoint = GameObject.Find("PanRestPoint").transform;
         }
-    }
-
-    void Start()
-    {
         isOnBack = true;
         if (tutorialManager == null)
         {
@@ -56,6 +57,16 @@ public class PanController : MonoBehaviour
         }
     }
 
+    void PlayShieldBashSound()
+    {
+        if (!SFXManager.Instance)
+        {
+            Debug.LogError("SFXManager not found in scene");
+            return;
+        }
+
+        SFXManager.Instance.Play(SFXManager.SFXType.ShieldBash);
+    }
     // Opens short damage window for the shield bash
     // Only called once bash start
     // Resets the hit lock so the bash can damage again
@@ -65,6 +76,7 @@ public class PanController : MonoBehaviour
 
         damageActive = true;
         hasHitThisBash = false;
+        PlayShieldBashSound();
 
         CancelInvoke(nameof(EndBashDamage));
         Invoke(nameof(EndBashDamage), duration);

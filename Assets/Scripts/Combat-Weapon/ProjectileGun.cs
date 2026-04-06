@@ -36,6 +36,10 @@ public class ProjectileGun : MonoBehaviour
 
     void Awake()
     {
+    }
+    
+    private void Start()
+    {
         if (PlayerCamera == null)
         {
             PlayerCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
@@ -53,10 +57,6 @@ public class ProjectileGun : MonoBehaviour
         {
             tutorialManager = FindFirstObjectByType<TutorialManager>();
         }
-    }
-    
-    private void Start()
-    {
         LoadOwnedBullets();
         maxAmmo = OrangeBulletPrefab.GetComponent<OrangeBullet>().maxAmmo;
         currentAmmo = maxAmmo;
@@ -69,7 +69,7 @@ public class ProjectileGun : MonoBehaviour
         // -- Shooting Preconditions -- \\
         if (!canShoot || isReloading || 
             !PlayerController.GetHatEquipped() || PlayerController.GetBlocking()
-            || PlayerController.GetMeleeAttacking())
+            || PlayerController.GetMeleeAttacking() || PlayerController.IsDead())
             return;
 
         if (currentAmmo <= 0)
@@ -83,7 +83,7 @@ public class ProjectileGun : MonoBehaviour
         ShootSound();
         currentAmmo--;
         _uiHandler.UpdateAmmoUI(currentAmmo.ToString() + " / Inf");
-
+        
         // -- Shooting Logic -- \\
         Ray ray = PlayerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         Vector3 targetPoint;
@@ -97,7 +97,10 @@ public class ProjectileGun : MonoBehaviour
             targetPoint = ray.origin + ray.direction * MaxDistance;
         }
 
-        Vector3 shootDirection = (targetPoint - BulletSpawnPoint.position).normalized;
+        // Vector3 cameraForwardPoint = PlayerCamera.transform.position + PlayerCamera.transform.forward * 0.6f; // tweak distance
+        // Vector3 shootDirection = (targetPoint - cameraForwardPoint).normalized;
+        // Vector3 shootDirection = (targetPoint - BulletSpawnPoint.position).normalized;
+        Vector3 shootDirection = (targetPoint - ray.origin).normalized;
 
         // -- Instantiate Current Bullet -- \\
         if (CurrentBulletType == BulletType.Orange)

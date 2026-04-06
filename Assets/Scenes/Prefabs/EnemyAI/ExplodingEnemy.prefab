@@ -192,6 +192,7 @@ MonoBehaviour:
   enemyHealth: 50
   healthSlider: {fileID: 5641001236623417741}
   isCube: 1
+  dropItems: 1
 --- !u!114 &7224313074676099302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,6 +207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   target: {fileID: 0}
   attackDistance: 2
+  explodeAudio: {fileID: 8300000, guid: b1a9b9c0ece96300899e625bf4ffbbf8, type: 3}
 --- !u!1 &4806936029441778592
 GameObject:
   m_ObjectHideFlags: 0

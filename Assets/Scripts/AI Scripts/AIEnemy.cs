@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class AIEnemy : MonoBehaviour
 {
@@ -14,7 +15,10 @@ public class AIEnemy : MonoBehaviour
 
     void Awake()
     {
-        _dropService = GameObject.FindWithTag("DropService").GetComponent<DropService>();
+        if(!_dropService)
+        {
+            _dropService = GameObject.FindWithTag("DropService").GetComponent<DropService>();
+        }
     }
 
     //Checks if game object has no health so it can destroy itself
@@ -25,14 +29,34 @@ public class AIEnemy : MonoBehaviour
             if (dropItems)
             {
                 OnDeathEvent();
-                _dropService.DropCoin(new Vector3(transform.position.x, transform.position.y, transform.position.z), 10); // Drop Coin
+                //Debug.Log(_dropService);
+                //Debug.Log(transform);
+                if (SceneManager.GetActiveScene().name == "SideQuestOne")
+                {
+                    _dropService.DropCoin(new Vector3(transform.position.x, transform.position.y, transform.position.z), 15); // Drop Coin
+                }
+                else if(SceneManager.GetActiveScene().name == "FirstLevel")
+                {
+                    _dropService.DropCoin(new Vector3(transform.position.x, transform.position.y, transform.position.z), 10); // Drop Coin
+                }
+                else if(SceneManager.GetActiveScene().name == "SecondLevel")
+                {
+                    _dropService.DropCoin(new Vector3(transform.position.x, transform.position.y, transform.position.z), 15); // Drop Coin
+                }
+                else if(SceneManager.GetActiveScene().name == "ThirdLevel")
+                {
+                    _dropService.DropCoin(new Vector3(transform.position.x, transform.position.y, transform.position.z), 18); // Drop Coin
+                }
+                else if(SceneManager.GetActiveScene().name == "FourthLevel")
+                {
+                    _dropService.DropCoin(new Vector3(transform.position.x, transform.position.y, transform.position.z), 20); // Drop Coin
+                }
             
-                int val = Random.Range(0, 1);
+                int val = Random.Range(0, 2);
             
                 if (val == 0)
-            
                 {
-                    _dropService.DropHeal(new Vector3(transform.position.x, transform.position.y, transform.position.z), 20);          
+                    _dropService.DropHeal(new Vector3(transform.position.x, transform.position.y, transform.position.z), 15);          
                 }
 
             }

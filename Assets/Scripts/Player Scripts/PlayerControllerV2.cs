@@ -1,4 +1,5 @@
 using System.Data.SqlTypes;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerControllerV2 : MonoBehaviour
@@ -15,6 +16,7 @@ public class PlayerControllerV2 : MonoBehaviour
     public UIHandler _uiHandler;
     private Animator _animator;
     public TutorialManager tutorialManager;
+    private DropService _dropService;
 
     // Camera Variables
     [SerializeField] private Transform cameraRig; // rotates yaw
@@ -31,16 +33,20 @@ public class PlayerControllerV2 : MonoBehaviour
 
     // Pan Object
     public PanController Pan;
+
+    // Input Handler Object
+    [SerializeField] private InputHandlerV2 _inputHandler;
     
     // --- Player Movement/Camera Variables --- \\
-    [SerializeField] private float MovementSpeed = 5f;
-    [SerializeField] private float RotationSpeed = 20f; // Horizontal Look Speed
-    [SerializeField] private float LookSensitivityY = 20f; // Veritical Look Speed
+    private float StartingMovementSpeed = 4f;
+    [SerializeField] private float MovementSpeed = 4f;
+    public float RotationSpeed = 20f; // Horizontal Look Speed
+    public float LookSensitivityY = 20f; // Veritical Look Speed
     [SerializeField] private float MinCamAngle = 45f;
     [SerializeField] private float MaxCamAngle = -75f;
     [SerializeField] private float JumpForce = 8f;
     [SerializeField] private float Gravity = -25f;
-    [SerializeField] private float SprintMultiplier = 2f;
+    [SerializeField] private float SprintMultiplier = 1.8f;
     private float distanceFromGroundThreshold = 0.4f;
 
     // Movement and Animation variables
@@ -65,6 +71,10 @@ public class PlayerControllerV2 : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _characterController = GetComponent<CharacterController>();
+    }
+
+    void Start()
+    {
         //if (CameraController == null)
         //{
         //    CameraController = FindFirstObjectByType<CameraControllerV2>();
@@ -89,10 +99,15 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             tutorialManager = FindFirstObjectByType<TutorialManager>();
         }
-    }
-
-    void Start()
-    {
+        if (_inputHandler == null)
+        {
+            _inputHandler = FindFirstObjectByType<InputHandlerV2>();
+        }
+        if (_dropService == null)
+        {
+            _dropService = FindFirstObjectByType<DropService>();
+        }
+        
         // Initialize Player Data
         InitializePlayerData();
 
@@ -129,7 +144,7 @@ public class PlayerControllerV2 : MonoBehaviour
         Coins = PlayerPrefs.GetInt("Coins", 0);
         _uiHandler.UpdateCoinUI(Coins);
 
-        MovementSpeed = 5f + PlayerPrefs.GetInt("MovementSpeedStat", 0) * 0.5f;
+        MovementSpeed = StartingMovementSpeed +PlayerPrefs.GetInt("MovementSpeedStat", 0) * 0.25f;
         
     }
 
@@ -151,6 +166,9 @@ public class PlayerControllerV2 : MonoBehaviour
 
     public void Move(Vector2 movementVector)
     {
+        // Does not allow movement if player is dead
+        if(_isDead) return;
+
         if (_characterController == null)
         {
             Debug.LogWarning("CharacterController component not found.");
@@ -161,9 +179,6 @@ public class PlayerControllerV2 : MonoBehaviour
             Debug.LogWarning("CharacterController component is Currently Inactive.");
             return;
         }
-
-        // Does not allow movement if player is dead
-        if(_isDead) return;
         
         // Redundant
         // If the player has landed stop horizontal movement momentarily
@@ -334,6 +349,8 @@ public class PlayerControllerV2 : MonoBehaviour
 
     public void TakeDamage(float damageAmount)
     {
+        if (_isDead) return;
+        
         if (GetBlocking())
         {
             float baseReduction = 0.30f;
@@ -349,6 +366,8 @@ public class PlayerControllerV2 : MonoBehaviour
             DeathSound();
             CurrentHealth = 0;
             _uiHandler.UpdateHealthUI(CurrentHealth, MaxHealth);
+            _inputHandler.DisableInputs();
+            _animator.SetBool("IsGrounded", true);
             _animator.SetTrigger("IsDead");
             _isDead = true;
         }
@@ -468,6 +487,9 @@ public class PlayerControllerV2 : MonoBehaviour
                     }
                 }
             }
+
+            // Delete all drops in the scene
+            _dropService.DeleteAllDrops();
             
 
             GameObject zone = GameObject.FindGameObjectWithTag("SideZone");
@@ -490,12 +512,22 @@ public class PlayerControllerV2 : MonoBehaviour
             _characterController.enabled = true;
             _verticalVelocity = -2f;
             _isDead = false;
+            // StartCoroutine(EnableInputsNextFrame());
+
+            _animator.Rebind();
+            _animator.Update(0f);
         }
         else
         {
             Debug.LogError("RespawnPoint not found in the scene.");
         }
     }
+
+    // IEnumerator EnableInputsNextFrame()
+    // {
+    //     yield return null;
+    //     _inputHandler.EnableInputs();
+    // }
 
     public bool IsMaxHealth()
     {

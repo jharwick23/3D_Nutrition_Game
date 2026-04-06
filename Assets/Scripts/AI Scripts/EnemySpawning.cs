@@ -87,5 +87,16 @@ public class EnemySpawner : MonoBehaviour
         spawnedEnemies.Clear();
         spawningDone = false; 
         totalSpawned = 0;
+
+        GameObject[] smallEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        //Just for fourthlevel
+        foreach (var enemy in smallEnemies)
+        {
+            if (enemy.name == "VirusEnemySmall(Clone)")
+            {
+                Destroy(enemy);
+            }
+        }
     }
 }

@@ -14,8 +14,7 @@ public class AIEnemyBurger : MonoBehaviour
     //private float distance;
     public LayerMask obstructionMask;
     private bool LOS = false, following = false, routineCalled = false;
-    [SerializeField] private Rigidbody rb;
-    [SerializeField] private float forwardForce, upForce, randomForceModifier;
+    [SerializeField] private float forwardForce;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -23,7 +22,6 @@ public class AIEnemyBurger : MonoBehaviour
     {
 
         agent = GetComponent<NavMeshAgent>();
-        rb = GetComponent<Rigidbody>();
 
     }
 
@@ -72,11 +70,11 @@ public class AIEnemyBurger : MonoBehaviour
 
         
             //Determiens routines by rigidbody and singleton routine handling
-        if (!routineCalled && rb.isKinematic)
-        {
-            StartCoroutine(Attack());
-            routineCalled = true;
-        }
+            if (!routineCalled)
+            {
+                StartCoroutine(Attack());
+                routineCalled = true;
+            }
             
             
         }
@@ -95,28 +93,81 @@ public class AIEnemyBurger : MonoBehaviour
     IEnumerator Attack()
     {
         yield return new WaitForSeconds(1.0f);
-        
-        rb.isKinematic = false;
-        agent.enabled = false;
 
-        Vector3 dir = (target.position - transform.position);
-        dir.y = 0;
-        dir.Normalize();
+        agent.isStopped = true;
+        agent.updatePosition = false;
 
-        Vector3 force = dir * forwardForce + Vector3.up * upForce + Random.insideUnitSphere * randomForceModifier;
+        Vector3 direction = (target.position - transform.position).normalized;
+        direction.y = 0;
 
-        rb.AddForce(force, ForceMode.Impulse);
+        float attackDuration = 0.3f;
+        float timer = 0f;
+        float jumpHeight = 0.5f;
 
-        routineCalled = false;
-        
+        Vector3 startPos = transform.position;
+        Vector3 endPos = startPos + direction * forwardForce * attackDuration;
+
+        while (timer < attackDuration)
+        {
+            float t = timer / attackDuration;
+
+            // horizontal movement
+            Vector3 pos = Vector3.Lerp(startPos, endPos, t);
+
+            // vertical arc
+            float yOffset;
+
+            if (t < 0.5f)
+            {
+                // going up 
+                yOffset = Mathf.Lerp(0, jumpHeight, t * 2f);
+            }
+            else
+            {
+                // falling 
+                yOffset = Mathf.Lerp(jumpHeight, 0, (t - 0.5f) * 2f);
+                yOffset *= 0.6f;
+            }
+
+            pos.y += yOffset;
+
+            // collision check before moving
+            Vector3 moveDir = (pos - transform.position).normalized;
+            float distance = Vector3.Distance(transform.position, pos);
+
+            if (Physics.Raycast(transform.position, moveDir, distance))
+            {
+                // drop straight down instead of freezing mid-air
+                RaycastHit groundHit;
+                if (Physics.Raycast(transform.position, Vector3.down, out groundHit, 10f))
+                {
+                    float heightOffset = GetComponent<Collider>().bounds.extents.y;
+                    transform.position = groundHit.point + Vector3.up * heightOffset;
+                }
+
+                break;
+            }
+
+            transform.position = pos;
+
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+
+        //routineCalled = false;
+
         StartCoroutine(RecoverTime());
     }
 
     //handles recovery time and rigidbody and agent manipulation
     IEnumerator RecoverTime()
     {
-        yield return new WaitForSeconds(3.0f);
-        rb.isKinematic = true;
-        agent.enabled = true;
+        yield return new WaitForSeconds(3.5f);
+        routineCalled = false;
+
+        agent.Warp(transform.position);
+        agent.updatePosition = true;
+        agent.isStopped = false;
     }
 }
