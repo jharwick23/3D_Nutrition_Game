@@ -69,7 +69,7 @@ public class ProjectileGun : MonoBehaviour
         // -- Shooting Preconditions -- \\
         if (!canShoot || isReloading || 
             !PlayerController.GetHatEquipped() || PlayerController.GetBlocking()
-            || PlayerController.GetMeleeAttacking())
+            || PlayerController.GetMeleeAttacking() || PlayerController.IsDead())
             return;
 
         if (currentAmmo <= 0)

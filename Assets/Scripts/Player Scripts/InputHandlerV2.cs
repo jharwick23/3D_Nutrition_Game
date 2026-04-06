@@ -95,6 +95,11 @@ public class InputHandlerV2 : MonoBehaviour
                 PlayerController.SetLastShootingAttackTime();
             }
         }
+
+        if (PlayerController.IsDead())
+        {
+            attackHeld = false;
+        }
     }
 
     void OnDisable()
