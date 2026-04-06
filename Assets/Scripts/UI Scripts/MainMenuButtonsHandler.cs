@@ -24,7 +24,11 @@ public class MainMenuButtonsHandler : MonoBehaviour
     //Handles quit, closes application
     public void Quit()
     {
+        Debug.Log("Quit Game");
         Application.Quit();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
     }
 
     //Moves to control page

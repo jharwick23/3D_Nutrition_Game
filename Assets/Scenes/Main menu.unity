@@ -2399,7 +2399,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 46244445}
-        m_TargetAssemblyTypeName: ButtonHandler, Assembly-CSharp
+        m_TargetAssemblyTypeName: MainMenuButtonsHandler, Assembly-CSharp
         m_MethodName: Quit
         m_Mode: 1
         m_Arguments:
