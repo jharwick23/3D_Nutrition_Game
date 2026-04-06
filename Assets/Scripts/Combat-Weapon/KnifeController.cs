@@ -68,6 +68,7 @@ public class KnifeController : MonoBehaviour
 
     public void SetKnifeOnHip()
     {
+        if (isOnHip) return;
         isOnHip = true;
         transform.SetParent(restKnifePoint);
         transform.localPosition = Vector3.zero;
@@ -76,6 +77,7 @@ public class KnifeController : MonoBehaviour
 
     public void HoldKnifeInHand()
     {
+        if (!isOnHip) return;
         isOnHip = false;
         transform.SetParent(holdKnifePoint);
         transform.localPosition = Vector3.zero;

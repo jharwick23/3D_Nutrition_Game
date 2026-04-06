@@ -229,7 +229,11 @@ public class InputHandlerV2 : MonoBehaviour
 
     private void OnDodgePerformed(InputAction.CallbackContext context)
     {
-        PlayerController.IsDodging();
+        if(PlayerController.GetIsDodging() == false)
+        {
+            PlayerController.SetIsDodging(true);
+            PlayerController.DodgePressed();
+        }
     }
 
     private void OnSprintPerformed(InputAction.CallbackContext context)

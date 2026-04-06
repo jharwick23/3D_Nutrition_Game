@@ -60,6 +60,7 @@ public class PlayerControllerV2 : MonoBehaviour
     private bool _isBlocking = false;
     private bool _isMeleeing = false;
     private bool _dodgePressed = false;
+    private bool _isDodging = false;
     //private bool _hasLanded = false;
     private bool _shieldBash = false;
     private bool _isDead = false;
@@ -562,9 +563,19 @@ public class PlayerControllerV2 : MonoBehaviour
         return _isBlocking;
     }
 
-    public void IsDodging()
+    public void DodgePressed()
     {
         _dodgePressed = true;
+    }
+
+    public void SetIsDodging(bool isDodging)
+    {
+        _isDodging = isDodging;
+    }
+
+    public bool GetIsDodging()
+    {
+        return _isDodging;
     }
 
     public void SetLastShootingAttackTime()

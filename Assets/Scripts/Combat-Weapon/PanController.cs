@@ -90,6 +90,7 @@ public class PanController : MonoBehaviour
 
     public void SetPanOnBack()
     {
+        if(isOnBack) return;
         isOnBack = true;
         transform.SetParent(restPanPoint);
         transform.localPosition = Vector3.zero;
@@ -98,6 +99,7 @@ public class PanController : MonoBehaviour
 
     public void HoldPanInHand()
     {
+        if(!isOnBack) return;
         isOnBack = false;
         transform.SetParent(holdPanPoint);
         transform.localPosition = Vector3.zero;
