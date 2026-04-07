@@ -110,7 +110,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.18539962
+  m_Radius: 1
   m_Center: {x: 0.00000014156103, y: -0.000000007450581, z: 0.000000014901161}
 --- !u!114 &5880944211666756632
 MonoBehaviour:
@@ -126,3 +126,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealTest
   bobbleHeight: 0.25
   bobbleSpeed: 2
+  baseHealAmount: 10

@@ -105,6 +105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CoinTest
   bobbleHeight: 0.25
   bobbleSpeed: 2
+  coinAmount: 1
 --- !u!135 &5588738963862323395
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -124,5 +125,5 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5302341
+  m_Radius: 2
   m_Center: {x: -0.0000001937151, y: 0.3482315, z: 0.03227981}

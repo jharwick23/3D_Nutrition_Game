@@ -12,6 +12,8 @@ public class AIEnemy : MonoBehaviour
     private DropService _dropService;
     [SerializeField] private bool dropItems = true;
     private bool canDamage = true;
+    private Transform location;
+    private Vector3 spawnLoc;
 
     void Awake()
     {
@@ -31,32 +33,44 @@ public class AIEnemy : MonoBehaviour
                 OnDeathEvent();
                 //Debug.Log(_dropService);
                 //Debug.Log(transform);
+                GameObject gameObject = GameObject.FindGameObjectWithTag("Player");
+
+                if (gameObject != null)
+                {
+                    spawnLoc = new Vector3(transform.position.x, gameObject.transform.position.y + 1f, transform.position.z);
+                }
+                else
+                {
+                    spawnLoc = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                }
+                
+
                 if (SceneManager.GetActiveScene().name == "SideQuestOne")
                 {
-                    _dropService.DropCoin(new Vector3(transform.position.x, transform.position.y, transform.position.z), 15); // Drop Coin
+                    _dropService.DropCoin(spawnLoc, 15); // Drop Coin
                 }
                 else if(SceneManager.GetActiveScene().name == "FirstLevel")
                 {
-                    _dropService.DropCoin(new Vector3(transform.position.x, transform.position.y, transform.position.z), 10); // Drop Coin
+                    _dropService.DropCoin(spawnLoc, 10); // Drop Coin
                 }
                 else if(SceneManager.GetActiveScene().name == "SecondLevel")
                 {
-                    _dropService.DropCoin(new Vector3(transform.position.x, transform.position.y, transform.position.z), 15); // Drop Coin
+                    _dropService.DropCoin(spawnLoc, 15); // Drop Coin
                 }
                 else if(SceneManager.GetActiveScene().name == "ThirdLevel")
                 {
-                    _dropService.DropCoin(new Vector3(transform.position.x, transform.position.y, transform.position.z), 18); // Drop Coin
+                    _dropService.DropCoin(spawnLoc, 18); // Drop Coin
                 }
                 else if(SceneManager.GetActiveScene().name == "FourthLevel")
                 {
-                    _dropService.DropCoin(new Vector3(transform.position.x, transform.position.y, transform.position.z), 20); // Drop Coin
+                    _dropService.DropCoin(spawnLoc, 20); // Drop Coin
                 }
             
                 int val = Random.Range(0, 2);
             
                 if (val == 0)
                 {
-                    _dropService.DropHeal(new Vector3(transform.position.x, transform.position.y, transform.position.z), 15);          
+                    _dropService.DropHeal(spawnLoc, 15);          
                 }
 
             }

@@ -44355,10 +44355,10 @@ MonoBehaviour:
   - {fileID: 103610522}
   - {fileID: 653244001}
   initialSpawnCount: 2
-  respawnAmount: 1
+  respawnAmount: 2
   respawnThreshold: 1
   spawningDone: 0
-  maxTotalSpawns: 3
+  maxTotalSpawns: 4
 --- !u!65 &1453329314
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -61141,10 +61141,10 @@ MonoBehaviour:
   - {fileID: 893972149}
   - {fileID: 1301373131}
   initialSpawnCount: 2
-  respawnAmount: 1
+  respawnAmount: 2
   respawnThreshold: 1
   spawningDone: 0
-  maxTotalSpawns: 3
+  maxTotalSpawns: 4
 --- !u!1001 &1963377649
 PrefabInstance:
   m_ObjectHideFlags: 0
