@@ -461,6 +461,7 @@ MonoBehaviour:
   spawnpos2: {fileID: 0}
   enemy: {fileID: 0}
   bullet: {fileID: 7946557371837356021}
+  slamVFX: {fileID: 1599718021928974, guid: 21461e6c060baf044ac3e717ed4170cb, type: 3}
   audioSource: {fileID: 0}
   greaseSound: {fileID: 8300000, guid: 3d3dcbddae705d65eb9b450835a329a9, type: 3}
   animator: {fileID: 7098359212327931201}
