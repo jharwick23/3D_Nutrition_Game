@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 [RequireComponent(typeof(Rigidbody))]
 public class CarrotBullet : MonoBehaviour
@@ -72,11 +73,18 @@ public class CarrotBullet : MonoBehaviour
 
         if (ImpactDecalPrefab != null)
         {
-            Instantiate(
+            GameObject decalInstance = Instantiate(
                 ImpactDecalPrefab,
                 spawnPosition,
                 hitRotation     
             );
+
+            DecalProjector projector = decalInstance.GetComponent<DecalProjector>();
+            if (projector != null)
+            {
+                projector.material = new Material(projector.material); // Create instance so we don't change the asset
+                projector.material.SetColor("_BaseColor", Color.darkOrange);
+            }
         }
         
         // Enemey damage logic

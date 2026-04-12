@@ -41,11 +41,14 @@ public class ThirdLevelPortal : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("Player") && PlayerPrefs.GetInt("SecondLevelCompleted", 0) != 1)
+        {
+            _uiHandler.SetAlertPrompt("Complete the previous level to unlock this portal!", 2f, Color.red);
+        }
         if (other.CompareTag("Player") && PlayerPrefs.GetInt("SecondLevelCompleted", 0) == 1)
         {
             SceneManager.LoadScene("ThirdLevel");
             return;
         }
-        _uiHandler.SetAlertPrompt("Complete the previous level to unlock this portal!", 2f, Color.red);
     }
 }
