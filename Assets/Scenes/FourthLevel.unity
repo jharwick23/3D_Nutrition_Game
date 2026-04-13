@@ -51971,6 +51971,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChefTork
       objectReference: {fileID: 0}
+    - target: {fileID: 6615386489972432802, guid: 922bfa8077057414d8e9e647240afe98, type: 3}
+      propertyPath: MaxHealth
+      value: 846
+      objectReference: {fileID: 0}
+    - target: {fileID: 6615386489972432802, guid: 922bfa8077057414d8e9e647240afe98, type: 3}
+      propertyPath: CurrentHealth
+      value: 394
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
