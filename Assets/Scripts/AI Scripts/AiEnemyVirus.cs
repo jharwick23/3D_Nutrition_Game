@@ -111,11 +111,11 @@ public class AiEnemyVirus : AIEnemy
         Vector3 direction = (target.position - transform.position).normalized;
         direction.y = 0f;
 
-        float dashDuration = 0.2f;
+        float dashDuration = 0.5f;
         float timer = 0f;
 
         Vector3 startPos = transform.position;
-        Vector3 endPos = startPos + direction * dashForce * dashDuration;
+        Vector3 endPos = startPos + direction * dashForce;
 
         while (timer < dashDuration)
         {
@@ -130,7 +130,7 @@ public class AiEnemyVirus : AIEnemy
             Vector3 moveDir = (pos - transform.position).normalized;
             float dist = Vector3.Distance(transform.position, pos);
 
-            if (Physics.Raycast(transform.position, moveDir, dist))
+            if (Physics.Raycast(transform.position, moveDir, dist, losMask))
             {
                 break;
             }

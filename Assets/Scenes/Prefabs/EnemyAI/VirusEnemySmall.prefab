@@ -315,7 +315,7 @@ MonoBehaviour:
   losMask:
     serializedVersion: 2
     m_Bits: 256
-  dashForce: 150
+  dashForce: 15
   interval: 3
   height: 3.5
   bobSpeed: 1
