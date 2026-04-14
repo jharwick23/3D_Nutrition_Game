@@ -58,7 +58,7 @@ public class AIEnemyExplode : MonoBehaviour
     //Handles Damage explosion if player is in designated Area
     private IEnumerator Explosion()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         if (playerInBox)
         {
             PlayerControllerV2 playerController = playerCollider.GetComponent<PlayerControllerV2>();
