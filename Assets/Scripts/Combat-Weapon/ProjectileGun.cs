@@ -72,6 +72,11 @@ public class ProjectileGun : MonoBehaviour
             || PlayerController.GetMeleeAttacking() || PlayerController.IsDead())
             return;
 
+        if(currentAmmo == 13 || currentAmmo == 1)
+        {
+            CatchPhraseSound();
+        }
+
         if (currentAmmo <= 0)
         {
             StartReloading();
@@ -258,5 +263,16 @@ public class ProjectileGun : MonoBehaviour
         }
 
         SFXManager.Instance.Play(SFXManager.SFXType.Shoot);
+    }
+
+    private void CatchPhraseSound()
+    {
+        if (!SFXManager.Instance)
+        {
+            Debug.LogError("SFXManager not found in scene");
+            return;
+        }
+
+        SFXManager.Instance.Play(SFXManager.SFXType.CatchPhrase);
     }
 }

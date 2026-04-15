@@ -4346,10 +4346,10 @@ MonoBehaviour:
   dialogueLines:
   - HELP! Oh my - I didn't see you there!
   - 'The city has been overrun by sugar... its everywhere. '
-  - They destroyed the bridge. There are some buttons around here that you can shoot
+  - They destroyed the bridge. There are some targets around here that you can shoot
     to get it working again.
   - Do you think you can get the bridge working again?
-  - I also heard a rumor there is a entrance to the factory t
+  - I also heard a rumor there is a entrance to the factory...
   - Thank you for your help!  Good luck, Chef!
   uiHandler: {fileID: 0}
 --- !u!65 &6754610520533386093
@@ -108109,8 +108109,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 489634228867175716}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 55.609, y: 0.161, z: -17.32}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 52.69, y: 0.161, z: -42.69}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -108118,7 +108118,7 @@ Transform:
   - {fileID: 8189545109390294705}
   - {fileID: 2919644752160578745}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9126662739796731347
 MonoBehaviour:
   m_ObjectHideFlags: 0

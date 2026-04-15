@@ -12,7 +12,8 @@ public class SFXManager: MonoBehaviour
         Heal,
         Shoot,
         CollectCoin,
-        ShieldBash
+        ShieldBash,
+        CatchPhrase
     }
 
     [Header("Player")]
@@ -23,6 +24,7 @@ public class SFXManager: MonoBehaviour
     public AudioClip shoot;
     public AudioClip collectCoin;
     public AudioClip shieldBash;
+    public AudioClip catchPhrase;
 
     void Awake()
     {
@@ -79,6 +81,9 @@ public class SFXManager: MonoBehaviour
                 break;
             case SFXType.ShieldBash:
                 audioSource.PlayOneShot(shieldBash, 0.5f);
+                break;
+            case SFXType.CatchPhrase:
+                audioSource.PlayOneShot(catchPhrase);
                 break;
         }
     }
