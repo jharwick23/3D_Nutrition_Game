@@ -6,7 +6,7 @@ public class TomatoBullet : MonoBehaviour
 {
     private Rigidbody rb;
     public float Speed = 25f;
-    public int bulletDamage = 50;
+    public int bulletDamage = 70;
     public float BulletDrop = 30f; // Gravity 
     public float LifeTime = 5f;
     public int maxAmmo = 24;

@@ -6,7 +6,7 @@ public class CarrotBullet : MonoBehaviour
 {
     private Rigidbody rb;
     public float Speed = 35f;
-    public int bulletDamage = 70;
+    public int bulletDamage = 50;
     public float BulletDrop = 0f; // Gravity 
     public float LifeTime = 5f;
     public int maxAmmo = 24;

@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarrotBullet
   Speed: 35
-  bulletDamage: 70
+  bulletDamage: 50
   BulletDrop: 0
   LifeTime: 5
   maxAmmo: 24

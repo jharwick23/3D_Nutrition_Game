@@ -5,12 +5,12 @@ using UnityEngine.Rendering.Universal;
 public class BananaBullet : MonoBehaviour
 {
     private Rigidbody rb;
-    public float Speed = 100f;
-    public int bulletDamage = 10;
+    public float Speed = 35f;
+    public int bulletDamage = 15;
     public float BulletDrop = 0f; // Gravity 
     public float LifeTime = 5f;
     public int maxAmmo = 24;
-    public float timeBetweenShooting = 0.2f;
+    public float timeBetweenShooting = 0.3f;
     public GameObject ImpactDecalPrefab;
     public ProjectileSFX projectileSFX;
 

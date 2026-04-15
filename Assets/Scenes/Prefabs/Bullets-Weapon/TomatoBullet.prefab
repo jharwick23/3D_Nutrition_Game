@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TomatoBullet
   Speed: 25
-  bulletDamage: 50
+  bulletDamage: 70
   BulletDrop: 30
   LifeTime: 5
   maxAmmo: 24
