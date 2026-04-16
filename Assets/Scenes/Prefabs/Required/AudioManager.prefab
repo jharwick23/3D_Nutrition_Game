@@ -150,3 +150,4 @@ MonoBehaviour:
   shoot: {fileID: 8300000, guid: 744a2ad7ae7f3cf948ef98f654765f15, type: 3}
   collectCoin: {fileID: 8300000, guid: 9c9d0416b1fe1b8b4af3ba1e7a1409e0, type: 3}
   shieldBash: {fileID: 8300000, guid: c2345c240b893ae719ca33aa1f6c5fec, type: 3}
+  catchPhrase: {fileID: 8300000, guid: a8f210137b33fc29e8c64a93c6957c64, type: 3}

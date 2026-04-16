@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 using UnityEditor;
 
 namespace FastMesh_Example
@@ -55,4 +55,4 @@ namespace FastMesh_Example
     }
 }
 
-
+*/
