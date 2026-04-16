@@ -153,8 +153,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 6, y: 4, z: 6}
-  m_Center: {x: 0, y: 0.73134387, z: 0.54}
+  m_Size: {x: 6, y: 4, z: 8}
+  m_Center: {x: 0, y: 0.73134387, z: 0.61}
 --- !u!195 &6730715853130720839
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   target: {fileID: 0}
-  attackDistance: 2
+  attackDistance: 5
   explodeAudio: {fileID: 8300000, guid: b1a9b9c0ece96300899e625bf4ffbbf8, type: 3}
   explosionVFX: {fileID: 1742013225946848, guid: b3d8264aa7d2d824a8a503e45291ddf4, type: 3}
 --- !u!1 &4806936029441778592
