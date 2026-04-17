@@ -1,5 +1,58 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2494061306566001729
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8680630002987788883}
+  - component: {fileID: 7598592653264456743}
+  m_Layer: 11
+  m_Name: HitBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8680630002987788883
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2494061306566001729}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.065, y: 0.15, z: 0.02}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8140127983875378134}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7598592653264456743
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2494061306566001729}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.9, y: 0.9, z: 0.9}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2588359317666433066
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,7 +65,7 @@ GameObject:
   - component: {fileID: 5732835621027580828}
   - component: {fileID: 3636805831386064805}
   - component: {fileID: 2815138752843275346}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: EnemyHud (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3026262804500804317}
   - component: {fileID: 4718019578132680788}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,7 +255,7 @@ GameObject:
   - component: {fileID: 4157074536903425745}
   - component: {fileID: 8047963250643127065}
   - component: {fileID: 98801458763767851}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: HealthContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,7 +331,7 @@ GameObject:
   - component: {fileID: 2317994683315153235}
   - component: {fileID: 3623256406026204666}
   - component: {fileID: 6509106949664632992}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: VirusMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -389,12 +442,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8140127983875378134}
-  - component: {fileID: 5123296424914645763}
   - component: {fileID: 8282676236287986388}
   - component: {fileID: 5676284486132124826}
   - component: {fileID: 732574368829542010}
   - component: {fileID: 4361614222537367346}
-  m_Layer: 11
+  - component: {fileID: 9193121636226377910}
+  m_Layer: 0
   m_Name: VirusEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -416,29 +469,9 @@ Transform:
   m_Children:
   - {fileID: 8114141410011279793}
   - {fileID: 5700704204905770869}
+  - {fileID: 8680630002987788883}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &5123296424914645763
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8208910801977227525}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.9, y: 2, z: 2}
-  m_Center: {x: -0.016812325, y: 0, z: 0}
 --- !u!195 &8282676236287986388
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -508,7 +541,6 @@ MonoBehaviour:
   height: 3.5
   bobSpeed: 1
   bobAmount: 0.5
-  playerCollided: 0
 --- !u!114 &4361614222537367346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -522,6 +554,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageTest
   damage: 10
+--- !u!54 &9193121636226377910
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8208910801977227525}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8596586107720439850
 GameObject:
   m_ObjectHideFlags: 0
@@ -533,7 +592,7 @@ GameObject:
   - component: {fileID: 2370274046933921431}
   - component: {fileID: 7326518199650827435}
   - component: {fileID: 3297056902420863665}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}

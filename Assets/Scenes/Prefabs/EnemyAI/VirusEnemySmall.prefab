@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5419719095057302953}
   - component: {fileID: 75562864363189902}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,6 +89,59 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &749166642226273803
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4555215926123461256}
+  - component: {fileID: 4037257662779158422}
+  m_Layer: 11
+  m_Name: HitBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4555215926123461256
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749166642226273803}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.02, y: 0.03, z: 0.07}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2673464763439326904}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4037257662779158422
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749166642226273803}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.9, y: 0.9, z: 0.9}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2148341520770869469
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,7 +154,7 @@ GameObject:
   - component: {fileID: 7562065420955063404}
   - component: {fileID: 6500247337995429010}
   - component: {fileID: 8908674163100411167}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: EnemyHud (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,13 +253,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2673464763439326904}
-  - component: {fileID: 1247933860896050570}
   - component: {fileID: 2153749251996965288}
   - component: {fileID: 85462187783899802}
   - component: {fileID: 535286447111794909}
   - component: {fileID: 9131139313399344015}
   - component: {fileID: 5441240874690449674}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: VirusEnemySmall
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -228,29 +280,9 @@ Transform:
   m_Children:
   - {fileID: 830649842334123712}
   - {fileID: 4848449945196700715}
+  - {fileID: 4555215926123461256}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1247933860896050570
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2240888520274524105}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &2153749251996965288
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -320,7 +352,6 @@ MonoBehaviour:
   height: 3.5
   bobSpeed: 1
   bobAmount: 0.5
-  playerCollided: 0
 --- !u!54 &9131139313399344015
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -372,7 +403,7 @@ GameObject:
   - component: {fileID: 4746365501448852661}
   - component: {fileID: 937924245017635265}
   - component: {fileID: 1747109260235171731}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -447,7 +478,7 @@ GameObject:
   - component: {fileID: 8410822597551747052}
   - component: {fileID: 5910494130364803994}
   - component: {fileID: 1341005501961183702}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: HealthContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -523,7 +554,7 @@ GameObject:
   - component: {fileID: 3293964265961284120}
   - component: {fileID: 304583758588704337}
   - component: {fileID: 1639075377944230322}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: VirusMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
