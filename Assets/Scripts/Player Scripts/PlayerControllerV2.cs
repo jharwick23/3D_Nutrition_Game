@@ -471,20 +471,26 @@ public class PlayerControllerV2 : MonoBehaviour
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("EnemyZones");
             if (enemies != null || enemies.Length > 0)
             {
-                foreach (GameObject enemy in enemies) {
-                
+                foreach (GameObject enemy in enemies)
+                {
+
                     if (enemy != null && enemy.GetComponent<EnemySpawner>())
                     {
                         enemy.GetComponent<EnemySpawner>().ResetArea();
                     }
-                    else if(enemy != null && enemy.GetComponent<EnemySpawnerLevelTwo>())
+                    else if (enemy != null && enemy.GetComponent<EnemySpawnerLevelTwo>())
                     {
                         enemy.GetComponent<EnemySpawnerLevelTwo>().ResetArea();
                     }
-                    
+
                     if (enemy.GetComponent<BossSpawn>() != null)
                     {
                         enemy.GetComponent<BossSpawn>().ResetArea();
+                    }
+
+                    if (enemy.GetComponent<EnableWalls>() != null)
+                    {
+                        enemy.GetComponent<EnableWalls>().DeactivateWalls();
                     }
                 }
             }

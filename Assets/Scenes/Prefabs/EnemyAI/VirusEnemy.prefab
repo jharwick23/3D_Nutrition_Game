@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5732835621027580828}
   - component: {fileID: 3636805831386064805}
   - component: {fileID: 2815138752843275346}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: EnemyHud (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3026262804500804317}
   - component: {fileID: 4718019578132680788}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,9 +185,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 160
+  m_MaxValue: 140
   m_WholeNumbers: 0
-  m_Value: 160
+  m_Value: 140
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 4157074536903425745}
   - component: {fileID: 8047963250643127065}
   - component: {fileID: 98801458763767851}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: HealthContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 2317994683315153235}
   - component: {fileID: 3623256406026204666}
   - component: {fileID: 6509106949664632992}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: VirusMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -394,7 +394,7 @@ GameObject:
   - component: {fileID: 5676284486132124826}
   - component: {fileID: 732574368829542010}
   - component: {fileID: 4361614222537367346}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: VirusEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -437,7 +437,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.96637535, y: 1, z: 1}
+  m_Size: {x: 1.9, y: 2, z: 2}
   m_Center: {x: -0.016812325, y: 0, z: 0}
 --- !u!195 &8282676236287986388
 NavMeshAgent:
@@ -494,7 +494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5a73acdd0fc1574f90e97b0945f599e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  enemyHealth: 160
+  enemyHealth: 140
   healthSlider: {fileID: 4718019578132680788}
   isCube: 1
   dropItems: 1
@@ -508,6 +508,7 @@ MonoBehaviour:
   height: 3.5
   bobSpeed: 1
   bobAmount: 0.5
+  playerCollided: 0
 --- !u!114 &4361614222537367346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -520,7 +521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3bfc0eeed0ab6c46bcbf2e4b33098e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageTest
-  damage: 20
+  damage: 10
 --- !u!1 &8596586107720439850
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,7 +533,7 @@ GameObject:
   - component: {fileID: 2370274046933921431}
   - component: {fileID: 7326518199650827435}
   - component: {fileID: 3297056902420863665}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
